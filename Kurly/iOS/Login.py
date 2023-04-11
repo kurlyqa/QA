@@ -17,6 +17,7 @@ class Login(testModule):
         TCFG.res.append(reso["width"])
         TCFG.res.append(reso["height"])
 
+
     def setUp(self):
         if not TCFG.is_passed and TCFG.is_initialized:
             self.exception('home')

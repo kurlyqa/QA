@@ -4,7 +4,7 @@ from selenium.webdriver.chrome.service import Service
 from webdriver_manager.chrome import ChromeDriverManager
 from time import sleep
 
-def interact(by_type, name, wait_sec=2, click=True, send_keys_msg=None):
+def interact(by_type, name, wait_sec=1, click=True, send_keys_msg=None):
     if by_type == 'XPATH':
         if send_keys_msg == None:
             if click == True:
@@ -30,7 +30,7 @@ def interact(by_type, name, wait_sec=2, click=True, send_keys_msg=None):
             driver.find_element(by=By.NAME, value=name).send_keys(send_keys_msg)
         sleep(wait_sec)
 
-url = 'https://hsmoa.com/'
+url = 'https://lms.stg.kurly.com/#/login'
 
 # 사람처럼 보이게 하는 옵션들
 options = webdriver.ChromeOptions()
@@ -39,12 +39,14 @@ options.add_argument('lang=ko_KR') # 언어 설정
 chrome_options = webdriver.ChromeOptions()
 driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=chrome_options) # 크롬 드라이버 설치
 
-driver.implicitly_wait(30) # 웹페이지 전체가 로드 될때까지 기다린다.
+# 웹페이지 전체가 로드 될때까지 기다린다.
+driver.implicitly_wait(30)
 driver.set_page_load_timeout(30)
 
-driver.get(url) # url 이동
-sleep(2) # 2초 대기
-driver.maximize_window() # 브라우저 최대화
+# url 이동
+driver.get(url)
+# 브라우저 최대화
+driver.maximize_window()
 
 # 검색어 입력란 확인
 interact(by_type="XPATH", name="//*[contains(@class, 'search-input')]")

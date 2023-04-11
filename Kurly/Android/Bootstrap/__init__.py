@@ -26,30 +26,27 @@ TEST_CONFIG = TestConfig()
 
 def initialize_bp(target, argv):
     TEST_CONFIG.port = "4723"
-    TEST_CONFIG.sdkver = "14.8.1"
-    # TEST_CONFIG.sdkver = "15."
-    TEST_CONFIG.dname = "iPhone 11"
-    # TEST_CONFIG.dname = "iPhone 8 plus"
-    TEST_CONFIG.udid = "00008030-000A2D283492802E"
-    TEST_CONFIG.auto = "XCUITest"
-    # TEST_CONFIG.bundleId = "buzzni.homeshoppingmoa.webapp.dev"
-    TEST_CONFIG.bundleId = "buzzni.homeshoppingmoa.webapp"
-    TEST_CONFIG.ratio = "2688 x 1242"
-    TEST_CONFIG.os = "iOS"
+    TEST_CONFIG.sdkver = "10"
+    TEST_CONFIG.dname = "Galaxy Note 9"
+    TEST_CONFIG.udid = "2469e164b41c7ece"
+    TEST_CONFIG.auto = "UIAutomator2"
+    TEST_CONFIG.ratio = "3040 x 1440"
+    TEST_CONFIG.os = "Android"
     TEST_CONFIG.user_name = "billy"
     TEST_CONFIG.password = "billy"
+    app = '/Users/122d6424/Git/Kurly/APKs/kurly.apk'
 
     TEST_CONFIG.driver = webdriver.Remote(
-        command_executor=f'http://127.0.0.1:{TEST_CONFIG.port}',
-        # command_executor=f'http://127.0.0.1:{TEST_CONFIG.port}/wd/hub',
+        # command_executor=f'http://127.0.0.1:{TEST_CONFIG.port}',
+        command_executor=f'http://127.0.0.1:{TEST_CONFIG.port}/wd/hub',
         desired_capabilities={
-            "platformName": "iOS",
-            "bundleId": TEST_CONFIG.bundleId,
+            'app': app,
+            "platformName": "Android",
             "appium:automationName": TEST_CONFIG.auto,
             "platformVersion": TEST_CONFIG.sdkver,
             "deviceName": TEST_CONFIG.dname,
             "appium:udid": TEST_CONFIG.udid,
             "newCommandTimeout": 10000,
             "appium:noReset": "true"
-        }
+    }
     )
