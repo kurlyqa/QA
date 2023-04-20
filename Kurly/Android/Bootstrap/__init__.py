@@ -1,8 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-import os
-import json
 from appium import webdriver
 
 class TestConfig():
@@ -26,18 +24,17 @@ TEST_CONFIG = TestConfig()
 
 def initialize_bp(target, argv):
     TEST_CONFIG.port = "4723"
-    TEST_CONFIG.sdkver = "10"
-    TEST_CONFIG.dname = "Galaxy Note 9"
-    TEST_CONFIG.udid = "2469e164b41c7ece"
-    TEST_CONFIG.auto = "UIAutomator2"
-    TEST_CONFIG.ratio = "3040 x 1440"
+    TEST_CONFIG.sdkver = "13"
+    TEST_CONFIG.dname = "Galaxy S22+"
+    TEST_CONFIG.udid = "RFCT215PARN"
+    TEST_CONFIG.auto = "UiAutomator2"
+    TEST_CONFIG.ratio = "2340 x 1080"
     TEST_CONFIG.os = "Android"
-    TEST_CONFIG.user_name = "billy"
-    TEST_CONFIG.password = "billy"
+    TEST_CONFIG.user_name = "junhyun.kyung"
+    TEST_CONFIG.password = "junhyun.kyung"
     app = '/Users/122d6424/Git/Kurly/APKs/kurly.apk'
 
     TEST_CONFIG.driver = webdriver.Remote(
-        # command_executor=f'http://127.0.0.1:{TEST_CONFIG.port}',
         command_executor=f'http://127.0.0.1:{TEST_CONFIG.port}/wd/hub',
         desired_capabilities={
             'app': app,

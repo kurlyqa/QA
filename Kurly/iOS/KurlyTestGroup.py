@@ -34,7 +34,7 @@ runner.run(suite)
 # msg = EmailMessage()
 # smtp_gmail.ehlo() # SMTP 객체를 생성한 후에는 프로토콜 상 가장 먼저 SMTP 서버에 Hello 메시지를 보내는데, ehlo() 메서드가 이 기능을 함
 # smtp_gmail.starttls() # tls방식으로 접속, 그 포트번호가 587
-# smtp_gmail.login('billy@buzzni.com', '!tlgjatlf1')
+# smtp_gmail.login('junhyun.kyung@kurlycorp.com', '!tlgjatlf1')
 # msg['Subject'] = "Kurly Automation Test Report (Android)" # 메일제목
 # msg.set_content("Test Started at : %s // Test Completed at : %s"%(daytime, datetime.datetime.now())) # 메일내용 테스트 시작시간과 종료시간
 # msg['From'] = 'junhyun.kyung@kurlycorp.com'
