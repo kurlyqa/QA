@@ -3,7 +3,7 @@
 from  __future__ import print_function
 from unittest import TestLoader, TestSuite
 from HtmlTestRunner import HTMLTestRunner
-from Login import *
+from Kurly_purchase import *
 from Category import *
 from email.message import EmailMessage
 import datetime
@@ -18,7 +18,7 @@ import smtplib
 #
 #     dname = json_string['dname']
 
-s1 = TestLoader().loadTestsFromTestCase(Login)
+s1 = TestLoader().loadTestsFromTestCase(Kurly_purchase)
 
 suite = TestSuite([s1])
 
