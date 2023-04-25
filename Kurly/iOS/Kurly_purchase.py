@@ -7,7 +7,7 @@ from TestModule import testModule
 from Bootstrap import initialize_bp
 from Bootstrap import TEST_CONFIG as TCFG
 
-class Kurly_purchase(testModule):
+class KurlyPurchase(testModule):
 
     def initialize(self):
         TCFG.is_initialized = True
@@ -33,71 +33,76 @@ class Kurly_purchase(testModule):
         sleep(2)
 
     def test_01_CreditCard_Payment(self):
-        for loop_count in range(0, TCFG.check_loop_count):
+        try:
+            # 컬리 로고 노출 확인
+            self.interact_by_id('navi_logo_white', search_sec=20, click=False)
+            # 검색 클릭
+            self.interact_by_id('tab_btn_search', search_sec=20)
+            # 깻잎 입력
+            self.interact_by_xpath('//XCUIElementTypeTextField[@value="검색어를 입력해주세요"]', search_sec=20, send_keys_msg="깻잎", click=False)
+            # 검색 클릭
+            self.interact_by_xpath('//XCUIElementTypeButton[@name="Search"]', wait_sec=5, search_sec=20)
+            # 첫번째 상품의 장바구니 클릭
+            self.interact_by_xpath('(//XCUIElementTypeButton[@name="saleBtnCart"])[1]', search_sec=20)
+            # 장바구니 담기 클릭
+            self.interact_by_xpath('//*[contains(@name, "장바구니 담기")]', search_sec=20)
+            # 하단 팝업 닫기
+            TouchAction(TCFG.driver).tap(None, 324, 54, 1).perform()
+            sleep(2)
+            # 장바구니 버튼 클릭
+            self.interact_by_xpath('//XCUIElementTypeImage[@name="navi_btn_cart_purple"]', search_sec=20)
+            # 주문하기 버튼 클릭
+            self.interact_by_xpath('//*[contains(@name, "주문하기")]', search_sec=20)
+            # 포인트 모두사용 클릭
+            self.interact_by_id('모두사용', search_sec=20)
+            ### 하단으로 이동 ###
+            # 좌표값 설정
+            start_x = 217
+            start_y = 721
+            end_x = 217
+            end_y = 247
+            # TouchAction 객체 생성
+            action = TouchAction(TCFG.driver)
+            # swipe 동작 수행
+            action.press(x=start_x, y=start_y).wait(250).move_to(x=end_x, y=end_y).release().perform()
+            sleep(2)
+            action.press(x=start_x, y=start_y).wait(250).move_to(x=end_x, y=end_y).release().perform()
+            sleep(2)
+            ###
+            # 결제하기 클릭
+            self.interact_by_id('0원 결제하기', search_sec=20)
+            # 앱 사용 어떠셨나요? 팝업
             try:
-                # 데브앱 iOS 결제테스트 샘플(kb pay 앱 없이 결제)
-                self.interact_by_id('홈', search_sec=20, click=False) # 홈 버튼 노출 확인
-                self.interact_by_id('마이메뉴', search_sec=20) # 마이메뉴 클릭
-                sleep(10)
-                TCFG.driver.swipe(217, 676, 217, 127, 10)
-                sleep(3)
-                TCFG.driver.swipe(217, 472, 217, 689, 10)
-                sleep(3)
-                self.interact_by_id('커머스 상품 (dev용)', search_sec=7) # 커머스 상품(dev용) 클릭
-                sleep(10)
-                TouchAction(TCFG.driver).tap(None, 81, 151, 1).perform() # 입력창 클릭
-                sleep(10)
-                TouchAction(TCFG.driver).tap(None, 29, 789, 1).perform() # 숫자클릭
-                sleep(3)
-                TouchAction(TCFG.driver).tap(None, 25, 620, 1).perform() # 1 클
-                sleep(1)
-                TouchAction(TCFG.driver).tap(None, 100, 622, 1).perform() # 3 클
-                sleep(1)
-                TouchAction(TCFG.driver).tap(None, 264, 624, 1).perform() # 7 클
-                sleep(1)
-                TouchAction(TCFG.driver).tap(None, 100, 622, 1).perform() # 3 클
-                sleep(1)
-                TouchAction(TCFG.driver).tap(None, 371, 105, 1).perform()  # 검색 클릭
-                sleep(1)
-                self.interact_by_xpath('//XCUIElementTypeStaticText[@name="쵸파_테스트 자동화 상품"]', search_sec=20) # 쵸파_테스트 자동화 상품 클릭
-                self.interact_by_xpath('//*[contains(@name, "바로구매")]', search_sec=20) # 바로구매 클릭
-                self.interact_by_xpath('(//*[contains(@name, "바로구매")])[2]', search_sec=20) # 바로구매 클릭
-                self.interact_by_xpath('//*[contains(@name, "결제하기")]', search_sec=20) # 결제하기 클릭
-                self.interact_by_xpath('//XCUIElementTypeButton[@name="앱 없이 결제"]', search_sec=20) # 앱 없이 결제 클릭
-                self.interact_by_id('휴대폰번호', search_sec=20, send_keys_msg="010-7513-6165", click=False) # 핸드폰 번호 입력
-                self.interact_by_id('주민등록번호 앞 7자리', search_sec=20, send_keys_msg="910131-1", click=False) # 주민번호 입력
-                self.interact_by_xpath('//XCUIElementTypeStaticText[@name="개인정보 수집이용 동의"]', search_sec=20) # 개인정보 수집이용 동의 체크
-                self.interact_by_xpath('//*[contains(@name, "확인")]', search_sec=20) # 확인클릭
-                self.interact_by_id('로그인', search_sec=20) # 로그인 클릭
-                self.interact_by_xpath('(//XCUIElementTypeButton[@name="결제하기"])[2]', search_sec=20) # 결제하기 클릭
-                # 비밀번호 클릭(KB페이의 경우 번호 버튼이 잡힘)
-                self.interact_by_xpath('//XCUIElementTypeButton[@name="3"]', search_sec=20) # 3 클릭
-                self.interact_by_xpath('//XCUIElementTypeButton[@name="1"]', search_sec=20) # 1 클릭
-                self.interact_by_xpath('//XCUIElementTypeButton[@name="8"]', search_sec=20) # 8 클릭
-                self.interact_by_xpath('//XCUIElementTypeButton[@name="2"]', search_sec=20) # 2 클릭
-                self.interact_by_xpath('//XCUIElementTypeButton[@name="3"]', search_sec=20) # 3 클릭
-                self.interact_by_xpath('//XCUIElementTypeButton[@name="1"]', search_sec=20) # 1 클릭
-                self.interact_by_xpath('//*[contains(@name, "확인")]', search_sec=20) # 확인 버튼 클릭
-                self.interact_by_xpath('//XCUIElementTypeButton[@name="주문 상세보기"]', search_sec=20) # 주문상세보기 버튼 클릭
-                self.interact_by_xpath('//XCUIElementTypeButton[@name="주문취소"]', search_sec=20) # 주문 취소 버튼 클릭
-                self.interact_by_xpath('//XCUIElementTypeButton[@name="다음"]', search_sec=20) # 다음 버튼 클릭
-                self.interact_by_id('주문실수', search_sec=20) # 주문실수 버튼 클릭
-                self.interact_by_xpath('//XCUIElementTypeCell[2]/XCUIElementTypeTextView', search_sec=20, send_keys_msg="주문취소 테스트입니다!!!", click=False) # 상세사유 입력
-                self.interact_by_xpath('//XCUIElementTypeButton[@name="다음"]', search_sec=20) # 다음 클릭
-                self.interact_by_xpath('//XCUIElementTypeButton[@name="취소요청"]', wait_sec=20, search_sec=10) # 취소요청 클릭
-                self.interact_by_xpath('//XCUIElementTypeButton[@name="취소 상세보기"]', search_sec=20) # 취소 상세보기 클릭
-                self.interact_by_xpath('//*[contains(@name, "취소완료")]', search_sec=20, click=False) # 취소완료 텍스트 노출 확인
+                self.interact_by_xpath('//XCUIElementTypeStaticText[@name="응답하지 않을래요"]', search_sec=20)
             except:
-                # if loop_count == (TCFG.check_loop_count-1):
-                if loop_count == 0:
-                    print("Error!")
-                    self.assertEqual(0, 1)
-                    break
-                self.exception('home')
-            else:
-                print("1 Passed")
-                TCFG.is_passed = True
-                break
+                pass
+            # 주문 상세보기 클릭
+            self.interact_by_id('주문 상세보기', search_sec=20)
+            # 전체 상품 주문 취소 클릭
+            self.interact_by_id('전체 상품 주문 취소', search_sec=20)
+            # 확인 클릭
+            self.interact_by_id('확인', search_sec=20)
+            # 하단으로 이동
+            action.press(x=start_x, y=start_y).wait(250).move_to(x=end_x, y=end_y).release().perform()
+            sleep(2)
+            # 주문 취소 동의 클릭
+            self.interact_by_id('주문취소 내역에 동의', search_sec=20)
+            # 주문 취소하기 클릭
+            self.interact_by_id('주문 취소하기', search_sec=20)
+            # 확인 클릭
+            self.interact_by_id('확인', search_sec=20)
+            # 홈으로 이동 클릭
+            self.interact_by_id('홈으로 이동', search_sec=20)
+            # 컬리 로고 노출 확인
+            self.interact_by_id('navi_logo_white', search_sec=20, click=False)
+        except:
+            print("Error!")
+            TCFG.is_finished = True
+            self.assertEqual(0, 1)
+        else:
+            print("1 Passed")
+            TCFG.is_finished = True
+            TCFG.is_passed = True
 
     def tearDown(self):
         if TCFG.is_finished:
@@ -105,5 +110,5 @@ class Kurly_purchase(testModule):
             TCFG.is_initialized=False
 
 if __name__ == '__main__':
-	suite = unittest.TestLoader().loadTestsFromTestCase(Kurly_purchase)
+	suite = unittest.TestLoader().loadTestsFromTestCase(KurlyPurchase)
 	unittest.TextTestRunner(verbosity=2).run(suite)

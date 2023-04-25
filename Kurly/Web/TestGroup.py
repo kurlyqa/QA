@@ -3,7 +3,8 @@
 from  __future__ import print_function
 from unittest import TestLoader, TestSuite
 from HtmlTestRunner import HTMLTestRunner
-from LMS_Login import *
+
+from Kurly.Web import lms_login
 from email.message import EmailMessage
 import datetime
 import os
@@ -17,7 +18,7 @@ import smtplib
 #
 #     dname = json_string['dname']
 
-s1 = TestLoader().loadTestsFromTestCase(LMS_Login)
+s1 = TestLoader().loadTestsFromTestCase(lms_login)
 
 suite = TestSuite([s1])
 

@@ -5,27 +5,6 @@ from selenium.webdriver.chrome.service import Service
 from webdriver_manager.chrome import ChromeDriverManager
 from time import sleep
 import subprocess
-# import os
-# from slack_sdk import WebClient
-# from slack_sdk.errors import SlackApiError
-# # Slack API 토큰 설정
-# client = WebClient(token=os.environ['xoxp-135797385811-4959253616502-5124347432567-b31a47aae75d6a672631fd3bba55dab7'])
-#
-# # 대상 사용자 ID 설정
-# user_id = "U04U77FJ4ES"
-#
-# # 전송할 메시지 설정
-# message = "테스트 결과입니다."
-#
-# try:
-#     # DM 전송 요청
-#     response = client.conversations_open(users=user_id)
-#     channel_id = response["channel"]["id"]
-#     client.chat_postMessage(channel=channel_id, text=message)
-#     print("메시지 전송 완료")
-# except SlackApiError as e:
-#     print("Error sending message: {}".format(e))
-
 
 class LMSLogin(unittest.TestCase):
     def setUp(self):
