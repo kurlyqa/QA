@@ -4,7 +4,7 @@ from  __future__ import print_function
 from unittest import TestLoader, TestSuite
 from HtmlTestRunner import HTMLTestRunner
 
-from Kurly.iOS.Kurly_purchase import Kurly_purchase
+from Kurly.Android.Kurly_purchase import Kurly_purchase
 from email.message import EmailMessage
 import datetime
 import os

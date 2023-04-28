@@ -9,7 +9,7 @@ from selenium.webdriver.support import expected_conditions as EC
 from webdriver_manager.chrome import ChromeDriverManager
 from time import sleep
 
-class LMSWebLogin(testModule):
+class TaskManagement(testModule):
 
     def setUp(self):
         # 사람처럼 보이게 하는 옵션들
@@ -23,7 +23,7 @@ class LMSWebLogin(testModule):
         # 웹페이지 전체가 로드 될때까지 기다림
         self.driver.implicitly_wait(30) # 또는 self.driver.set_page_load_timeout(30)
 
-    def test_01_LMS_Web_로그인(self):
+    def test_01_작업관리(self):
         try:
             # 이동할 url주소
             url = 'https://admin-lms.stg.kurly.com/?#/login'
@@ -76,6 +76,6 @@ class LMSWebLogin(testModule):
 # Python에서 모듈이 직접 실행될 때 (즉, 다른 모듈에서 import 되지 않고 직접 실행될 때) 해당 코드 블록을 실행하도록 하는 일종의 조건문
 if __name__ == '__main__':
     # 이 클래스에서 정의된 테스트 메소드들을 자동으로 찾아주는 메소드를 사용하여 테스트 스위트(TestSuite) 객체를 생성
-    suite = unittest.TestLoader().loadTestsFromTestCase(LMSWebLogin)
+    suite = unittest.TestLoader().loadTestsFromTestCase(TaskManagement)
     # TextTestRunner 클래스의 객체를 생성하여 생성된 테스트 스위트 객체를 실행. verbosity 인자는 테스트 결과를 출력할 상세도를 설정하는 인자. 2이면 테스트 케이스 수, 테스트 시간, 테스트 결과를 출력. .run(suite)는 생성된 TestSuite객체를 실행하는 메소드.
     unittest.TextTestRunner(verbosity=2).run(suite)
