@@ -27,10 +27,13 @@ class LMSWebLogin(testModule):
         try:
             # 이동할 url주소
             url = 'https://admin-lms.stg.kurly.com/?#/login'
+
             # url 이동
             self.driver.get(url)
+
             # 브라우저 최대화
             self.driver.maximize_window()
+
             # 로그인 페이지 진입
             # 아이디(lmstest01) 입력
             self.interact(by_type="XPATH", name="//input[@id='input-16' and @type='text' and @required='required']", click=False, send_keys_msg='lmstest01', error_msg="아이디 입력란 미노출")
@@ -40,14 +43,18 @@ class LMSWebLogin(testModule):
             self.interact(by_type="XPATH", name="//*[contains(@class, 'v-btn v-btn--block v-btn--contained theme--light v-size--large primary')]", error_msg="로그인 버튼 미노출")
             # 로그인 되었습니다 팝업 노출
             self.interact(by_type="XPATH", name="//*[contains(text(), '로그인 되었습니다.')]", click=False, error_msg="로그인 되었습니다. 텍스트 미노출")
+
             # 최종접속일시 노출(YYYY-MM-DD HH:MM:SS) -> 시간에 대한 비교로 테스트하면 오차가 생기기 때문에 형태값에 대한 테스트 진행
             # 최종접속일시 노출(YYYY-MM-DD HH:MM:SS)의 UI 요소를 찾아서 안에 있는 텍스트를 가져옴
             time_element = WebDriverWait(self.driver, 10).until(EC.presence_of_element_located((By.CSS_SELECTOR, ".v-card__text div:nth-child(2)")))
             time_text = time_element.text
+
             # 시간값을 추출하기 위한 정규표현식을 정의합니다.
             pattern = r'\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}'
+
             # 위에 정규식 패턴이 추출한 text에 존재하는지 확인
             match = re.search(pattern, time_text)
+
             # 형태가 일치하지 않을 경우 match의 값이 None
             if match:
                 # 확인
@@ -58,9 +65,9 @@ class LMSWebLogin(testModule):
                 self.interact(by_type="XPATH", name="(//*[contains(@class, 'v-btn v-btn--flat v-btn--icon v-btn--round theme--dark v-size--default')])[2]", error_msg="로그아웃 버튼 미노출")
                 # 로그인 버튼 노출 확인
                 self.interact(by_type="XPATH", name="//*[contains(@class, 'v-btn v-btn--block v-btn--contained theme--light v-size--large primary')]", click=False, error_msg="로그인 버튼 미노출")
+
                 # LMS 모바일 닫기
                 self.driver.close()
-                print('테스트 정상 종료!')
             else:
                 raise Exception("YYYY-MM-DD HH:MM:SS 형태의 시간이 미노출")
         except:

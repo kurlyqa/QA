@@ -5,11 +5,13 @@ from unittest import TestLoader, TestSuite
 from HtmlTestRunner import HTMLTestRunner
 from lms_web_login import LMSWebLogin
 from task_management import TaskManagement
+from site_management import SiteManagement
 import datetime
 import os
 
 s1 = TestLoader().loadTestsFromTestCase(LMSWebLogin)
 s2 = TestLoader().loadTestsFromTestCase(TaskManagement)
+s3 = TestLoader().loadTestsFromTestCase(SiteManagement)
 
 suite = TestSuite([s1, s2])
 
