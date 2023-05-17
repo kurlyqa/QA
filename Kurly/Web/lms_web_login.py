@@ -12,16 +12,7 @@ from time import sleep
 class LMSWebLogin(testModule):
 
     def setUp(self):
-        # 사람처럼 보이게 하는 옵션들
-        chrome_options = webdriver.ChromeOptions()
-        # 가속(GPU) 사용 안함
-        chrome_options.add_argument('disable-gpu')
-        # 언어 설정
-        chrome_options.add_argument('lang=ko_KR')
-        # 크롬 드라이버 설치
-        self.driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=chrome_options)
-        # 웹페이지 전체가 로드 될때까지 기다림
-        self.driver.implicitly_wait(30) # 또는 self.driver.set_page_load_timeout(30)
+        super().setUp() # testModule 클래스의 setUp 함수 호출
 
     def test_01_LMS_Web_로그인(self):
         try:

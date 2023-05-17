@@ -18,16 +18,7 @@ from time import sleep
 class TaskManagement(testModule):
 
     def setUp(self):
-        # 사람처럼 보이게 하는 옵션들
-        chrome_options = webdriver.ChromeOptions()
-        # 가속(GPU) 사용 안함
-        chrome_options.add_argument('disable-gpu')
-        # 언어 설정
-        chrome_options.add_argument('lang=ko_KR')
-        # 크롬 드라이버 설치
-        self.driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=chrome_options)
-        # 웹페이지 전체가 로드 될때까지 기다림
-        self.driver.implicitly_wait(30) # 또는 self.driver.set_page_load_timeout(30)
+        super().setUp() # testModule 클래스의 setUp 함수 호출
 
     def test_02_작업관리(self):
         try:
@@ -74,11 +65,20 @@ class TaskManagement(testModule):
             # 다음
             self.interact(by_type="XPATH", name="//*[contains(@class, 'v-btn v-btn--contained theme--light v-size--default primary')]", error_msg="출근 프로세스 진행중 다음 버튼 미노출")
 
-            # 아니요
-            self.interact(by_type="XPATH", name="//*[contains(@class, 'bottom-btn no-btn v-btn v-btn--contained theme--light v-size--default')]", error_msg="출근 프로세스 진행중 아니요 버튼 미노출")
+            # 네
+            self.interact(by_type="XPATH", name="//*[contains(@class, 'bottom-btn v-btn v-btn--contained theme--light v-size--default primary')]", error_msg="출근 프로세스 진행중 네 버튼 미노출")
+
+            # 선택
+            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-select__selections')]", error_msg="출근 프로세스 진행중 연장근무의 선택 버튼 미노출")
+
+            # 연장근무 30분 선택
+            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-list-item__title') and contains(text(), '30분')]", error_msg="출근 프로세스 진행중 연장근무 30분 선택 미노출")
+
+            # 확인 버튼 선택
+            self.interact(by_type="XPATH", name="//*[contains(@class, 'bottom-btn v-btn v-btn--contained theme--light v-size--default primary')]", error_msg="출근 프로세스 진행중 연장근무 선택 후 확인 버튼 미노출")
 
             # 네
-            self.interact(by_type="XPATH", name="//*[contains(@class, 'dialog-btn ml-0 v-btn v-btn--contained theme--light v-size--default primary')]", error_msg="출근 프로세스 진행중 네 버튼 미노출")
+            self.interact(by_type="XPATH", name="//*[contains(@class, 'dialog-btn ml-0 v-btn v-btn--contained theme--light v-size--default primary')]", error_msg="출근 프로세스 진행중 연장근무 선택 후 네 버튼 미노출")
 
             # 관리자 로그인
             # 새 탭 열기
@@ -711,22 +711,32 @@ class TaskManagement(testModule):
             self.interact(by_type="XPATH", name="//*[contains(@class, 'primary v-btn v-btn--contained theme--light v-size--default')]", error_msg="연장근무 희망 관리 조회 중 검색 버튼 미노출")
 
             # CC / 센터 / 최종 체크인 대분류공정 / 최종 체크인 소분류공정 / 계약구분 / 업무파트 / 팀명 / 근무shift /
-            # 아이디 / 이름 / 연장근무 가능시간 / 작업자 상세
-            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-data-table-header')]//*[contains(@aria-label, 'CC')]", click=False, error_msg="연장근무 희망 관리 검색 후 CC 미노출")
-            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-data-table-header')]//*[contains(@aria-label, '센터')]", click=False, error_msg="연장근무 희망 관리 검색 후 센터 미노출")
-            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-data-table-header')]//*[contains(@aria-label, '최종 체크인 대분류 공정')]", click=False, error_msg="연장근무 희망 관리 검색 후 최종 체크인 대분류 공정 미노출")
-            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-data-table-header')]//*[contains(@aria-label, '최종 체크인 소분류 공정')]", click=False, error_msg="연장근무 희망 관리 검색 후 최종 체크인 소분류 공정 미노출")
-            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-data-table-header')]//*[contains(@aria-label, '계약구분')]", click=False, error_msg="연장근무 희망 관리 검색 후 계약구분 미노출")
-            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-data-table-header')]//*[contains(@aria-label, '출근업무파트')]", click=False, error_msg="연장근무 희망 관리 검색 후 출근업무파트 미노출")
-            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-data-table-header')]//*[contains(@aria-label, '팀명')]", click=False, error_msg="연장근무 희망 관리 검색 후 팀명 미노출")
-            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-data-table-header')]//*[contains(@aria-label, '근무 Shift')]", click=False, error_msg="연장근무 희망 관리 검색 후 근무 Shift 미노출")
-            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-data-table-header')]//*[contains(@aria-label, '아이디')]", click=False, error_msg="연장근무 희망 관리 검색 후 아이디 미노출")
-            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-data-table-header')]//*[contains(@aria-label, '이름')]", click=False, error_msg="연장근무 희망 관리 검색 후 이름 미노출")
-            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-data-table-header')]//*[contains(@aria-label, '연장근무 가능 시간')]", click=False, error_msg="연장근무 희망 관리 검색 후 연장근무 가능 시간 미노출")
-            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-data-table-header')]//*[contains(@aria-label, '작업자 상세')]", click=False, error_msg="연장근무 희망 관리 검색 후 작업자 상세 미노출")
-            # 항목 노출
-            # 항목 노출 되지 않음..
-            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-data-table__empty-wrapper')]//*[contains(text(), '조회 결과가 없습니다')]", click=False, error_msg="연장근무 희망 관리 검색 후 조회 결과가 없습니다 텍스트 미노출")
+            # 아이디 / 이름 / 연장근무 가능시간 / 작업자 상세 항목 노출
+            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-data-table-header')]//*[contains(@aria-label, 'CC')]", click=False, error_msg="연장근무 희망 관리 검색 후 CC 항목명 미노출")
+            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-data-table-header')]//*[contains(@aria-label, '센터')]", click=False, error_msg="연장근무 희망 관리 검색 후 센터 항목명 미노출")
+            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-data-table-header')]//*[contains(@aria-label, '최종 체크인 대분류 공정')]", click=False, error_msg="연장근무 희망 관리 검색 후 최종 체크인 대분류 공정 항목명 미노출")
+            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-data-table-header')]//*[contains(@aria-label, '최종 체크인 소분류 공정')]", click=False, error_msg="연장근무 희망 관리 검색 후 최종 체크인 소분류 공정 항목명 미노출")
+            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-data-table-header')]//*[contains(@aria-label, '계약구분')]", click=False, error_msg="연장근무 희망 관리 검색 후 계약구분 항목명 미노출")
+            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-data-table-header')]//*[contains(@aria-label, '출근업무파트')]", click=False, error_msg="연장근무 희망 관리 검색 후 출근업무파트 항목명 미노출")
+            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-data-table-header')]//*[contains(@aria-label, '팀명')]", click=False, error_msg="연장근무 희망 관리 검색 후 팀명 항목명 미노출")
+            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-data-table-header')]//*[contains(@aria-label, '근무 Shift')]", click=False, error_msg="연장근무 희망 관리 검색 후 근무 Shift 항목명 미노출")
+            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-data-table-header')]//*[contains(@aria-label, '아이디')]", click=False, error_msg="연장근무 희망 관리 검색 후 아이디 항목명 미노출")
+            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-data-table-header')]//*[contains(@aria-label, '이름')]", click=False, error_msg="연장근무 희망 관리 검색 후 이름 항목명 미노출")
+            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-data-table-header')]//*[contains(@aria-label, '연장근무 가능 시간')]", click=False, error_msg="연장근무 희망 관리 검색 후 연장근무 가능 시간 항목명 미노출")
+            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-data-table-header')]//*[contains(@aria-label, '작업자 상세')]", click=False, error_msg="연장근무 희망 관리 검색 후 작업자 상세 항목명 미노출")
+
+            self.interact(by_type="XPATH", name="(//*[contains(@class, 'text-center')])[13]", click=False, error_msg="연장근무 희망 관리 검색 후 CC 결과 미노출")
+            self.interact(by_type="XPATH", name="(//*[contains(@class, 'text-center')])[14]", click=False, error_msg="연장근무 희망 관리 검색 후 센터 결과 미노출")
+            self.interact(by_type="XPATH", name="(//*[contains(@class, 'text-center')])[15]", click=False, error_msg="연장근무 희망 관리 검색 후 최종 체크인 대분류 공정 결과 미노출")
+            self.interact(by_type="XPATH", name="(//*[contains(@class, 'text-center')])[16]", click=False, error_msg="연장근무 희망 관리 검색 후 최종 체크인 소분류 공정 결과 미노출")
+            self.interact(by_type="XPATH", name="(//*[contains(@class, 'text-center')])[17]", click=False, error_msg="연장근무 희망 관리 검색 후 계약구분 결과 미노출")
+            self.interact(by_type="XPATH", name="(//*[contains(@class, 'text-center')])[18]", click=False, error_msg="연장근무 희망 관리 검색 후 출근업무파트 결과 미노출")
+            self.interact(by_type="XPATH", name="(//*[contains(@class, 'text-center')])[19]", click=False, error_msg="연장근무 희망 관리 검색 후 팀명 결과 미노출")
+            self.interact(by_type="XPATH", name="(//*[contains(@class, 'text-center')])[20]", click=False, error_msg="연장근무 희망 관리 검색 후 근무 Shift 결과 미노출")
+            self.interact(by_type="XPATH", name="(//*[contains(@class, 'text-center')])[21]", click=False, error_msg="연장근무 희망 관리 검색 후 아이디 결과 미노출")
+            self.interact(by_type="XPATH", name="(//*[contains(@class, 'text-center')])[22]", click=False, error_msg="연장근무 희망 관리 검색 후 이름 결과 미노출")
+            self.interact(by_type="XPATH", name="(//*[contains(@class, 'text-center')])[23]", click=False, error_msg="연장근무 희망 관리 검색 후 연장근무 가능 시간 결과 미노출")
+            self.interact(by_type="XPATH", name="(//*[contains(@class, 'text-center')])[24]", click=False, error_msg="연장근무 희망 관리 검색 후 작업자 상세 결과 미노출")
 
 
 
@@ -849,23 +859,19 @@ class TaskManagement(testModule):
             self.interact(by_type="XPATH", name="//*[contains(@class, 'v-list-item__title') and contains(text(), '00:25 ~ 05:00')]", error_msg="연장근무 희망 관리 조회 중 00:25 ~ 05:00 미노출")
 
             # [검색]버튼 선택
-            self.interact(by_type="XPATH", name="//*[contains(@class, 'primary v-btn v-btn--contained theme--light v-size--default')]", error_msg="공정별 이탈 작업자 확인 조회 중 검색 버튼 미노출")
+            self.interact(by_type="XPATH", name="//*[contains(@class, 'primary v-btn v-btn--contained theme--light v-size--default')]", error_msg="연장근무 희망 관리 탭 검색 버튼 미노출")
 
-            ### 결과 값이 없어서 다운로드 버튼이 없음 ###
+            # [다운로드] 버튼 선택
+            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-btn v-btn--contained theme--light v-size--default primary')]", error_msg="연장근무 희망 관리 조회 후 다운로드 버튼 미노출")
 
-            # # [다운로드] 버튼 선택
-            # self.interact(by_type="XPATH", name="//*[contains(@class, 'v-btn v-btn--contained theme--light v-size--default primary')]", error_msg="연장근무 희망 관리 조회 후 다운로드 버튼 미노출")
-            #
-            # # 개인정보 다운로드 설정 사유 입력
-            # self.interact(by_type="XPATH", name="(//*[contains(@class, 'v-text-field__slot')])[7]//input", click=False, send_keys_msg='테스트테스트테스트테스트', error_msg="연장근무 희망 관리 조회 후 다운로드 시 다운로드 사유 입력란 미노출")
-            #
-            # # 파일 비밀번호 입력
-            # self.interact(by_type="XPATH", name="(//*[contains(@class, 'v-text-field__slot')])[8]//input", click=False, send_keys_msg='!testtest1', error_msg="연장근무 희망 관리 조회 후 다운로드 시 파일 비밀번호 입력란 미노출")
-            #
-            # # [등록] 버튼 선택
-            # self.interact(by_type="XPATH", name="//*[contains(@class, 'v-btn v-btn--contained theme--light v-size--default primary__btn')]", error_msg="연장근무 희망 관리 조회 후 다운로드 시 등록 버튼 미노출")
+            # 개인정보 다운로드 설정 사유 입력
+            self.interact(by_type="XPATH", name="(//*[contains(@class, 'v-text-field__slot')]//input)[2]", click=False, send_keys_msg='테스트테스트테스트테스트', error_msg="연장근무 희망 관리 조회 후 다운로드 시 다운로드 사유 입력란 미노출")
 
+            # 파일 비밀번호 입력
+            self.interact(by_type="XPATH", name="(//*[contains(@class, 'v-text-field__slot')]//input)[3]", click=False, send_keys_msg='!testtest1', error_msg="연장근무 희망 관리 조회 후 다운로드 시 파일 비밀번호 입력란 미노출")
 
+            # [등록] 버튼 선택
+            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-btn v-btn--contained theme--light v-size--default primary__btn')]", error_msg="연장근무 희망 관리 조회 후 다운로드 시 등록 버튼 미노출")
 
             # 엑셀 파일 확인
             # *항목) CC / 센터 / 최종 체크인 대분류공정 / 최종 체크인 소분류공정 / 계약구분 / 업무파트 / 팀명 /
@@ -881,9 +887,9 @@ class TaskManagement(testModule):
             self.driver.switch_to.window(self.driver.window_handles[0])
 
             # 퇴근
-            self.interact(by_type="XPATH", name="//*[contains(@class, 'work-btn v-btn v-btn--contained v-btn--fab v-btn--round theme--light v-size--default primary')]", error_msg="")
+            self.interact(by_type="XPATH", name="//*[contains(@class, 'work-btn v-btn v-btn--contained v-btn--fab v-btn--round theme--light v-size--default primary')]", error_msg="작업관리 모든 테스트 진행 후 퇴근 버튼 미노출")
             # 네
-            self.interact(by_type="XPATH", name="//*[contains(@class, 'dialog-btn ml-0 v-btn v-btn--contained theme--light v-size--default primary')]", error_msg="")
+            self.interact(by_type="XPATH", name="//*[contains(@class, 'dialog-btn ml-0 v-btn v-btn--contained theme--light v-size--default primary')]", error_msg="작업관리 모든 테스트 진행 후 퇴근 버튼 클릭 시 네 버튼 미노출")
             # LMS 모바일 닫기
             self.driver.close()
             print('테스트 정상 종료!')
@@ -902,51 +908,3 @@ if __name__ == '__main__':
     suite = unittest.TestLoader().loadTestsFromTestCase(TaskManagement)
     # TextTestRunner 클래스의 객체를 생성하여 생성된 테스트 스위트 객체를 실행. verbosity 인자는 테스트 결과를 출력할 상세도를 설정하는 인자. 2이면 테스트 케이스 수, 테스트 시간, 테스트 결과를 출력. .run(suite)는 생성된 TestSuite객체를 실행하는 메소드.
     unittest.TextTestRunner(verbosity=2).run(suite)
-
-
-
-
-
-    # ## <구글 드라이브에 로컬 파일 업로드 후 실행하는 코드> ###
-    # # 인증 정보 생성
-    # creds = None
-    # SCOPES = ['https://www.googleapis.com/auth/drive']
-    # if os.path.exists('token.json'):
-    #     creds = Credentials.from_authorized_user_file('token.json', SCOPES)
-    #
-    # # 인증되지 않은 경우, OAuth2.0 프로세스 실행
-    # if not creds or not creds.valid:
-    #     flow = InstalledAppFlow.from_client_secrets_file(
-    #         'client_secret.json', SCOPES)
-    #     creds = flow.run_local_server(port=0)
-    #     # 인증 정보 저장
-    #     with open('token.json', 'w') as token:
-    #         token.write(creds.to_json())
-    #
-    # # 작업상세내역으로 시작하는 파일 경로 지정
-    # dir_path = '/Users/122d6424/Downloads'
-    # file_path = ''
-    # for file_name in os.listdir(dir_path):
-    #     if file_name.startswith('작업상세내역'):
-    #         file_path = os.path.join(dir_path, file_name)
-    #         break
-    #
-    # # 파일 이름 추출
-    # file_name = os.path.basename(file_path)
-    #
-    # # Google Drive API 클라이언트 생성
-    # service = build('drive', 'v3', credentials=creds)
-    #
-    # # 파일 업로드
-    # file_metadata = {'name': file_name}
-    # media = MediaFileUpload(file_path, mimetype='application/vnd.ms-excel')
-    # file = service.files().create(body=file_metadata, media_body=media, fields='id').execute()
-    #
-    # # 업로드된 파일 ID 출력
-    # print(f"File ID: {file.get('id')}")
-    #
-    # # 파일 열기
-    # file_id = file.get('id')
-    # url = f'https://drive.google.com/file/d/{file_id}/view?usp=sharing'
-    # print(f"File URL: {url}")
-    # #####
