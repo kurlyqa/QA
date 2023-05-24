@@ -40,7 +40,7 @@ class LMSWebLogin(testModule):
             time_element = WebDriverWait(self.driver, 10).until(EC.presence_of_element_located((By.CSS_SELECTOR, ".v-card__text div:nth-child(2)")))
             time_text = time_element.text
 
-            # 시간값을 추출하기 위한 정규표현식을 정의합니다.
+            # 시간값을 추출하기 위한 정규표현식을 정의
             pattern = r'\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}'
 
             # 위에 정규식 패턴이 추출한 text에 존재하는지 확인

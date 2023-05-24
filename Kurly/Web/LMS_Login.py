@@ -80,7 +80,7 @@ class LMSLogin(unittest.TestCase):
             # 아이디 입력
             self.interact(by_type="XPATH", name="//input[@id='input-13' and @type='text' and @required='required']", click=False, send_keys_msg='junhyunkyung')
             # 비밀번호 입력
-            self.interact(by_type="XPATH", name="//input[@id='input-16' and @type='password' and @required='required']", click=False, send_keys_msg='!tlgjatlf1')
+            self.interact(by_type="XPATH", name="//input[@id='input-16' and @type='password' and @required='required']", click=False, send_keys_msg='!wnsgus1')
             # 로그인
             self.interact(by_type="XPATH", name="//*[contains(@class, 'v-btn__content')]")
 

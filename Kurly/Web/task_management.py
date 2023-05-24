@@ -35,13 +35,16 @@ class TaskManagement(testModule):
             # LMS 모바일 로그인
             # 아이디 입력
             self.interact(by_type="XPATH", name="//input[@id='input-13' and @type='text' and @required='required']", click=False, send_keys_msg='junhyunkyung', error_msg="아이디 입력란 미노출")
+
             # 비밀번호 입력
-            self.interact(by_type="XPATH", name="//input[@id='input-16' and @type='password' and @required='required']", click=False, send_keys_msg='!tlgjatlf1', error_msg="비밀번호 입력란 미노출")
+            self.interact(by_type="XPATH", name="//input[@id='input-16' and @type='password' and @required='required']", click=False, send_keys_msg='!wnsgus1', error_msg="비밀번호 입력란 미노출")
+
             # 로그인
             self.interact(by_type="XPATH", name="//*[contains(@class, 'v-btn__content')]", error_msg="로그인 버튼 미노출")
 
             # 출근 클릭
             self.interact(by_type="XPATH", name="//*[contains(@class, 'work-btn v-btn v-btn--contained v-btn--fab v-btn--round theme--light v-size--default primary')]", error_msg="출근 버튼 미노출")
+
             # 송파CC
             # 송파 냉장1
             self.interact(by_type="XPATH", name="(//*[contains(@class, 'v-select__selections')])[1]", error_msg="CC 선택란 미노출")
@@ -156,7 +159,7 @@ class TaskManagement(testModule):
             time_element = WebDriverWait(self.driver, 10).until(EC.presence_of_element_located((By.CSS_SELECTOR, ".purple-bold > span:nth-child(2)")))
             time_text = time_element.text
 
-            # 시간값을 추출하기 위한 정규표현식을 정의합니다.
+            # 시간값을 추출하기 위한 정규표현식을 정의
             pattern = r'\d{4}-\d{2}-\d{2} \d{2}:\d{2}'
 
             # 위에 정규식 패턴이 추출한 text에 존재하는지 확인
@@ -244,7 +247,7 @@ class TaskManagement(testModule):
             time_element = WebDriverWait(self.driver, 10).until(EC.presence_of_element_located((By.XPATH, "(//*[contains(@class, 'text-center')])[14]")))
             time_text = time_element.text
 
-            # 시간값을 추출하기 위한 정규표현식을 정의합니다.
+            # 시간값을 추출하기 위한 정규표현식을 정의
             pattern = r'\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}'
 
             # 위에 정규식 패턴이 추출한 text에 존재하는지 확인
@@ -461,7 +464,7 @@ class TaskManagement(testModule):
             # 시작시간
             time_element = WebDriverWait(self.driver, 10).until(EC.presence_of_element_located((By.CSS_SELECTOR, ".total-container")))
             before = time_element.text
-            # 시간값을 추출하기 위한 정규표현식을 정의합니다.
+            # 시간값을 추출하기 위한 정규표현식을 정의
             pattern = r'\d{2}:\d{2}:\d{2}'
             # 위에 정규식 패턴이 추출한 text에 존재하는지 확인
             match = re.search(pattern, before)
@@ -477,7 +480,7 @@ class TaskManagement(testModule):
             # 1분 후 시간
             time_element = WebDriverWait(self.driver, 10).until(EC.presence_of_element_located((By.CSS_SELECTOR, ".total-container")))
             after = time_element.text
-            # 시간값을 추출하기 위한 정규표현식을 정의합니다.
+            # 시간값을 추출하기 위한 정규표현식을 정의
             pattern = r'\d{2}:\d{2}:\d{2}'
             # 위에 정규식 패턴이 추출한 text에 존재하는지 확인
             match = re.search(pattern, after)
@@ -580,7 +583,7 @@ class TaskManagement(testModule):
             self.interact(by_type="XPATH", name="//*[contains(@class, 'col') and contains(text(), '분 이상')]", click=False, error_msg="작업자별 작업이력 확인 초기화 후 분 이상 텍스트 미노출")
 
             # 날짜 클릭 후 표시된 날짜 추출
-            self.interact(by_type="XPATH", name="(//*[contains(@class, 'v-text-field__slot') ])[3]//input", error_msg="작업자별 작업이력 확인 조회 후 초기화 버튼 클릭 시 조회 결과가 없습니다 텍스트 미노출")
+            self.interact(by_type="XPATH", name="(//*[contains(@class, 'v-text-field__slot')])[3]//input", error_msg="작업자별 작업이력 확인 조회 후 초기화 버튼 클릭 시 조회 결과가 없습니다 텍스트 미노출")
             time_element = WebDriverWait(self.driver, 10).until(EC.presence_of_element_located((By.XPATH, "//*[contains(@class, 'v-btn v-date-picker-table__current v-btn--active v-btn--text v-btn--rounded theme--light accent')]//*[contains(@class, 'v-btn__content')]")))
 
             # 표시 된 날짜의 가장 오른쪽 하나의 숫자
@@ -764,8 +767,8 @@ class TaskManagement(testModule):
             else:
                 raise Exception("연장근무 희망 관리 초기화 후 계약구분 활성화 상태")
 
-            # 업무파트:선택(비활)
-            self.interact(by_type="XPATH", name="(//*[contains(@class, 'v-select__selections')])[4]//*[contains(text(), '선택')]", click=False, error_msg="연장근무 희망 관리 초기화 후 업무파트 선택란 전체 텍스트 미노출")
+            # 출근업무파트:전체(비활)
+            self.interact(by_type="XPATH", name="(//*[contains(@class, 'v-select__selections')])[4]//*[contains(text(), '전체')]", click=False, error_msg="연장근무 희망 관리 초기화 후 출근업무파트 선택란 전체 텍스트 미노출")
 
             select_element = WebDriverWait(self.driver, 10).until(EC.presence_of_element_located((By.XPATH, "(//*[contains(@class, 'v-select__selections')])[4]//input")))
             is_disabled = select_element.get_attribute("disabled")
@@ -878,6 +881,234 @@ class TaskManagement(testModule):
             # 근무shift  / 아이디 / 이름 / 연장근무 가능시간
 
             # 파일이 잠겨 있기 때문에 파일 확인 불가
+
+
+
+            # 16. <센터별 출근 작업자 확인 조회>
+
+            # 센터별 출근 작업자 확인 클릭
+            self.interact(by_type="XPATH", name="//*[contains(text(), '센터별 출근 작업자 확인')]", error_msg="센터별 출근 작업자 확인 탭 미노출")
+
+            # CC 항목 값 변경 : 송파CC
+            # 센터 항목 값 변경 : 송파 냉장1
+            # 계약구분 값 변경 : 상용직
+            # 출근업무파트 변경 : HUB
+            self.interact(by_type="XPATH", name="(//*[contains(@class, 'v-select__selections')])[1]", error_msg="센터별 출근 작업자 확인 탭 CC 선택란 미노출")
+            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-list-item__title') and contains(text(), '송파 CC')]", error_msg="센터별 출근 작업자 확인 탭 CC 항목 송파 CC 미노출")
+            self.interact(by_type="XPATH", name="(//*[contains(@class, 'v-select__selections')])[2]", error_msg="센터별 출근 작업자 확인 탭 센터 선택란 미노출")
+            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-list-item__title') and contains(text(), '송파 냉장1')]", error_msg="센터별 출근 작업자 확인 탭 센터 항목 송파 냉장1 미노출")
+            self.interact(by_type="XPATH", name="(//*[contains(@class, 'v-select__selections')])[3]", error_msg="센터별 출근 작업자 확인 탭 계약구분 선택란 미노출")
+            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-list-item__title') and contains(text(), '상용직')]", error_msg="센터별 출근 작업자 확인 탭 계약구분 항목 상용직 미노출")
+            self.interact(by_type="XPATH", name="(//*[contains(@class, 'v-select__selections')])[4]", error_msg="센터별 출근 작업자 확인 탭 출근업무파트 선택란 미노출")
+            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-list-item__title') and contains(text(), 'HUB')]", error_msg="센터별 출근 작업자 확인 탭 출근업무파트 항목 HUB 미노출")
+
+            # [검색]버튼 선택
+            self.interact(by_type="XPATH", name="//*[contains(@class, 'primary v-btn v-btn--contained theme--light v-size--default')]", error_msg="센터별 출근 작업자 확인 탭 검색 버튼 미노출")
+
+            # CC / 센터 / 계약 구분 / 출근업무파트 / 팀명 / 근무Shift / 체크인상태 / 아이디 / 이름 / 출근일시 / 작업자정보상세
+            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-data-table-header')]//*[contains(@aria-label, 'CC')]", click=False, error_msg="센터별 출근 작업자 확인 탭 검색 후 CC 항목명 미노출")
+            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-data-table-header')]//*[contains(@aria-label, '센터')]", click=False, error_msg="센터별 출근 작업자 확인 탭 검색 후 센터 항목명 미노출")
+            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-data-table-header')]//*[contains(@aria-label, '계약 구분')]", click=False, error_msg="센터별 출근 작업자 확인 탭 검색 후 계약 구분 항목명 미노출")
+            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-data-table-header')]//*[contains(@aria-label, '출근업무파트')]", click=False, error_msg="센터별 출근 작업자 확인 탭 검색 후 출근업무파트 항목명 미노출")
+            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-data-table-header')]//*[contains(@aria-label, '팀명')]", click=False, error_msg="센터별 출근 작업자 확인 탭 검색 후 팀명 항목명 미노출")
+            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-data-table-header')]//*[contains(@aria-label, '근무Shift')]", click=False, error_msg="센터별 출근 작업자 확인 탭 검색 후 근무Shift 항목명 미노출")
+            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-data-table-header')]//*[contains(@aria-label, '체크인상태')]", click=False, error_msg="센터별 출근 작업자 확인 탭 검색 후 체크인상태 항목명 미노출")
+            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-data-table-header')]//*[contains(@aria-label, '아이디')]", click=False, error_msg="센터별 출근 작업자 확인 탭 검색 후 아이디 항목명 미노출")
+            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-data-table-header')]//*[contains(@aria-label, '이름')]", click=False, error_msg="센터별 출근 작업자 확인 탭 검색 후 이름 항목명 미노출")
+            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-data-table-header')]//*[contains(@aria-label, '출근일시')]", click=False, error_msg="센터별 출근 작업자 확인 탭 검색 후 출근일시 항목명 미노출")
+            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-data-table-header')]//*[contains(@aria-label, '작업자정보상세')]", click=False, error_msg="센터별 출근 작업자 확인 탭 검색 후 작업자정보상세 항목명 미노출")
+
+
+
+            # 17. <센터별 출근 작업자 확인 조회 초기화>
+
+            # [초기화]버튼 선택
+            self.interact(by_type="XPATH", name="//*[contains(@class, 'gray v-btn v-btn--contained theme--light v-size--default')]", error_msg="센터별 출근 작업자 확인 탭 검색 후 초기화 버튼 미노출")
+
+            # CC : 선택 / 센터 : 선택
+            self.interact(by_type="XPATH", name="(//*[contains(@class, 'v-select__selections')])[1]//*[contains(text(), '선택')]", click=False, error_msg="센터별 출근 작업자 확인 탭 초기화 후 CC 선택란 선택 텍스트 미노출")
+            self.interact(by_type="XPATH", name="(//*[contains(@class, 'v-select__selections')])[2]//*[contains(text(), '선택')]", click=False, error_msg="센터별 출근 작업자 확인 탭 초기화 후 센터 선택란 선택 텍스트 미노출")
+
+            # 계약구분 : 전체
+            self.interact(by_type="XPATH", name="(//*[contains(@class, 'v-select__selections')])[3]//*[contains(text(), '전체')]", click=False, error_msg="센터별 출근 작업자 확인 탭 초기화 후 계약구분 선택란 전체 텍스트 미노출")
+
+            # 출근업무파트 : 전체
+            self.interact(by_type="XPATH", name="(//*[contains(@class, 'v-select__selections')])[4]//*[contains(text(), '전체')]", click=False, error_msg="센터별 출근 작업자 확인 탭 초기화 후 출근업무파트 선택란 전체 텍스트 미노출")
+
+            # 팀명 : 전체
+            self.interact(by_type="XPATH", name="(//*[contains(@class, 'v-select__selections')])[5]//*[contains(text(), '전체')]", click=False, error_msg="센터별 출근 작업자 확인 탭 초기화 후 팀명 선택란 전체 텍스트 미노출")
+
+            # 근무Shift : 전체
+            self.interact(by_type="XPATH", name="(//*[contains(@class, 'v-select__selections')])[6]//*[contains(text(), '전체')]", click=False, error_msg="센터별 출근 작업자 확인 탭 초기화 후 근무Shift 선택란 전체 텍스트 미노출")
+
+            # 체크인상태 : 전체
+            self.interact(by_type="XPATH", name="(//*[contains(@class, 'v-select__selections')])[7]//*[contains(text(), '전체')]", click=False, error_msg="센터별 출근 작업자 확인 탭 초기화 후 체크인상태 선택란 전체 텍스트 미노출")
+
+            # 조회결과 영역 초기화 상태 확인
+            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-data-table__empty-wrapper')]//*[contains(text(), '조회 결과가 없습니다')]", error_msg="센터별 출근 작업자 확인 탭 초기화 버튼 클릭 후 조회 결과가 없습니다 텍스트 미노출")
+
+
+
+            # 18. <센터별 출근 작업자 작업상세내역 다운로드>
+
+            # CC 항목 값 변경 : 송파CC
+            # 센터 항목 값 변경 : 송파냉장1
+            # 계약구분 값 변경 : 상용직
+            # 업무파트 변경 : HUB
+            self.interact(by_type="XPATH", name="(//*[contains(@class, 'v-select__selections')])[1]", error_msg="센터별 출근 작업자 확인 탭 CC 선택란 미노출")
+            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-list-item__title') and contains(text(), '송파 CC')]", error_msg="센터별 출근 작업자 확인 탭 CC 항목 송파 CC 미노출")
+            self.interact(by_type="XPATH", name="(//*[contains(@class, 'v-select__selections')])[2]", error_msg="센터별 출근 작업자 확인 탭 센터 선택란 미노출")
+            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-list-item__title') and contains(text(), '송파 냉장1')]", error_msg="센터별 출근 작업자 확인 탭 센터 항목 송파 냉장1 미노출")
+            self.interact(by_type="XPATH", name="(//*[contains(@class, 'v-select__selections')])[3]", error_msg="센터별 출근 작업자 확인 탭 계약구분 선택란 미노출")
+            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-list-item__title') and contains(text(), '상용직')]", error_msg="센터별 출근 작업자 확인 탭 계약구분 항목 상용직 미노출")
+            self.interact(by_type="XPATH", name="(//*[contains(@class, 'v-select__selections')])[4]", error_msg="센터별 출근 작업자 확인 탭 출근업무파트 선택란 미노출")
+            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-list-item__title') and contains(text(), 'HUB')]", error_msg="센터별 출근 작업자 확인 탭 출근업무파트 항목 HUB 미노출")
+
+            # [검색]버튼 선택
+            self.interact(by_type="XPATH", name="//*[contains(@class, 'primary v-btn v-btn--contained theme--light v-size--default')]", error_msg="센터별 출근 작업자 확인 탭 검색 버튼 미노출")
+
+            # [다운로드] 버튼 선택
+            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-btn v-btn--contained theme--light v-size--default primary')]", error_msg="센터별 출근 작업자 확인 탭 검색 후 다운로드 버튼 미노출")
+
+            # 개인정보 다운로드 설정 사유 입력
+            self.interact(by_type="XPATH", name="(//*[contains(@class, 'v-text-field__slot')])[1]//input", click=False, send_keys_msg='테스트테스트테스트테스트', error_msg="센터별 출근 작업자 확인 탭 검색 후 다운로드 시 다운로드 사유 입력란 미노출")
+
+            # 파일 비밀번호 입력
+            self.interact(by_type="XPATH", name="(//*[contains(@class, 'v-text-field__slot')])[2]//input", click=False, send_keys_msg='!testtest1', error_msg="센터별 출근 작업자 확인 탭 검색 후 다운로드 시 파일 비밀번호 입력란 미노출")
+
+            # [등록] 버튼 선택
+            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-btn v-btn--contained theme--light v-size--default primary__btn')]", error_msg="센터별 출근 작업자 확인 탭 검색 후 다운로드 시 등록 버튼 미노출")
+
+            # 엑셀 파일 확인 CC / 센터 / 계약구분 / 출근업무파트 / 팀명 / 근무shift / 체크인상태 / 아이디 / 이름 / 출근일시 항목 값 노출
+
+
+
+            # 19. <센터별 퇴근 작업자 확인 조회>
+
+            # 센터별 퇴근 작업자 확인 클릭
+            self.interact(by_type="XPATH", name="//*[contains(text(), '센터별 퇴근 작업자 확인')]", error_msg="센터별 퇴근 작업자 확인 탭 미노출")
+
+            # CC 항목 값 변경 : 송파CC
+            # 센터 항목 값 변경 : 송파냉장1
+            # 계약구분 값 변경 : 상용직
+            # 출근업무파트 변경 : HUB
+            self.interact(by_type="XPATH", name="(//*[contains(@class, 'v-select__selections')])[1]", error_msg="센터별 퇴근 작업자 확인 탭 CC 선택란 미노출")
+            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-list-item__title') and contains(text(), '송파 CC')]", error_msg="센터별 퇴근 작업자 확인 탭 CC 항목 송파 CC 미노출")
+            self.interact(by_type="XPATH", name="(//*[contains(@class, 'v-select__selections')])[2]", error_msg="센터별 퇴근 작업자 확인 탭 센터 선택란 미노출")
+            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-list-item__title') and contains(text(), '송파 냉장1')]", error_msg="센터별 퇴근 작업자 확인 탭 센터 항목 송파 냉장1 미노출")
+            self.interact(by_type="XPATH", name="(//*[contains(@class, 'v-select__selections')])[3]", error_msg="센터별 퇴근 작업자 확인 탭 계약구분 선택란 미노출")
+            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-list-item__title') and contains(text(), '상용직')]", error_msg="센터별 퇴근 작업자 확인 탭 계약구분 항목 상용직 미노출")
+            self.interact(by_type="XPATH", name="(//*[contains(@class, 'v-select__selections')])[4]", error_msg="센터별 퇴근 작업자 확인 탭 출근업무파트 선택란 미노출")
+            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-list-item__title') and contains(text(), 'HUB')]", error_msg="센터별 퇴근 작업자 확인 탭 출근업무파트 항목 HUB 미노출")
+
+            # [검색]버튼 선택
+            self.interact(by_type="XPATH", name="//*[contains(@class, 'primary v-btn v-btn--contained theme--light v-size--default')]", error_msg="센터별 퇴근 작업자 확인 탭 검색 버튼 미노출")
+
+            # CC / 센터 / 계약구분 / 출근업무파트 / 팀명 / 근무 Shift / 아이디 / 이름 / 출근일시 / 퇴근일시 / 자동퇴근처리 / 작업자정보상세 항목 노출
+            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-data-table-header')]//*[contains(@aria-label, 'CC')]", click=False, error_msg="센터별 퇴근 작업자 확인 탭 검색 후 CC 항목명 미노출")
+            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-data-table-header')]//*[contains(@aria-label, '센터')]", click=False, error_msg="센터별 퇴근 작업자 확인 탭 검색 후 센터 항목명 미노출")
+            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-data-table-header')]//*[contains(@aria-label, '계약구분')]", click=False, error_msg="센터별 퇴근 작업자 확인 탭 검색 후 계약구분 항목명 미노출")
+            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-data-table-header')]//*[contains(@aria-label, '출근업무파트')]", click=False, error_msg="센터별 퇴근 작업자 확인 탭 검색 후 출근업무파트 항목명 미노출")
+            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-data-table-header')]//*[contains(@aria-label, '팀명')]", click=False, error_msg="센터별 퇴근 작업자 확인 탭 검색 후 팀명 항목명 미노출")
+            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-data-table-header')]//*[contains(@aria-label, '근무 Shift')]", click=False, error_msg="센터별 퇴근 작업자 확인 탭 검색 후 근무 Shift 항목명 미노출")
+            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-data-table-header')]//*[contains(@aria-label, '아이디')]", click=False, error_msg="센터별 퇴근 작업자 확인 탭 검색 후 아이디 항목명 미노출")
+            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-data-table-header')]//*[contains(@aria-label, '이름')]", click=False, error_msg="센터별 퇴근 작업자 확인 탭 검색 후 이름 항목명 미노출")
+            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-data-table-header')]//*[contains(@aria-label, '출근일시')]", click=False, error_msg="센터별 퇴근 작업자 확인 탭 검색 후 출근일시 항목명 미노출")
+            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-data-table-header')]//*[contains(@aria-label, '퇴근일시')]", click=False, error_msg="센터별 퇴근 작업자 확인 탭 검색 후 퇴근일시 항목명 미노출")
+            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-data-table-header')]//*[contains(@aria-label, '자동퇴근처리')]", click=False, error_msg="센터별 퇴근 작업자 확인 탭 검색 후 자동퇴근처리 항목명 미노출")
+            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-data-table-header')]//*[contains(@aria-label, '작업자정보상세')]", click=False, error_msg="센터별 퇴근 작업자 확인 탭 검색 후 작업자정보상세 항목명 미노출")
+
+
+
+            # 20. <센터별 퇴근 작업자 확인 조회 초기화>
+
+            # [초기화]버튼 선택
+            self.interact(by_type="XPATH", name="//*[contains(@class, 'gray v-btn v-btn--contained theme--light v-size--default')]", error_msg="센터별 퇴근 작업자 확인 탭 검색 후 초기화 버튼 미노출")
+
+            # CC : 선택 / 센터 : 선택
+            self.interact(by_type="XPATH", name="(//*[contains(@class, 'v-select__selections')])[1]//*[contains(text(), '선택')]", click=False, error_msg="센터별 퇴근 작업자 확인 탭 초기화 후 CC 선택란 선택 텍스트 미노출")
+            self.interact(by_type="XPATH", name="(//*[contains(@class, 'v-select__selections')])[2]//*[contains(text(), '선택')]", click=False, error_msg="센터별 퇴근 작업자 확인 탭 초기화 후 센터 선택란 선택 텍스트 미노출")
+
+            # 계약구분 : 전체
+            self.interact(by_type="XPATH", name="(//*[contains(@class, 'v-select__selections')])[3]//*[contains(text(), '전체')]", click=False, error_msg="센터별 퇴근 작업자 확인 탭 초기화 후 계약구분 선택란 전체 텍스트 미노출")
+
+            # 출근업무파트 : 전체
+            self.interact(by_type="XPATH", name="(//*[contains(@class, 'v-select__selections')])[4]//*[contains(text(), '전체')]", click=False, error_msg="센터별 퇴근 작업자 확인 탭 초기화 후 출근업무파트 선택란 전체 텍스트 미노출")
+
+            # 팀명 : 전체
+            self.interact(by_type="XPATH", name="(//*[contains(@class, 'v-select__selections')])[5]//*[contains(text(), '전체')]", click=False, error_msg="센터별 퇴근 작업자 확인 탭 초기화 후 팀명 선택란 전체 텍스트 미노출")
+
+            # 근무Shift : 전체
+            self.interact(by_type="XPATH", name="(//*[contains(@class, 'v-select__selections')])[6]//*[contains(text(), '전체')]", click=False, error_msg="센터별 퇴근 작업자 확인 탭 초기화 후 근무Shift 선택란 전체 텍스트 미노출")
+
+            # 퇴근Y : off
+            element = WebDriverWait(self.driver, 10).until(EC.presence_of_element_located((By.XPATH, "//*[contains(@class, 'v-input--selection-controls__input')]//input")))
+
+            is_disabled = element.get_attribute("aria-disabled")
+
+            if is_disabled == "false":
+                pass
+            else:
+                raise Exception("센터별 퇴근 작업자 확인 탭 초기화 후 퇴근Y 활성화 상태로 표시됨")
+
+            # 날짜 : 오늘날짜
+            # 날짜 클릭 후 표시된 날짜 추출
+            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-text-field__slot')]//input", error_msg="센터별 퇴근 작업자 탭에서 초기화 버튼 클릭 시 날짜 탭 버튼 미노출")
+            time_element = WebDriverWait(self.driver, 10).until(EC.presence_of_element_located((By.XPATH, "//*[contains(@class, 'v-btn v-date-picker-table__current v-btn--active v-btn--text v-btn--rounded theme--light accent')]//*[contains(@class, 'v-btn__content')]")))
+
+            # 표시 된 날짜의 가장 오른쪽 하나의 숫자
+            time_text = time_element.text
+            time_text = str(time_text)[-1]
+
+            # 오늘 날짜 가장 오른쪽 하나의 숫자
+            today = datetime.today().strftime('%Y-%m-%d')
+            today = str(today)[-1]
+
+            # 비교
+            if time_text == today:
+                pass
+            else:
+                raise Exception("센터별 퇴근 작업자 탭에서 초기화 버튼 클릭 시 날짜가 오늘이 아님")
+
+            # 날짜 선택창 닫기 위해 오늘 날짜 선택
+            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-btn v-date-picker-table__current v-btn--active v-btn--text v-btn--rounded theme--light accent')]//*[contains(@class, 'v-btn__content')]", error_msg="센터별 퇴근 작업자 확인 탭 초기화 시 오늘 날짜 선택 미노출")
+
+            # 조회결과 영역 초기화 상태 확인
+            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-data-table__empty-wrapper')]//*[contains(text(), '조회 결과가 없습니다')]", error_msg="센터별 퇴근 작업자 확인 탭 초기화 버튼 클릭 후 조회 결과가 없습니다 텍스트 미노출")
+
+
+
+            # 21. <센터별 퇴근 작업자 작업상세내역 다운로드>
+
+            # CC 항목 값 변경 : 송파CC
+            # 센터 항목 값 변경 : 송파냉장1
+            # 계약구분 값 변경 : 상용직
+            # 업무파트 변경 : HUB
+            self.interact(by_type="XPATH", name="(//*[contains(@class, 'v-select__selections')])[1]", error_msg="센터별 퇴근 작업자 확인 탭 CC 선택란 미노출")
+            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-list-item__title') and contains(text(), '송파 CC')]", error_msg="센터별 퇴근 작업자 확인 탭 CC 항목 송파 CC 미노출")
+            self.interact(by_type="XPATH", name="(//*[contains(@class, 'v-select__selections')])[2]", error_msg="센터별 퇴근 작업자 확인 탭 센터 선택란 미노출")
+            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-list-item__title') and contains(text(), '송파 냉장1')]", error_msg="센터별 퇴근 작업자 확인 탭 센터 항목 송파 냉장1 미노출")
+            self.interact(by_type="XPATH", name="(//*[contains(@class, 'v-select__selections')])[3]", error_msg="센터별 퇴근 작업자 확인 탭 계약구분 선택란 미노출")
+            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-list-item__title') and contains(text(), '상용직')]", error_msg="센터별 퇴근 작업자 확인 탭 계약구분 항목 상용직 미노출")
+            self.interact(by_type="XPATH", name="(//*[contains(@class, 'v-select__selections')])[4]", error_msg="센터별 퇴근 작업자 확인 탭 출근업무파트 선택란 미노출")
+            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-list-item__title') and contains(text(), 'HUB')]", error_msg="센터별 퇴근 작업자 확인 탭 출근업무파트 항목 HUB 미노출")
+
+            # [검색]버튼 선택
+            self.interact(by_type="XPATH", name="//*[contains(@class, 'primary v-btn v-btn--contained theme--light v-size--default')]", error_msg="센터별 퇴근 작업자 확인 탭 검색 버튼 미노출")
+
+            # [다운로드] 버튼 선택
+            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-btn v-btn--contained theme--light v-size--default primary')]", error_msg="센터별 퇴근 작업자 확인 탭 검색 후 다운로드 버튼 미노출")
+
+            # 개인정보 다운로드 설정 사유 입력
+            self.interact(by_type="XPATH", name="(//*[contains(@class, 'v-text-field__slot')])[3]//input", click=False, send_keys_msg='테스트테스트테스트테스트', error_msg="센터별 퇴근 작업자 확인 탭 검색 후 다운로드 시 다운로드 사유 입력란 미노출")
+
+            # 파일 비밀번호 입력
+            self.interact(by_type="XPATH", name="(//*[contains(@class, 'v-text-field__slot')])[4]//input", click=False, send_keys_msg='!testtest1', error_msg="센터별 퇴근 작업자 확인 탭 검색 후 다운로드 시 파일 비밀번호 입력란 미노출")
+
+            # [등록] 버튼 선택
+            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-btn v-btn--contained theme--light v-size--default primary__btn')]", error_msg="센터별 퇴근 작업자 확인 탭 검색 후 다운로드 시 등록 버튼 미노출")
+
+            # 엑셀 파일 확인 CC / 센터 / 계약구분 / 출근업무파트 / 팀명 / 근무shift / 아이디 / 이름 / 출근일시 / 퇴근일시 / 자동퇴근처리 항목 값 노출
 
 
 

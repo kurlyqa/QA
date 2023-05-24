@@ -6,21 +6,20 @@ from HtmlTestRunner import HTMLTestRunner
 from lms_web_login import LMSWebLogin
 from task_management import TaskManagement
 from site_management import SiteManagement
-# from 1 import 4
-# from 1 import 5
-# from 1 import 6
+from master_management import MasterManagement
+from account_management import AccountManagement
+from mobile_web_login import MobileWebLogin
 import datetime
 import os
 
 s1 = TestLoader().loadTestsFromTestCase(LMSWebLogin)
 s2 = TestLoader().loadTestsFromTestCase(TaskManagement)
 s3 = TestLoader().loadTestsFromTestCase(SiteManagement)
-# s4 = TestLoader().loadTestsFromTestCase(4)
-# s5 = TestLoader().loadTestsFromTestCase(5)
-# s6 = TestLoader().loadTestsFromTestCase(6)
+s4 = TestLoader().loadTestsFromTestCase(MasterManagement)
+s5 = TestLoader().loadTestsFromTestCase(AccountManagement)
+s6 = TestLoader().loadTestsFromTestCase(MobileWebLogin)
 
-# suite = TestSuite([s1, s2, s3, s4, s5, s6])
-suite = TestSuite([s1, s2, s3])
+suite = TestSuite([s1, s2, s3, s4, s5, s6])
 
 daytime = datetime.datetime.now()
 dt = daytime.strftime("%Y-%m-%d_%H-%M-%S")

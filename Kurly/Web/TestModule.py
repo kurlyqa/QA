@@ -26,16 +26,13 @@ class testModule(unittest.TestCase):
         try:
             ele = self.driver.find_element(by=By.XPATH, value=name)
             self.driver.execute_script("arguments[0].setAttribute('style',arguments[1]);", ele, "background: yellow; border: 2px solid red;")
-            if by_type == 'XPATH':
-                if send_keys_msg:
-                    ele.send_keys(send_keys_msg)
-                if click:
-                    self.driver.execute_script("arguments[0].click();", ele)
-            elif by_type == 'NAME':
-                if send_keys_msg:
-                    ele.send_keys(send_keys_msg)
-                if click:
-                    self.driver.execute_script("arguments[0].click();", ele)
+
+            if send_keys_msg:
+                ele.send_keys(send_keys_msg)
+
+            if click:
+                self.driver.execute_script("arguments[0].click();", ele)
+
             sleep(wait_sec)
         except:
             print(error_msg)
