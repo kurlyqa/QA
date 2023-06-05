@@ -161,12 +161,11 @@ class LMSLogin(unittest.TestCase):
             self.interact(by_type="XPATH", name="//*[contains(@class, 'dialog-btn ml-0 v-btn v-btn--contained theme--light v-size--default primary')]")
             # LMS 모바일 닫기
             self.driver.close()
-            print('테스트 정상 종료!')
         except:
             print("Error!")
             self.assertEqual(0, 1)
         else:
-            print("1 Passed")
+            print("Passed")
 
     def tearDown(self):
         self.driver.quit()

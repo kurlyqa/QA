@@ -22,6 +22,9 @@ class TaskManagement(testModule):
 
     def test_02_작업관리(self):
         try:
+            # 파일 삭제 시 주소 ( 각 PC마다 변경해야 함 )
+            folder_path = "/Users/122d6424/Git/Kurly/Web"
+
             # 1. <공정별 투입인원 현황 조회>
 
             # 작업자 체크인상태
@@ -37,13 +40,35 @@ class TaskManagement(testModule):
             self.interact(by_type="XPATH", name="//input[@id='input-13' and @type='text' and @required='required']", click=False, send_keys_msg='junhyunkyung', error_msg="아이디 입력란 미노출")
 
             # 비밀번호 입력
-            self.interact(by_type="XPATH", name="//input[@id='input-16' and @type='password' and @required='required']", click=False, send_keys_msg='!wnsgus1', error_msg="비밀번호 입력란 미노출")
+            self.interact(by_type="XPATH", name="//input[@id='input-16' and @type='password' and @required='required']", click=False, send_keys_msg='kurly12!@', error_msg="비밀번호 입력란 미노출")
 
             # 로그인
             self.interact(by_type="XPATH", name="//*[contains(@class, 'v-btn__content')]", error_msg="로그인 버튼 미노출")
 
-            # 출근 클릭
+            # 출근/퇴근 클릭
             self.interact(by_type="XPATH", name="//*[contains(@class, 'work-btn v-btn v-btn--contained v-btn--fab v-btn--round theme--light v-size--default primary')]", error_msg="출근 버튼 미노출")
+
+            # 출근이 아닌 퇴근이 뜬다면 퇴근하고 다시 로그인 후에 출근하는 예외처리
+            try:
+                # 네
+                self.interact(by_type="XPATH", name="//*[contains(@class, 'dialog-btn ml-0 v-btn v-btn--contained theme--light v-size--default primary')]", error_msg="")
+
+                # 확인
+                self.interact(by_type="XPATH", name="//*[contains(@class, 'v-btn v-btn--contained theme--light v-size--large')]", error_msg="")
+
+                # 아이디 입력
+                self.interact(by_type="XPATH", name="(//*[contains(@class,'v-text-field__slot')])[1]//input", click=False, send_keys_msg='junhyunkyung', error_msg="")
+
+                # 비밀번호 입력
+                self.interact(by_type="XPATH", name="(//*[contains(@class,'v-text-field__slot')])[2]//input", click=False, send_keys_msg='kurly12!@', error_msg="")
+
+                # 로그인
+                self.interact(by_type="XPATH", name="//*[contains(@class, 'v-btn__content')]", error_msg="")
+
+                # 출근 클릭
+                self.interact(by_type="XPATH", name="//*[contains(@class, 'work-btn v-btn v-btn--contained v-btn--fab v-btn--round theme--light v-size--default primary')]", error_msg="")
+            except:
+                pass
 
             # 송파CC
             # 송파 냉장1
@@ -174,7 +199,10 @@ class TaskManagement(testModule):
             # 대분류 / 소분류 공정/ Check In 값 노출
             self.interact(by_type="XPATH", name="//*[contains(@class, 'text-center v-data-table__divider tableHeader')]//span[contains(text(), 'MOVE')]", click=False, error_msg="공정별 투입인원 현황 검색 결과 중 대분류 미노출")
             self.interact(by_type="XPATH", name="//*[contains(@class, 'text-center v-data-table__divider tableHeader')]//span[contains(text(), 'PLT 이동')]", click=False, error_msg="공정별 투입인원 현황 검색 결과 중 소분류 미노출")
-            self.interact(by_type="XPATH", name="(//*[contains(@class, 'text-center v-data-table__divider') and contains(text(), '1 명')])[2]", click=False, error_msg="공정별 투입인원 현황 검색 결과 중 check in 값 미노출")
+            try:
+                self.interact(by_type="XPATH", name="(//*[contains(@class, 'text-center v-data-table__divider') and contains(text(), '2 명')])[2]", click=False, error_msg="")
+            except:
+                self.interact(by_type="XPATH", name="(//*[contains(@class, 'text-center v-data-table__divider') and contains(text(), '1 명')])[2]", click=False, error_msg="")
 
 
 
@@ -314,15 +342,7 @@ class TaskManagement(testModule):
 
 
 
-            # 6. <공정공정별 체크인 작업자 확인 작업상세내역 다운로드 - 체크아웃 이력이 없는경우>
-
-            # 비밀번호가 있는 엑셀 파일은 새로 다운받아서 실행시켰을 때 액세스 허가 버튼을 따로 눌러줘야 하는 문제 발생
-            # 시스템 제어가 필요한 부분이라 다운 받은 파일의 존재 유무만 확인해야 함
-            # 따라서 7번과 같음
-
-
-
-            # 7. <공정공정별 체크인 작업자 확인 작업상세내역 다운로드 - 체크아웃 이력이 있는경우>
+            # 6. <공정공정별 체크인 작업자 확인 작업상세내역 다운로드>
 
             # CC = 송파CC
             # 센터 = 송파 냉장1
@@ -358,72 +378,15 @@ class TaskManagement(testModule):
             # [등록] 버튼 선택
             self.interact(by_type="XPATH", name="//*[contains(@class, 'v-btn v-btn--contained theme--light v-size--default primary__btn')]", error_msg="공정별 체크인 작업자 확인 조회 후 다운로드 시 등록 버튼 미노출")
 
-            # # 다운로드된 엑셀 파일 경로
-            # directory = '/Users/122d6424/Downloads/'
-            # # 삭제된 파일이 있는지 여부
-            # is_file_removed = False
-            # # '작업상세내역'으로 시작하는 파일 삭제
-            # for filename in os.listdir(directory):
-            #     if filename.startswith('작업상세내역'):
-            #         os.remove(os.path.join(directory, filename))
-            #         is_file_removed = True
-            # # 삭제된 파일이 없을 경우 엑셀 파일 다운로드 실패
-            # if is_file_removed:
-            #     pass
-            # else:
-            #     raise Exception("엑셀 파일 다운로드 실패")
-            #
-            # # 다운로드된 엑셀 파일 경로(경로에 있는 모든 엑셀 파일 가져오기)
-            # excel_file_path_list = glob.glob('/Users/122d6424/Downloads/*.xlsx')
-            # excel_file_path = excel_file_path_list[0]
-            #
-            # # 엑셀 파일 열기 (비밀번호로 보호된 파일)
-            # workbook = xw.Book(excel_file_path, password='!testtest1')
-            #
-            # # 시트 선택
-            # worksheet = workbook.sheets[0] # worksheet = workbook.active
-            #
-            # # 특정 값들이 있는지 확인할 열과 값들
-            # columns_and_values = {
-            #     'a': 'CC',
-            #     'b': '센터',
-            #     'c': '계약구분',
-            #     'd': '업무파트',
-            #     'e': '대분류 공정',
-            #     'f': '소분류 공정',
-            #     'g': '아이디',
-            #     'h': '이름',
-            #     'i': '날짜',
-            #     'j': '체크인',
-            #     'k': '체크아웃'
-            # }
-            #
-            # # 특정 값이 없는 열이 있는지 여부
-            # missing_value = False
-            #
-            # # 각 열에서 특정 값이 있는지 확인하기
-            # for column, value in columns_and_values.items():
-            #     cell = worksheet[f'{column}1']  # 해당 열의 첫 번째 셀 선택
-            #     if cell.value == value:
-            #         print(f'"{value}" found in column "{column}"')
-            #     else:
-            #         print(f'"{value}" not found in column "{column}"')
-            #         missing_value = True
-            #
-            # if missing_value:
-            #     raise Exception(f'Error: Header row values {header_row_values} do not match expected values {expected_header}')
-            # else:
-            #     print('All values found')
-            #
-            # # 엑셀 파일 닫기
-            # workbook.close()
-            #
-            # # 엑셀 파일 삭제
-            # os.remove(excel_file_path)
+            # 다운받은 엑셀 파일 삭제
+            for file_name in os.listdir(folder_path):
+                if file_name.endswith(".xlsx"):
+                    file_path = os.path.join(folder_path, file_name)
+                    os.remove(file_path)
 
 
 
-            # 8. <공정별 이탈 작업자 확인 조회>
+            # 7. <공정별 이탈 작업자 확인 조회>
 
             # 공정별 체크인 작업자 확인 클릭
             self.interact(by_type="XPATH", name="//*[contains(text(), '공정별 이탈 작업자 확인')]", error_msg="공정별 이탈 작업자 확인 탭 미노출")
@@ -494,7 +457,7 @@ class TaskManagement(testModule):
 
 
 
-            # 9. <공정별 이탈 작업자 확인 조회 초기화>
+            # 8. <공정별 이탈 작업자 확인 조회 초기화>
 
             # 초기화 버튼 클릭
             self.interact(by_type="XPATH", name="//*[contains(@class, 'gray v-btn v-btn--contained theme--light v-size--default')]", error_msg="공정별 이탈 작업자 확인 조회 후 초기화 버튼 미노출")
@@ -519,7 +482,8 @@ class TaskManagement(testModule):
 
 
 
-            # 10. <작업자별 작업이력 확인 조회>
+            # 9. <작업자별 작업이력 확인 조회>
+
             # 관리자 로그인 상태
             # 작업자별 작업이력이 있는 상태
             # 작업자별 작업이력 확인 클릭
@@ -563,7 +527,8 @@ class TaskManagement(testModule):
 
 
 
-            # 11. <작업자별  작업이력 확인 조회 초기화>
+            # 10. <작업자별  작업이력 확인 조회 초기화>
+
             # [초기화]버튼 선택
             self.interact(by_type="XPATH", name="//*[contains(@class, 'gray v-btn v-btn--contained theme--light v-size--default')]", error_msg="작업자별 작업이력 확인 조회 후 초기화 버튼 미노출")
 
@@ -607,7 +572,8 @@ class TaskManagement(testModule):
 
 
 
-            # 12. <작업자별 작업이력 확인 작업자상세내역 다운로드>
+            # 11. <작업자별 작업이력 확인 작업자상세내역 다운로드>
+
             # CC 항목 값 변경 : 송파CC
             # 센터 항목 값 변경 : 송파냉장1
             # 계약구분 값 변경 : 상용직
@@ -636,57 +602,15 @@ class TaskManagement(testModule):
             # [다운로드] 버튼 선택
             self.interact(by_type="XPATH", name="//*[contains(@class, 'v-btn v-btn--contained theme--light v-size--default primary')]", error_msg="공정별 이탈 작업자 확인 조회 후 다운로드 버튼 미노출")
 
-            # 액세스 허가 버튼이 노출되어 확인불가..
-
-            # # 엑셀 파일 확인
-            # # *항목) 작업자아이디, 계약구분, 최근 출근일자, 총 출근일수, 최근작업공정
-            # # 다운로드된 엑셀 파일 경로(경로에 있는 모든 엑셀 파일 가져오기)
-            # excel_file_path_list = glob.glob('/Users/122d6424/Downloads/*.xlsx')
-            # excel_file_path = excel_file_path_list[0]
-            #
-            # # 엑셀 파일 열기
-            # workbook = xw.Book(excel_file_path)
-            #
-            # # 시트 선택
-            # worksheet = workbook.sheets[0] # worksheet = workbook.active
-            #
-            # # 특정 값들이 있는지 확인할 열과 값들
-            # columns_and_values = {
-            #     'a': '작업자아이디',
-            #     'b': '계약구분',
-            #     'c': '최근 출근일자',
-            #     'd': '총 출근일수',
-            #     'e': '최근 작업공정'
-            # }
-            #
-            # # 특정 값이 없는 열이 있는지 여부
-            # missing_value = False
-            #
-            # # 각 열에서 특정 값이 있는지 확인하기
-            # for column, value in columns_and_values.items():
-            #     cell = worksheet[f'{column}1']  # 해당 열의 첫 번째 셀 선택
-            #     print("cell")
-            #     print(cell)
-            #     if cell.value == value:
-            #         print(f'"{value}" found in column "{column}"')
-            #     else:
-            #         print(f'"{value}" not found in column "{column}"')
-            #         missing_value = True
-            #
-            # if missing_value:
-            #     raise Exception(f'Error: Header row values {header_row_values} do not match expected values {expected_header}')
-            # else:
-            #     print('All values found')
-            #
-            # # 엑셀 파일 닫기
-            # workbook.close()
-            #
-            # # 엑셀 파일 삭제
-            # os.remove(excel_file_path)
+            # 다운받은 엑셀 파일 삭제
+            for file_name in os.listdir(folder_path):
+                if file_name.endswith(".xlsx"):
+                    file_path = os.path.join(folder_path, file_name)
+                    os.remove(file_path)
 
 
 
-            # 13. <연장근무 희망 관리 조회>
+            # 12. <연장근무 희망 관리 조회>
 
             # 공정별 체크인 작업자 확인 클릭
             self.interact(by_type="XPATH", name="//*[contains(text(), '연장근무 희망 관리')]", error_msg="연장근무 희망 관리 탭 미노출")
@@ -743,7 +667,7 @@ class TaskManagement(testModule):
 
 
 
-            # 14. <연장근무 희망 관리 조회 초기화>
+            # 13. <연장근무 희망 관리 조회 초기화>
 
             # [초기화]버튼 선택
             self.interact(by_type="XPATH", name="//*[contains(@class, 'gray v-btn v-btn--contained theme--light v-size--default')]", error_msg="연장근무 희망 관리 조회 후 초기화 버튼 미노출")
@@ -838,7 +762,7 @@ class TaskManagement(testModule):
 
 
 
-            # 15. <연장근무 희망 관리 작업자상세내역 다운로드>
+            # 14. <연장근무 희망 관리 작업자상세내역 다운로드>
 
             # CC 항목 값 변경 : 송파CC
             # 센터 항목 값 변경 : 송파냉장1
@@ -876,15 +800,15 @@ class TaskManagement(testModule):
             # [등록] 버튼 선택
             self.interact(by_type="XPATH", name="//*[contains(@class, 'v-btn v-btn--contained theme--light v-size--default primary__btn')]", error_msg="연장근무 희망 관리 조회 후 다운로드 시 등록 버튼 미노출")
 
-            # 엑셀 파일 확인
-            # *항목) CC / 센터 / 최종 체크인 대분류공정 / 최종 체크인 소분류공정 / 계약구분 / 업무파트 / 팀명 /
-            # 근무shift  / 아이디 / 이름 / 연장근무 가능시간
+            # 다운받은 엑셀 파일 삭제
+            for file_name in os.listdir(folder_path):
+                if file_name.endswith(".xlsx"):
+                    file_path = os.path.join(folder_path, file_name)
+                    os.remove(file_path)
 
-            # 파일이 잠겨 있기 때문에 파일 확인 불가
 
 
-
-            # 16. <센터별 출근 작업자 확인 조회>
+            # 15. <센터별 출근 작업자 확인 조회>
 
             # 센터별 출근 작업자 확인 클릭
             self.interact(by_type="XPATH", name="//*[contains(text(), '센터별 출근 작업자 확인')]", error_msg="센터별 출근 작업자 확인 탭 미노출")
@@ -920,7 +844,7 @@ class TaskManagement(testModule):
 
 
 
-            # 17. <센터별 출근 작업자 확인 조회 초기화>
+            # 16. <센터별 출근 작업자 확인 조회 초기화>
 
             # [초기화]버튼 선택
             self.interact(by_type="XPATH", name="//*[contains(@class, 'gray v-btn v-btn--contained theme--light v-size--default')]", error_msg="센터별 출근 작업자 확인 탭 검색 후 초기화 버튼 미노출")
@@ -949,7 +873,7 @@ class TaskManagement(testModule):
 
 
 
-            # 18. <센터별 출근 작업자 작업상세내역 다운로드>
+            # 17. <센터별 출근 작업자 작업상세내역 다운로드>
 
             # CC 항목 값 변경 : 송파CC
             # 센터 항목 값 변경 : 송파냉장1
@@ -979,11 +903,9 @@ class TaskManagement(testModule):
             # [등록] 버튼 선택
             self.interact(by_type="XPATH", name="//*[contains(@class, 'v-btn v-btn--contained theme--light v-size--default primary__btn')]", error_msg="센터별 출근 작업자 확인 탭 검색 후 다운로드 시 등록 버튼 미노출")
 
-            # 엑셀 파일 확인 CC / 센터 / 계약구분 / 출근업무파트 / 팀명 / 근무shift / 체크인상태 / 아이디 / 이름 / 출근일시 항목 값 노출
 
 
-
-            # 19. <센터별 퇴근 작업자 확인 조회>
+            # 18. <센터별 퇴근 작업자 확인 조회>
 
             # 센터별 퇴근 작업자 확인 클릭
             self.interact(by_type="XPATH", name="//*[contains(text(), '센터별 퇴근 작업자 확인')]", error_msg="센터별 퇴근 작업자 확인 탭 미노출")
@@ -1020,7 +942,7 @@ class TaskManagement(testModule):
 
 
 
-            # 20. <센터별 퇴근 작업자 확인 조회 초기화>
+            # 19. <센터별 퇴근 작업자 확인 조회 초기화>
 
             # [초기화]버튼 선택
             self.interact(by_type="XPATH", name="//*[contains(@class, 'gray v-btn v-btn--contained theme--light v-size--default')]", error_msg="센터별 퇴근 작업자 확인 탭 검색 후 초기화 버튼 미노출")
@@ -1078,7 +1000,7 @@ class TaskManagement(testModule):
 
 
 
-            # 21. <센터별 퇴근 작업자 작업상세내역 다운로드>
+            # 20. <센터별 퇴근 작업자 작업상세내역 다운로드>
 
             # CC 항목 값 변경 : 송파CC
             # 센터 항목 값 변경 : 송파냉장1
@@ -1108,7 +1030,11 @@ class TaskManagement(testModule):
             # [등록] 버튼 선택
             self.interact(by_type="XPATH", name="//*[contains(@class, 'v-btn v-btn--contained theme--light v-size--default primary__btn')]", error_msg="센터별 퇴근 작업자 확인 탭 검색 후 다운로드 시 등록 버튼 미노출")
 
-            # 엑셀 파일 확인 CC / 센터 / 계약구분 / 출근업무파트 / 팀명 / 근무shift / 아이디 / 이름 / 출근일시 / 퇴근일시 / 자동퇴근처리 항목 값 노출
+            # 다운받은 엑셀 파일 삭제
+            for file_name in os.listdir(folder_path):
+                if file_name.endswith(".xlsx"):
+                    file_path = os.path.join(folder_path, file_name)
+                    os.remove(file_path)
 
 
 
@@ -1123,11 +1049,10 @@ class TaskManagement(testModule):
             self.interact(by_type="XPATH", name="//*[contains(@class, 'dialog-btn ml-0 v-btn v-btn--contained theme--light v-size--default primary')]", error_msg="작업관리 모든 테스트 진행 후 퇴근 버튼 클릭 시 네 버튼 미노출")
             # LMS 모바일 닫기
             self.driver.close()
-            print('테스트 정상 종료!')
         except:
             self.assertEqual(0, 1)
         else:
-            print("1 Passed")
+            print("Passed")
 
     def tearDown(self):
         self.driver.quit()

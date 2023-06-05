@@ -65,7 +65,7 @@ class LMSWebLogin(testModule):
             # print("Error!")
             self.assertEqual(0, 1)
         else:
-            print("1 Passed")
+            print("Passed")
 
     def tearDown(self):
         self.driver.quit()
