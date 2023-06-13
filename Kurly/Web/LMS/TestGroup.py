@@ -48,7 +48,7 @@ result = runner.run(suite)
 # fail_count = len(result.failures)
 #
 # # Slack 토큰 설정
-# slack_token = "xoxb-135797385811-5371175357495-jXZJPtnc5xtCG3Sm4a6Gqheq"
+# slack_token = "xoxb-135797385811-5371175357495-emVZE4lEgsKTCjAsdzG5J3Ef"
 # client = WebClient(token=slack_token)
 #
 # # 채널ID
