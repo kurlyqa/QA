@@ -34,13 +34,13 @@ class MobileWebLogin(testModule):
 
             # LMS 모바일 로그인
             # 아이디 입력
-            self.interact(by_type="XPATH", name="//input[@id='input-13' and @type='text' and @required='required']", click=False, send_keys_msg='junhyunkyung', error_msg="아이디 입력란 미노출")
+            self.interact(by_type="XPATH", name="(//*[contains(@class,'v-text-field__slot')])[1]//input", click=False, send_keys_msg='junhyunkyung', error_msg="아이디 입력란 미노출")
 
             # 비밀번호 입력
-            self.interact(by_type="XPATH", name="//input[@id='input-16' and @type='password' and @required='required']", click=False, send_keys_msg='kurly12!@', error_msg="비밀번호 입력란 미노출")
+            self.interact(by_type="XPATH", name="(//*[contains(@class,'v-text-field__slot')])[2]//input", click=False, send_keys_msg='kurly12!@', error_msg="비밀번호 입력란 미노출")
 
             # 로그인
-            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-btn__content')]", error_msg="로그인 버튼 미노출")
+            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-btn v-btn--block v-btn--contained theme--light v-size--large')]", error_msg="로그인 버튼 미노출")
 
             # 출근/퇴근 클릭
             self.interact(by_type="XPATH", name="//*[contains(@class, 'work-btn v-btn v-btn--contained v-btn--fab v-btn--round theme--light v-size--default primary')]", error_msg="출근 버튼 미노출")
@@ -59,7 +59,7 @@ class MobileWebLogin(testModule):
                 self.interact(by_type="XPATH", name="(//*[contains(@class,'v-text-field__slot')])[2]//input", click=False, send_keys_msg='kurly12!@', error_msg="")
 
                 # 로그인
-                self.interact(by_type="XPATH", name="//*[contains(@class, 'v-btn__content')]", error_msg="")
+                self.interact(by_type="XPATH", name="//*[contains(@class, 'v-btn v-btn--block v-btn--contained theme--light v-size--large')]", error_msg="")
 
                 # 출근 클릭
                 self.interact(by_type="XPATH", name="//*[contains(@class, 'work-btn v-btn v-btn--contained v-btn--fab v-btn--round theme--light v-size--default primary')]", error_msg="")
@@ -156,17 +156,17 @@ class MobileWebLogin(testModule):
 
             # 잘못된 비밀번호 6회 입력
             self.interact(by_type="XPATH", name="(//*[contains(@class,'v-text-field__slot')])[2]//input", click=False, send_keys_msg='kurly123!1', error_msg="비밀번호 입력란 미노출")
-            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-btn__content')]", error_msg="로그인 버튼 미노출")
+            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-btn v-btn--block v-btn--contained theme--light v-size--large')]", error_msg="로그인 버튼 미노출")
             self.interact(by_type="XPATH", name="(//*[contains(@class,'v-text-field__slot')])[2]//input", click=False, send_keys_msg='!', error_msg="비밀번호 입력란 미노출")
-            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-btn__content')]", error_msg="로그인 버튼 미노출")
+            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-btn v-btn--block v-btn--contained theme--light v-size--large')]", error_msg="로그인 버튼 미노출")
             self.interact(by_type="XPATH", name="(//*[contains(@class,'v-text-field__slot')])[2]//input", click=False, send_keys_msg='@3', error_msg="비밀번호 입력란 미노출")
-            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-btn__content')]", error_msg="로그인 버튼 미노출")
+            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-btn v-btn--block v-btn--contained theme--light v-size--large')]", error_msg="로그인 버튼 미노출")
             self.interact(by_type="XPATH", name="(//*[contains(@class,'v-text-field__slot')])[2]//input", click=False, send_keys_msg='4#', error_msg="비밀번호 입력란 미노출")
-            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-btn__content')]", error_msg="로그인 버튼 미노출")
+            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-btn v-btn--block v-btn--contained theme--light v-size--large')]", error_msg="로그인 버튼 미노출")
             self.interact(by_type="XPATH", name="(//*[contains(@class,'v-text-field__slot')])[2]//input", click=False, send_keys_msg='$5', error_msg="비밀번호 입력란 미노출")
-            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-btn__content')]", error_msg="로그인 버튼 미노출")
+            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-btn v-btn--block v-btn--contained theme--light v-size--large')]", error_msg="로그인 버튼 미노출")
             self.interact(by_type="XPATH", name="(//*[contains(@class,'v-text-field__slot')])[2]//input", click=False, send_keys_msg='sc', error_msg="비밀번호 입력란 미노출")
-            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-btn__content')]", error_msg="로그인 버튼 미노출")
+            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-btn v-btn--block v-btn--contained theme--light v-size--large')]", error_msg="로그인 버튼 미노출")
 
             # 로그인 정보가 6회 이상 실패하여 계정 사용이 불가합니다. 관리자를 통해 계정 초기화 해주세요. 안내문구 화면 확인
             self.interact(by_type="XPATH", name="//*[contains(@class, 'v-alert__content') and contains(text(), '로그인 정보가 5회 이상 실패하여 계정 사용이 불가')]", click=False, error_msg="로그인 정보가 5회 이상 실패하여 계정 사용이 불가합니다. 알럿 미노출")
@@ -187,13 +187,13 @@ class MobileWebLogin(testModule):
             self.driver.get(url)
 
             # 아이디(lmstest01) 입력
-            self.interact(by_type="XPATH", name="//input[@id='input-16' and @type='text' and @required='required']", click=False, send_keys_msg='lmstest01', error_msg="관리자 로그인중 아이디 입력란 미노출")
+            self.interact(by_type="XPATH", name="(//*[contains(@class,'v-text-field__slot')])[1]//input", click=False, send_keys_msg='lmstest01', error_msg="관리자 로그인중 아이디 입력란 미노출")
 
             # 비밀번호(q1w2e3r4!) 입력
-            self.interact(by_type="XPATH", name="//input[@id='input-19' and @type='password' and @required='required']", click=False, send_keys_msg='q1w2e3r4!', error_msg="관리자 로그인중 비밀번호 입력란 미노출")
+            self.interact(by_type="XPATH", name="(//*[contains(@class,'v-text-field__slot')])[2]//input", click=False, send_keys_msg='q1w2e3r4!', error_msg="관리자 로그인중 비밀번호 입력란 미노출")
 
             # 로그인
-            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-btn v-btn--block v-btn--contained theme--light v-size--large primary')]", error_msg="관리자 로그인중 로그인 버튼 미노출")
+            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-btn v-btn--block v-btn--contained theme--light v-size--large')]", error_msg="관리자 로그인중 로그인 버튼 미노출")
 
             # 확인
             self.interact(by_type="XPATH", name="//*[contains(@class, 'v-btn v-btn--block v-btn--flat v-btn--text theme--light v-size--default primary--text')]", error_msg="관리자 로그인중 확인 버튼 미노출")
@@ -266,7 +266,7 @@ class MobileWebLogin(testModule):
             self.interact(by_type="XPATH", name="(//*[contains(@class,'v-text-field__slot')])[2]//input", click=False, send_keys_msg='kurly123!@', error_msg="비밀번호 입력란 미노출")
 
             # 로그인
-            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-btn__content')]", error_msg="로그인 버튼 미노출")
+            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-btn v-btn--block v-btn--contained theme--light v-size--large')]", error_msg="로그인 버튼 미노출")
 
             # 비밀번호 변경 팝업 노출
             # 신규(초기화) 비밀번호는 변경이 필요합니다.
@@ -373,7 +373,7 @@ class MobileWebLogin(testModule):
             self.interact(by_type="XPATH", name="(//*[contains(@class,'v-text-field__slot')])[2]//input", click=False, send_keys_msg='kurly12!@', error_msg="비밀번호 입력란 미노출")
 
             # [로그인] 버튼 선택
-            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-btn__content')]", error_msg="로그인 버튼 미노출")
+            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-btn v-btn--block v-btn--contained theme--light v-size--large')]", error_msg="로그인 버튼 미노출")
 
             # 비밀번호 변경 팝업 노출
             # 개인정보 보호를 위해 비밀번호를 변경해주세요
@@ -406,13 +406,13 @@ class MobileWebLogin(testModule):
             self.driver.get(url)
 
             # 아이디(lmstest01) 입력
-            self.interact(by_type="XPATH", name="//input[@id='input-16' and @type='text' and @required='required']", click=False, send_keys_msg='lmstest01', error_msg="관리자 로그인중 아이디 입력란 미노출")
+            self.interact(by_type="XPATH", name="(//*[contains(@class,'v-text-field__slot')])[1]//input", click=False, send_keys_msg='lmstest01', error_msg="관리자 로그인중 아이디 입력란 미노출")
 
             # 비밀번호(q1w2e3r4!) 입력
-            self.interact(by_type="XPATH", name="//input[@id='input-19' and @type='password' and @required='required']", click=False, send_keys_msg='q1w2e3r4!', error_msg="관리자 로그인중 비밀번호 입력란 미노출")
+            self.interact(by_type="XPATH", name="(//*[contains(@class,'v-text-field__slot')])[2]//input", click=False, send_keys_msg='q1w2e3r4!', error_msg="관리자 로그인중 비밀번호 입력란 미노출")
 
             # 로그인
-            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-btn v-btn--block v-btn--contained theme--light v-size--large primary')]", error_msg="관리자 로그인중 로그인 버튼 미노출")
+            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-btn v-btn--block v-btn--contained theme--light v-size--large')]", error_msg="관리자 로그인중 로그인 버튼 미노출")
 
             try:
                 # 아이디 입력
@@ -437,7 +437,7 @@ class MobileWebLogin(testModule):
                 self.interact(by_type="XPATH", name="(//*[contains(@class,'v-text-field__slot')])[2]//input", click=False, send_keys_msg='q1w2e3r4!', error_msg="비밀번호 입력란 미노출")
 
                 # 로그인
-                self.interact(by_type="XPATH", name="//*[contains(@class, 'v-btn v-btn--block v-btn--contained theme--light v-size--large primary')]", error_msg="관리자 로그인중 로그인 버튼 미노출")
+                self.interact(by_type="XPATH", name="//*[contains(@class, 'v-btn v-btn--block v-btn--contained theme--light v-size--large')]", error_msg="관리자 로그인중 로그인 버튼 미노출")
             except:
                 pass
 
@@ -508,7 +508,7 @@ class MobileWebLogin(testModule):
             self.interact(by_type="XPATH", name="(//*[contains(@class,'v-text-field__slot')])[2]//input", click=False, send_keys_msg='kurly123!@', error_msg="비밀번호 입력란 미노출")
 
             # 로그인
-            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-btn__content')]", error_msg="로그인 버튼 미노출")
+            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-btn v-btn--block v-btn--contained theme--light v-size--large')]", error_msg="로그인 버튼 미노출")
 
             # 비밀번호 변경 팝업 노출
             # 신규(초기화) 비밀번호는 변경이 필요합니다.
