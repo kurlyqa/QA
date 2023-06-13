@@ -11,100 +11,131 @@ from account_management import AccountManagement
 from mobile_web_login import MobileWebLogin
 import datetime
 import os
-import requests
-import json
+import ssl
+from slack_sdk import WebClient
+from slack_sdk.errors import SlackApiError
 
 s1 = TestLoader().loadTestsFromTestCase(LMSWebLogin)
-# s2 = TestLoader().loadTestsFromTestCase(TaskManagement)
-# s3 = TestLoader().loadTestsFromTestCase(SiteManagement)
-# s4 = TestLoader().loadTestsFromTestCase(MasterManagement)
-# s5 = TestLoader().loadTestsFromTestCase(AccountManagement)
-# s6 = TestLoader().loadTestsFromTestCase(MobileWebLogin)
+s2 = TestLoader().loadTestsFromTestCase(TaskManagement)
+s3 = TestLoader().loadTestsFromTestCase(SiteManagement)
+s4 = TestLoader().loadTestsFromTestCase(MasterManagement)
+s5 = TestLoader().loadTestsFromTestCase(AccountManagement)
+s6 = TestLoader().loadTestsFromTestCase(MobileWebLogin)
 
 # suite = TestSuite([s1, s2, s3, s4, s5, s6])
-suite = TestSuite([s1])
+suite = TestSuite([s1, s5])
 
 daytime = datetime.datetime.now()
 dt = daytime.strftime("%Y-%m-%d_%H-%M-%S")
-filename = f"LMSAutomationTestReport"
+domain = "LMS"
+filename = domain + f"AutomationTestReport"
 dir = os.getcwd()
 
 # 전송할 파일 경로 설정
-file_path = (dir + f"/reports/LMSAutomationTestReport_"+dt+".html")
+file_path = dir + f"/reports/" + filename + "_" + dt + ".html"
 
 # report_title 파일열면 가장위에 있는 메인 title
-runner = HTMLTestRunner(combine_reports=True, report_name=filename, report_title="LMS Automation Test Report")
+runner = HTMLTestRunner(combine_reports=True, report_name=filename, report_title=domain + " Automation Test Report")
 
 # 테스트 실행 결과 저장
 result = runner.run(suite)
 
-# Slack 토큰 설정
-slack_token = "xoxb-135797385811-5371175357495-AX0671dxN5cIIhl64I6CfhHg"
-
-# 파일 전송 함수 정의
-def send_file_to_slack(file_path, pass_count, fail_count):
-    try:
-        # 파일 열기
-        with open(file_path, 'rb') as file:
-            # Slack 파일 업로드 URL
-            upload_url = 'https://slack.com/api/files.upload'
-            # 전송할 채널명
-            channel = 'C05BQN1D9GT'
-            # 전송할 파일명
-            filename = f"LMSAutomationTestReport_{dt}.html"
-            # 전송 제목
-            title = "LMS 자동화 테스트 결과 : " + dt
-
-            # 메시지 내용
-            if fail_count == 0:
-                message = f"```\n[LMS 자동화 테스트 결과]\nPass 개수 : {pass_count} / Fail 개수 : {fail_count}\n<@U04GD12NLA0> <@U04U77FJ4ES>```"
-            else:
-                message = f"```\nPass 개수 : {pass_count} / Fail 개수 : {fail_count}\n```"
-
-            # POST 요청 보내기
-            response = requests.post(upload_url, files={'file': file}, data={'token': slack_token, 'channels': channel, 'filename': filename, 'title': title, 'initial_comment': message})
-            if response.ok:
-                print("파일 전송 성공")
-            else:
-                print("파일 전송 실패")
-    except Exception as e:
-        print(f"파일 전송 에러: {str(e)}")
-
-# 테스트 결과 가져오기
-pass_count = len(result.successes)
-fail_count = len(result.failures)
-
-# 파일 전송 함수 호출
-send_file_to_slack(file_path, pass_count, fail_count)
-
-# # 파일 전송 함수 호출
-# send_file_to_slack(file_path)
-
-#### 슬랙 앱으로 메세지 보내는 코드 ####
-# # 슬랙 API 요청 URL
-# url = "https://slack.com/api/chat.postMessage"
+# # 인증서 설정
+# ssl._create_default_https_context = ssl._create_unverified_context
 #
-# # 요청 헤더 설정
-# headers = {
-#     "Authorization": "Bearer xoxb-135797385811-5371175357495-AX0671dxN5cIIhl64I6CfhHg",
-#     "Content-Type": "application/json"
-# }
+# # 테스트 결과 가져오기
+# pass_count = len(result.successes)
+# fail_count = len(result.failures)
 #
-# # 메시지 데이터 생성
-# message = {
-#     "channel": "D05B5272K1U",
-#     "text": "테스트 결과를 전송합니다."
-# }
-#
-# # API 요청 보내기
-# response = requests.post(url, headers=headers, data=json.dumps(message))
-#
-# # 응답 확인
-# if response.status_code == 200:
-#     print("메시지가 성공적으로 전송되었습니다.")
-# else:
-#     print("메시지 전송에 실패했습니다. 응답 코드:", response.status_code)
-#################################
 # # Slack 토큰 설정
-# slack_token = "xoxb-135797385811-5371175357495-AX0671dxN5cIIhl64I6CfhHg"
-# response = requests.post(upload_url, files={'file': file}, data={'token': slack_token, 'channels': channel, 'filename': filename, 'title': title, 'initial_comment': message})
+# slack_token = "xoxb-135797385811-5371175357495-jXZJPtnc5xtCG3Sm4a6Gqheq"
+# client = WebClient(token=slack_token)
+#
+# # 채널ID
+# channel = 'C05BQN1D9GT'
+#
+# mrkdwn_text = ''
+#
+# if fail_count > 0:
+#     mrkdwn_text = f'''
+#     >[{domain} 자동화 테스트 결과]\n
+#     *Pass 개수 : {pass_count}* / *`Fail 개수 : {fail_count}`*\n
+#     <@U04U77FJ4ES>\n
+#     <@U04GD12NLA0>
+#     '''
+# else:
+#     mrkdwn_text = f'''
+#     > {domain} 자동화 테스트 결과\n
+#     *Pass 개수 : {pass_count}* / *Fail 개수 : {fail_count}*\n
+#     <@U04U77FJ4ES>\n
+#     <@U04GD12NLA0>
+#     '''
+#
+# # 메세지 및 파일 슬랙 전송
+# try:
+#     response_msg = client.chat_postMessage(channel=channel,
+#                                            text=mrkdwn_text)
+#
+#     response_file = client.files_upload_v2(channel=channel,
+#                                           file=file_path,
+#                                           filename=filename+dt)
+#
+# except SlackApiError as e:
+#     print('Error: {}'.format(e.response['error']))
+
+####################### Markdown_text ########################
+# mrkdwn_text = '''
+# This is test message.
+# > Block quote
+#
+# *Bold text*
+#
+# ```
+# code block - line 1
+# code block - line 2\ncode block - line 3
+# ```
+#
+# `highlight`
+#
+# _italicize_
+#
+# ~Strikethrough~
+#
+# <https://www.google.com|This is link to google.com>
+# '''
+
+
+
+####################### Webhook ##############################
+# def send_message_to_slack(text):
+#     url = "WebHook Url"
+#
+#     payload = { "text" : text }
+#
+#     requests.post(url, json=payload)
+#
+# def send_message_to_slack(webhook_url, channel, message, file_path=None):
+#     payload = {
+#         'channel': channel,
+#         'text': message
+#     }
+#
+#     files = None
+#     if file_path:
+#         files = {'file': open(file_path, 'rb')}
+#
+#     response = requests.post(webhook_url, json=payload, files=files)
+#     if response.status_code == 200:
+#         print("메시지 전송 성공")
+#     else:
+#         print("메시지 전송 실패")
+#
+# # Webhook URL 설정
+# webhook_url = 'https://hooks.slack.com/services/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'
+#
+# # 채널과 메시지 내용 설정
+# channel = 'C05BQN1D9GT'
+# message = '안녕하세요, 테스트입니다.'
+#
+# # 메시지와 파일 전송
+# send_message_to_slack(webhook_url, channel, message, file_path)
