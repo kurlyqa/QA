@@ -64,7 +64,7 @@ if fail_count > 0:
     '''
 else:
     mrkdwn_text = f'''
-    > {domain} 자동화 테스트 결과\n
+    >[{domain} 자동화 테스트 결과]\n
     *Pass 개수 : {pass_count}* / *Fail 개수 : {fail_count}*\n
     <@U04U77FJ4ES>\n
     <@U04GD12NLA0>
