@@ -27,11 +27,11 @@ class LMSWebLogin(testModule):
 
             # 로그인 페이지 진입
             # 아이디(lmstest01) 입력
-            self.interact(by_type="XPATH", name="//input[@id='input-16' and @type='text' and @required='required']", click=False, send_keys_msg='lmstest01', error_msg="아이디 입력란 미노출")
+            self.interact(by_type="XPATH", name="(//*[contains(@class,'v-text-field__slot')])[1]//input", click=False, send_keys_msg='lmstest01', error_msg="아이디 입력란 미노출")
             # 비밀번호(q1w2e3r4!) 입력
-            self.interact(by_type="XPATH", name="//input[@id='input-19' and @type='password' and @required='required']", click=False, send_keys_msg='q1w2e3r4!', error_msg="비밀번호 입력란 미노출")
+            self.interact(by_type="XPATH", name="(//*[contains(@class,'v-text-field__slot')])[2]//input", click=False, send_keys_msg='q1w2e3r4!', error_msg="비밀번호 입력란 미노출")
             # 로그인
-            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-btn v-btn--block v-btn--contained theme--light v-size--large primary')]", error_msg="로그인 버튼 미노출")
+            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-btn v-btn--block v-btn--contained theme--light v-size--large')]", error_msg="로그인 버튼 미노출")
             # 로그인 되었습니다 팝업 노출
             self.interact(by_type="XPATH", name="//*[contains(text(), '로그인 되었습니다.')]", click=False, error_msg="로그인 되었습니다. 텍스트 미노출")
 
@@ -55,7 +55,7 @@ class LMSWebLogin(testModule):
                 # 우측상단 로그아웃 UI선택
                 self.interact(by_type="XPATH", name="(//*[contains(@class, 'v-btn v-btn--flat v-btn--icon v-btn--round theme--dark v-size--default')])[2]", error_msg="로그아웃 버튼 미노출")
                 # 로그인 버튼 노출 확인
-                self.interact(by_type="XPATH", name="//*[contains(@class, 'v-btn v-btn--block v-btn--contained theme--light v-size--large primary')]", click=False, error_msg="로그인 버튼 미노출")
+                self.interact(by_type="XPATH", name="//*[contains(@class, 'v-btn v-btn--block v-btn--contained theme--light v-size--large')]", click=False, error_msg="로그인 버튼 미노출")
 
                 # LMS 모바일 닫기
                 self.driver.close()

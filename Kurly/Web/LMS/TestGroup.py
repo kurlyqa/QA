@@ -53,19 +53,20 @@ client = WebClient(token=slack_token)
 # 채널ID
 channel = 'C05BQN1D9GT'
 
-mrkdwn_text = ''
+mrkdwn_text = f'''
+    *[{domain} 자동화 테스트 결과]*\n
+    '''
 
 if fail_count > 0:
-    mrkdwn_text = f'''
-    >[{domain} 자동화 테스트 결과]\n
-    *Pass 개수 : {pass_count}* / *`Fail 개수 : {fail_count}`*\n
-    <@U04U77FJ4ES>\n
-    <@U04GD12NLA0>
+    mrkdwn_text = mrkdwn_text + f'''
+    Pass 개수 : {pass_count} / `Fail 개수 : {fail_count}`\n
     '''
 else:
-    mrkdwn_text = f'''
-    >[{domain} 자동화 테스트 결과]\n
-    *Pass 개수 : {pass_count}* / *Fail 개수 : {fail_count}*\n
+    mrkdwn_text = mrkdwn_text + f'''
+    Pass 개수 : {pass_count} / Fail 개수 : {fail_count}\n
+    '''
+
+mrkdwn_text = mrkdwn_text + f'''  
     <@U04U77FJ4ES>\n
     <@U04GD12NLA0>
     '''

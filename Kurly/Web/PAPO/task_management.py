@@ -23,7 +23,7 @@ class TaskManagement(testModule):
     def test_02_작업관리(self):
         try:
             # 파일 삭제 시 주소 ( 각 PC마다 변경해야 함 )
-            folder_path = "/Users/122d6424/Git/Kurly/Web/PAPO"
+            folder_path = "/Users/122d6424/Git/Kurly/Web/LMS"
 
             # 1. <공정별 투입인원 현황 조회>
 
@@ -37,13 +37,13 @@ class TaskManagement(testModule):
 
             # LMS 모바일 로그인
             # 아이디 입력
-            self.interact(by_type="XPATH", name="//input[@id='input-13' and @type='text' and @required='required']", click=False, send_keys_msg='junhyunkyung', error_msg="아이디 입력란 미노출")
+            self.interact(by_type="XPATH", name="(//*[contains(@class,'v-text-field__slot')])[1]//input", click=False, send_keys_msg='junhyunkyung', error_msg="아이디 입력란 미노출")
 
             # 비밀번호 입력
-            self.interact(by_type="XPATH", name="//input[@id='input-16' and @type='password' and @required='required']", click=False, send_keys_msg='kurly12!@', error_msg="비밀번호 입력란 미노출")
+            self.interact(by_type="XPATH", name="(//*[contains(@class,'v-text-field__slot')])[2]//input", click=False, send_keys_msg='kurly12!@', error_msg="비밀번호 입력란 미노출")
 
             # 로그인
-            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-btn__content')]", error_msg="로그인 버튼 미노출")
+            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-btn v-btn--block v-btn--contained theme--light v-size--large')]", error_msg="로그인 버튼 미노출")
 
             # 출근/퇴근 클릭
             self.interact(by_type="XPATH", name="//*[contains(@class, 'work-btn v-btn v-btn--contained v-btn--fab v-btn--round theme--light v-size--default primary')]", error_msg="출근 버튼 미노출")
@@ -63,7 +63,7 @@ class TaskManagement(testModule):
                 self.interact(by_type="XPATH", name="(//*[contains(@class,'v-text-field__slot')])[2]//input", click=False, send_keys_msg='kurly12!@', error_msg="")
 
                 # 로그인
-                self.interact(by_type="XPATH", name="//*[contains(@class, 'v-btn__content')]", error_msg="")
+                self.interact(by_type="XPATH", name="//*[contains(@class, 'v-btn v-btn--block v-btn--contained theme--light v-size--large')]", error_msg="")
 
                 # 출근 클릭
                 self.interact(by_type="XPATH", name="//*[contains(@class, 'work-btn v-btn v-btn--contained v-btn--fab v-btn--round theme--light v-size--default primary')]", error_msg="")
