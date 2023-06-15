@@ -23,7 +23,7 @@ class TaskManagement(testModule):
     def test_02_작업관리(self):
         try:
             # 파일 삭제 시 주소 ( 각 PC마다 변경해야 함 )
-            folder_path = "/Users/122d6424/Git/Kurly/Web/LMS"
+            folder_path = "/Users/122d6424/Git/Kurly/Web/PAPO"
 
             # 1. <공정별 투입인원 현황 조회>
 

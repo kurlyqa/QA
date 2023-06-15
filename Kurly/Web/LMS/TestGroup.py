@@ -66,7 +66,7 @@ else:
     Pass 개수 : {pass_count} / Fail 개수 : {fail_count}\n
     '''
 
-mrkdwn_text = mrkdwn_text + f'''  
+mrkdwn_text = mrkdwn_text + f'''
     <@U04U77FJ4ES>\n
     <@U04GD12NLA0>
     '''

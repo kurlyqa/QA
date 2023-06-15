@@ -427,7 +427,7 @@ class MobileWebLogin(testModule):
                 # 이렇게 하면 Selenium이 값을 변경한 것을 인식하고, 변경된 값이 다시 전송되지 않음
                 self.driver.execute_script("arguments[0].dispatchEvent(new Event('input', { bubbles: true }));", element)
                 sleep(3)
-                self.interact(by_type="XPATH", name="(//*[contains(@class,'v-text-field__slot')])[1]//input", click=False, send_keys_msg='lmstest01', error_msg="아이디 입력란 미노출")
+                self.interact(by_type="XPATH", name="(//*[contains(@class,'v-text-field__slot')])[1]//input", click=False, send_keys_msg='lmstest01', error_msg="")
 
                 # 초기 비밀번호 입력 : kurly123!@
                 element = WebDriverWait(self.driver, 10).until(EC.presence_of_element_located((By.XPATH, "(//*[contains(@class,'v-text-field__slot')])[2]//input")))

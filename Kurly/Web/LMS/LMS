@@ -3,5 +3,8 @@
 # 실행할 파이썬 파일 경로
 python_file="/Users/122d6424/Git/Kurly/Web/LMS/TestGroup.py"
 
-# 파이썬 파일 실행
-python3 "$python_file"
+# 파이썬 파일 실행 1번 반복
+for ((i=1; i<=1; i++))
+do
+    python3 "$python_file"
+done

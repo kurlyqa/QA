@@ -20,10 +20,10 @@ class testModule(unittest.TestCase):
         # 언어 설정
         chrome_options.add_argument('lang=ko_KR')
 
-        # headless 모드 설정
-        chrome_options.add_argument('--headless')
-        chrome_options.add_argument('--no-sandbox')
-        chrome_options.add_argument('--disable-dev-shm-usage')
+        # # headless 모드 설정
+        # chrome_options.add_argument('--headless')
+        # chrome_options.add_argument('--no-sandbox')
+        # chrome_options.add_argument('--disable-dev-shm-usage')
 
         # 크롬 드라이버 설치
         self.driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=chrome_options)

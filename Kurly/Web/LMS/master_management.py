@@ -149,7 +149,7 @@ class MasterManagement(testModule):
 
             try:
                 # 기존 대분류 공정에 !!!!! 있는지 확인
-                self.interact(by_type="XPATH", name="//*[contains(@class, 'flex d-flex align-content-center justify-center align-self-stretch flex-wrap sm4') and contains(text(), '!!!!!')]", click=False, error_msg="작업공정 관리 탭 [대분류 공정 등록] 버튼 클릭 시 !!!!! 미노출")
+                self.interact(by_type="XPATH", name="//*[contains(@class, 'flex d-flex align-content-center justify-center align-self-stretch flex-wrap sm4') and contains(text(), '!!!!!')]", click=False, error_msg="")
 
                 # 추가된 대분류 공정 : !!!!! 체크박스 선택
                 self.interact(by_type="XPATH", name="(//*[contains(@class, 'v-input--selection-controls__ripple')])[1]", error_msg="작업공정 관리 탭 대분류 공정 등록 후 체크박스 버튼 미노출")
