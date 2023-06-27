@@ -22,8 +22,8 @@ s4 = TestLoader().loadTestsFromTestCase(MasterManagement)
 s5 = TestLoader().loadTestsFromTestCase(AccountManagement)
 s6 = TestLoader().loadTestsFromTestCase(MobileWebLogin)
 
-suite = TestSuite([s1])
-# suite = TestSuite([s1, s2, s3, s4, s5, s6])
+# suite = TestSuite([s1])
+suite = TestSuite([s1, s2, s3, s4, s5, s6])
 
 daytime = datetime.datetime.now()
 dt = daytime.strftime("%Y-%m-%d_%H-%M-%S")
