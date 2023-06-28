@@ -27,7 +27,7 @@ class Kurly_App_TestCase(unittest.TestCase):
 
     # 배경화면에 마켓컬리 앱 아이콘 존재 필요
 
-        driver.find_element(By.XPATH, "//android.widget.TextView[@content-desc='마켓컬리 beta']").click()
+        driver.find_element(By.XPATH, "//android.widget.TextView[@content-desc='컬리']").click()
         time.sleep(3)
         driver.find_element(By.ID, 'com.dbs.kurly.m2.beta:id/mykurly').click()
         time.sleep(1)
@@ -132,6 +132,6 @@ class Kurly_App_TestCase(unittest.TestCase):
         self.driver.quit()
 
 if __name__ == '__main__':
-    unittest.main(testRunner=HtmlTestRunner.HTMLTestRunner(output='/Users/mk-jj-mac-050/PycharmProjects/SQE_unittest/appium_reports'))
+    #unittest.main(testRunner=HtmlTestRunner.HTMLTestRunner(output='/Users/mk-jj-mac-050/PycharmProjects/SQE_unittest/appium_reports'))
 
     # driver.back()
