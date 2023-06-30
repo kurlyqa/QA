@@ -22,8 +22,7 @@ s4 = TestLoader().loadTestsFromTestCase(MasterManagement)
 s5 = TestLoader().loadTestsFromTestCase(AccountManagement)
 s6 = TestLoader().loadTestsFromTestCase(MobileWebLogin)
 
-suite = TestSuite([s1])
-# suite = TestSuite([s1, s2, s3, s4, s5, s6])
+suite = TestSuite([s1, s2, s3, s4, s5, s6])
 
 daytime = datetime.datetime.now()
 dt = daytime.strftime("%Y-%m-%d_%H-%M-%S")
@@ -32,7 +31,7 @@ filename = domain + f"AutomationTestReport"
 dir = os.getcwd()
 
 # 전송할 파일 경로 설정
-file_path = dir + f"/reports/" + filename + "_" + dt + ".html"
+file_path = dir + f"/reports/{filename}_{dt}.html"
 
 # report_title 파일열면 가장위에 있는 메인 title
 runner = HTMLTestRunner(combine_reports=True, report_name=filename, report_title=domain + " Automation Test Report")
