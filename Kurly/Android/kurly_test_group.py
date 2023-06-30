@@ -3,30 +3,29 @@
 from  __future__ import print_function
 from unittest import TestLoader, TestSuite
 from HtmlTestRunner import HTMLTestRunner
-
-from Kurly.Android.Kurly_purchase import Kurly_purchase
+from Kurly_purchase import KurlyPurchase
 from email.message import EmailMessage
 import datetime
 import os
 import smtplib
 
-# with open('/Users/tsquare/Desktop/Git/AP/info.json') as json_file:
-# with open('C:\\Users\\TSQUARE\\Documents\\Git\\AP\\info.json') as json_file:
+# with open('/Users/122d6424/Desktop/Git/AP/info.json') as json_file:
+# with open('C:\\Users\\122d6424\\Documents\\Git\\AP\\info.json') as json_file:
 #     json_data = json.load(json_file)
 #     keylist = list(json_data.keys())
 #     json_string = json_data[sys.argv[1]]
 #
 #     dname = json_string['dname']
 
-s1 = TestLoader().loadTestsFromTestCase(Kurly_purchase)
+s1 = TestLoader().loadTestsFromTestCase(KurlyPurchase)
 
 suite = TestSuite([s1])
 
 daytime = datetime.datetime.now()
 dt = daytime.strftime("%Y-%m-%d_%H-%M-%S")
-filename = (f"GalaxyNote9KurlyAutomationFunctionalTestReport")
+filename = (f"GalaxyS22plusKurlyAutomationFunctionalTestReport")
 dir = os.getcwd()
-finalfile = (dir + f"/reports/GalaxyNote9KurlyAutomationTestReport_"+dt+".html")
+finalfile = (dir + f"/reports/GalaxyS22plusKurlyAutomationTestReport_"+dt+".html")
 runner = HTMLTestRunner(combine_reports=True, report_name=filename, report_title="Kurly Automation Functional Test Report (Android)") # report_title 파일열면 가장위에 있는 메인 title
 runner.run(suite)
 

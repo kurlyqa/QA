@@ -162,7 +162,6 @@ class LMSLogin(unittest.TestCase):
             # LMS 모바일 닫기
             self.driver.close()
         except:
-            print("Error!")
             self.assertEqual(0, 1)
         else:
             print("Passed")

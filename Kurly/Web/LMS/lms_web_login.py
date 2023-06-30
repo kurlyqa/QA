@@ -62,7 +62,6 @@ class LMSWebLogin(testModule):
             else:
                 raise Exception("YYYY-MM-DD HH:MM:SS 형태의 시간이 미노출")
         except:
-            # print("Error!")
             self.assertEqual(0, 1)
         else:
             print("Passed")

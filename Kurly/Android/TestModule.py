@@ -144,7 +144,7 @@ class testModule(unittest.TestCase):
                     y = y * 1.17
             elif ratio == 16:
                 if '19' in corr and TCFG.ratio == 19:
-                    dc
+                    y = y * 0.91
                 if '18' in corr and TCFG.ratio == 18.5:
                     y = y * 0.85
         TouchAction(TCFG.driver).tap(None, x, y, count).perform()

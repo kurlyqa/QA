@@ -3,8 +3,8 @@
 from __future__ import print_function
 from unittest import TestLoader, TestSuite
 from HtmlTestRunner import HTMLTestRunner
-from lms_web_login import LMSWebLogin
-from task_management import TaskManagement
+from papo_login import PAPOLogin
+from order_management import OrderManagement
 from site_management import SiteManagement
 from master_management import MasterManagement
 from account_management import AccountManagement
@@ -15,14 +15,19 @@ import ssl
 from slack_sdk import WebClient
 from slack_sdk.errors import SlackApiError
 
-s1 = TestLoader().loadTestsFromTestCase(LMSWebLogin)
-s2 = TestLoader().loadTestsFromTestCase(TaskManagement)
-s3 = TestLoader().loadTestsFromTestCase(SiteManagement)
-s4 = TestLoader().loadTestsFromTestCase(MasterManagement)
-s5 = TestLoader().loadTestsFromTestCase(AccountManagement)
-s6 = TestLoader().loadTestsFromTestCase(MobileWebLogin)
+s1 = TestLoader().loadTestsFromTestCase(PAPOLogin)
+s2 = TestLoader().loadTestsFromTestCase(OrderManagement)
+# s3 = TestLoader().loadTestsFromTestCase(SiteManagement)
+# s4 = TestLoader().loadTestsFromTestCase(MasterManagement)
+# s5 = TestLoader().loadTestsFromTestCase(AccountManagement)
+# s6 = TestLoader().loadTestsFromTestCase(MobileWebLogin)
 
-suite = TestSuite([s1, s2, s3, s4, s5, s6])
+# suite = TestSuite([s1])
+suite = TestSuite([s1, s2])
+# suite = TestSuite([s1, s2, s3])
+# suite = TestSuite([s1, s2, s3, s4])
+# suite = TestSuite([s1, s2, s3, s4, s5])
+# suite = TestSuite([s1, s2, s3, s4, s5, s6])
 
 daytime = datetime.datetime.now()
 dt = daytime.strftime("%Y-%m-%d_%H-%M-%S")
@@ -31,7 +36,7 @@ filename = domain + f"AutomationTestReport"
 dir = os.getcwd()
 
 # 전송할 파일 경로 설정
-file_path = dir + f"/reports/" + filename + "_" + dt + ".html"
+file_path = dir + f"/reports/{filename}_{dt}.html"
 
 # report_title 파일열면 가장위에 있는 메인 title
 runner = HTMLTestRunner(combine_reports=True, report_name=filename, report_title=domain + " Automation Test Report")
