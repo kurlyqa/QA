@@ -1,5 +1,6 @@
 from selenium import webdriver
 from webdriver_manager.chrome import ChromeDriverManager
+from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.support.ui import Select
 import datetime, time
 from selenium.webdriver.common.by import By
@@ -23,7 +24,7 @@ print('--* SQA - RMS 기본기능 | 자동화 테스트 시작시간 :', test_st
 
 class PaPoTestCase(unittest.TestCase):
     def setUp(self):
-        self.driver = webdriver.Chrome(ChromeDriverManager().install())
+        self.driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
         self.driver.implicitly_wait(10)
         self.driver.maximize_window()
         self.driver.get('https://partner.stg.kurly.com/#/stafflogin')
@@ -104,4 +105,4 @@ class PaPoTestCase(unittest.TestCase):
         self.driver.quit()
 
 if __name__ == '__main__':
-    unittest.main(testRunner=HtmlTestRunner.HTMLTestRunner(output='/Users/mk-jj-mac-050/Git/Kurly/Partner_Portal/reports'))
+    unittest.main(testRunner=HtmlTestRunner.HTMLTestRunner(output='/Users/jcfk90x0dk/Git/Kurly/SQE_Test/reports'))
