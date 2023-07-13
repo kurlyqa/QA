@@ -20,16 +20,16 @@ class testModule(unittest.TestCase):
         # 언어 설정
         chrome_options.add_argument('lang=ko_KR')
 
-        # headless 모드 설정
-        chrome_options.add_argument('--headless')
-        chrome_options.add_argument('--no-sandbox')
-        chrome_options.add_argument('--disable-dev-shm-usage')
+        # # headless 모드 설정
+        # chrome_options.add_argument('--headless')
+        # chrome_options.add_argument('--no-sandbox')
+        # chrome_options.add_argument('--disable-dev-shm-usage')
 
         # 크롬 드라이버 설치
         self.driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=chrome_options)
 
         # 웹페이지 전체가 로드 될때까지 기다림
-        self.driver.implicitly_wait(30) # 또는 self.driver.set_page_load_timeout(30)
+        self.driver.implicitly_wait(100) # 또는 self.driver.set_page_load_timeout(30)
 
     # 반복 되는 부분을 모듈화 한 함수
     def interact(self, by_type, name, wait_sec=1, click=True, send_keys_msg=None, error_msg=None):

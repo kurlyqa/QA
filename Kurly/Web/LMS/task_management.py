@@ -9,6 +9,7 @@ from datetime import datetime
 from TestModule import testModule
 from selenium import webdriver
 from selenium.webdriver.common.by import By
+from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
@@ -24,6 +25,7 @@ class TaskManagement(testModule):
         try:
             # 파일 삭제 시 주소 ( 각 PC마다 변경해야 함 )
             folder_path = "/Users/122d6424/Git/Kurly/Web/LMS"
+            # folder_path = "/Users/122d6424/Downloads"
 
             # 1. <공정별 투입인원 현황 조회>
 
@@ -43,7 +45,7 @@ class TaskManagement(testModule):
             self.interact(by_type="XPATH", name="(//*[contains(@class,'v-text-field__slot')])[2]//input", click=False, send_keys_msg='kurly12!@', error_msg="비밀번호 입력란 미노출")
 
             # 로그인
-            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-btn v-btn--block v-btn--contained theme--light v-size--large')]", error_msg="로그인 버튼 미노출")
+            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-btn__content')]//*[contains(text(),'로그인')]", error_msg="로그인 버튼 미노출")
 
             # 출근/퇴근 클릭
             self.interact(by_type="XPATH", name="//*[contains(@class, 'work-btn v-btn v-btn--contained v-btn--fab v-btn--round theme--light v-size--default primary')]", error_msg="출근 버튼 미노출")
@@ -70,25 +72,25 @@ class TaskManagement(testModule):
             except:
                 pass
 
-            # 송파CC
-            # 송파 냉장1
+            # 김포CC
+            # 김포 상온
             self.interact(by_type="XPATH", name="(//*[contains(@class, 'v-select__selections')])[1]", error_msg="CC 선택란 미노출")
-            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-list-item__title') and contains(text(), '송파')]", error_msg="송파 미노출")
+            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-list-item__title') and contains(text(), '김포')]", error_msg="김포 미노출")
             self.interact(by_type="XPATH", name="(//*[contains(@class, 'v-select__selections')])[2]", error_msg="센터 선택란 미노출")
-            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-list-item__title') and contains(text(), '송파 냉장1')]", error_msg="송파 냉장1 미노출")
+            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-list-item__title') and contains(text(), '김포 상온')]", error_msg="김포 상온 미노출")
 
             # 다음
             self.interact(by_type="XPATH", name="//*[contains(@class, 'v-btn v-btn--contained theme--light v-size--default primary')]", error_msg="출근 프로세스 진행중 다음 버튼 미노출")
 
-            # 업무파트=HUB
-            # 팀명=송냉 HUB
-            # 근무 Shift=00:25 ~ 05:00
+            # 업무파트=IB
+            # 팀명=김포상온 A
+            # 근무 Shift=00:00 ~ 01:50
             self.interact(by_type="XPATH", name="(//*[contains(@class, 'v-select__selections')])[1]", error_msg="업무파트 선택란 미노출")
-            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-list-item__title') and contains(text(), 'HUB')]", error_msg="HUB")
+            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-list-item__title') and contains(text(), 'IB')]", error_msg="IB")
             self.interact(by_type="XPATH", name="(//*[contains(@class, 'v-select__selections')])[2]", error_msg="팀명 선택란 미노출")
-            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-list-item__title') and contains(text(), '송냉 HUB')]", error_msg="송냉 HUB 미노출")
+            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-list-item__title') and contains(text(), '김포상온 A')]", error_msg="김포상온 A 미노출")
             self.interact(by_type="XPATH", name="(//*[contains(@class, 'v-select__selections')])[3]", error_msg="근무 Shift 선택란 미노출")
-            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-list-item__title') and contains(text(), '00:25 ~ 05:00')]", error_msg="00:25 ~ 05:00 미노출")
+            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-list-item__title') and contains(text(), '00:00 ~ 01:50')]", error_msg="00:00 ~ 01:50 미노출")
 
             # 다음
             self.interact(by_type="XPATH", name="//*[contains(@class, 'v-btn v-btn--contained theme--light v-size--default primary')]", error_msg="출근 프로세스 진행중 다음 버튼 미노출")
@@ -116,7 +118,7 @@ class TaskManagement(testModule):
             self.driver.switch_to.window(self.driver.window_handles[-1])
 
             # LMS 어드민 URL 접속
-            url = 'https://admin-lms.stg.kurly.com/?#/login'
+            url = 'https://admin-lms.stg.kurly.com/#/login'
             self.driver.get(url)
 
             # 아이디(lmstest01) 입력
@@ -133,21 +135,21 @@ class TaskManagement(testModule):
             # 현장관리 탭
             self.interact(by_type="XPATH", name="//*[contains(@class, 'v-btn__content') and contains(text(), '현장관리')]", error_msg="작업자 체크인 중 현장관리 탭 없음")
 
-            # CC = 송파CC
-            # 센터 = 송파 냉장1 센터
-            # 업무파트 = HUB
-            # 대분류 작업공정 = MOVE
-            # 소분류 작업공정 = PLT 이동
+            # CC = 김포CC
+            # 센터 = 김포 상온 센터
+            # 업무파트 = IB
+            # 대분류 작업공정 = picking
+            # 소분류 작업공정 = 피킹
             self.interact(by_type="XPATH", name="(//*[contains(@class, 'v-select__selections')])[1]", error_msg="작업자 체크인 중 CC 선택란 미노출")
-            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-list-item__title') and contains(text(), '송파 CC')]", error_msg="작업자 체크인 중 송파 CC 미노출")
+            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-list-item__title') and contains(text(), '김포 CC')]", error_msg="작업자 체크인 중 김포 CC 미노출")
             self.interact(by_type="XPATH", name="(//*[contains(@class, 'v-select__selections')])[2]", error_msg="작업자 체크인 중 센터 선택란 미노출")
-            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-list-item__title') and contains(text(), '송파 냉장1')]", error_msg="작업자 체크인 중 송파 냉장1 미노출")
+            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-list-item__title') and contains(text(), '김포 상온')]", error_msg="작업자 체크인 중 김포 상온 미노출")
             self.interact(by_type="XPATH", name="(//*[contains(@class, 'v-select__selections')])[3]", error_msg="작업자 체크인 중 업무파트 선택란 미노출")
-            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-list-item__title') and contains(text(), 'HUB')]", error_msg="작업자 체크인 중 HUB 미노출")
+            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-list-item__title') and contains(text(), 'IB')]", error_msg="작업자 체크인 중 IB 미노출")
             self.interact(by_type="XPATH", name="(//*[contains(@class, 'v-select__selections')])[4]", error_msg="작업자 체크인 중 대분류 작업공정 선택란 미노출")
-            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-list-item__title') and contains(text(), 'MOVE')]", error_msg="작업자 체크인 중 MOVE 미노출")
+            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-list-item__title') and contains(text(), 'picking')]", error_msg="작업자 체크인 중 picking 미노출")
             self.interact(by_type="XPATH", name="(//*[contains(@class, 'v-select__selections')])[5]", error_msg="작업자 체크인 중 소분류 작업공정 선택란 미노출")
-            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-list-item__title') and contains(text(), 'PLT 이동')]", error_msg="작업자 체크인 중 PLT 이동 미노출")
+            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-list-item__title') and contains(text(), '피킹')]", error_msg="작업자 체크인 중 피킹 미노출")
 
             # QR코드 junhyunkyung 입력
             self.interact(by_type="XPATH", name="(//*[contains(@class, 'v-input__slot white')])[6]//input", click=False, send_keys_msg='junhyunkyung', error_msg="작업자 체크인 중 QR코드 입력란 미노출")
@@ -161,24 +163,24 @@ class TaskManagement(testModule):
             # 공정별 투입인원 현황 텍스트 노출 확인
             self.interact(by_type="XPATH", name="//*[contains(text(), '공정별 투입인원 현황')]", error_msg="공정별 투입인원 현황 텍스트 미노출")
 
-            # CC = 송파CC
-            # 센터 = 송파 냉장1 센터
-            # 업무파트 = HUB
-            # 대분류 작업공정 = MOVE
+            # CC = 김포CC
+            # 센터 = 김포 상온 센터
+            # 업무파트 = IB
+            # 대분류 작업공정 = picking
             self.interact(by_type="XPATH", name="(//*[contains(@class, 'v-select__selections')])[1]", error_msg="공정별 투입인원 현황 조회중 CC 선택란 미노출")
-            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-list-item__title') and contains(text(), '송파 CC')]", error_msg="공정별 투입인원 현황 조회중 송파 CC 미노출")
+            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-list-item__title') and contains(text(), '김포 CC')]", error_msg="공정별 투입인원 현황 조회중 김포 CC 미노출")
             self.interact(by_type="XPATH", name="(//*[contains(@class, 'v-select__selections')])[2]", error_msg="공정별 투입인원 현황 조회중 센터 선택란 미노출")
-            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-list-item__title') and contains(text(), '송파 냉장1')]", error_msg="공정별 투입인원 현황 조회중 송파 냉장1 미노출")
+            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-list-item__title') and contains(text(), '김포 상온')]", error_msg="공정별 투입인원 현황 조회중 김포 상온 미노출")
             self.interact(by_type="XPATH", name="(//*[contains(@class, 'v-select__selections')])[3]", error_msg="공정별 투입인원 현황 조회중 업무파트 선택란 미노출")
-            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-list-item__title') and contains(text(), 'HUB')]", error_msg="공정별 투입인원 현황 조회중 HUB 미노출")
+            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-list-item__title') and contains(text(), 'IB')]", error_msg="공정별 투입인원 현황 조회중 IB 미노출")
             self.interact(by_type="XPATH", name="(//*[contains(@class, 'v-select__selections')])[4]", error_msg="공정별 투입인원 현황 조회중 대분류 작업공정 선택란 미노출")
-            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-list-item__title') and contains(text(), 'MOVE')]", error_msg="공정별 투입인원 현황 조회중 MOVE 미노출")
+            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-list-item__title') and contains(text(), 'picking')]", error_msg="공정별 투입인원 현황 조회중 picking 미노출")
 
             # 검색 버튼 클릭
             self.interact(by_type="XPATH", name="//*[contains(@class, 'primary v-btn v-btn--contained theme--light v-size--default')]", error_msg="공정별 투입인원 현황 조회중 검색 버튼 미노출")
 
             # CC / 센터 / 업무파트 (YYYY-MM-DD HH:MM) 노출
-            self.interact(by_type="XPATH", name="//*[contains(text(), '송파 CC 송파 냉장1 HUB')]", click=False, error_msg="공정별 투입인원 현황 검색 결과 미노출")
+            self.interact(by_type="XPATH", name="//*[contains(text(), '김포 CC 김포 상온 IB')]", click=False, error_msg="공정별 투입인원 현황 검색 결과 미노출")
 
             # YYYY-MM-DD HH:MM:SS 의 UI 요소를 찾아서 안에 있는 텍스트를 가져옴
             time_element = WebDriverWait(self.driver, 10).until(EC.presence_of_element_located((By.CSS_SELECTOR, ".purple-bold > span:nth-child(2)")))
@@ -197,8 +199,8 @@ class TaskManagement(testModule):
                 raise Exception("YYYY-MM-DD HH:MM 형태의 시간 미노출")
 
             # 대분류 / 소분류 공정/ Check In 값 노출
-            self.interact(by_type="XPATH", name="//*[contains(@class, 'text-center v-data-table__divider tableHeader')]//span[contains(text(), 'MOVE')]", click=False, error_msg="공정별 투입인원 현황 검색 결과 중 대분류 미노출")
-            self.interact(by_type="XPATH", name="//*[contains(@class, 'text-center v-data-table__divider tableHeader')]//span[contains(text(), 'PLT 이동')]", click=False, error_msg="공정별 투입인원 현황 검색 결과 중 소분류 미노출")
+            self.interact(by_type="XPATH", name="//*[contains(@class, 'text-center v-data-table__divider tableHeader')]//span[contains(text(), 'picking')]", click=False, error_msg="공정별 투입인원 현황 검색 결과 중 대분류 미노출")
+            self.interact(by_type="XPATH", name="//*[contains(@class, 'text-center v-data-table__divider tableHeader')]//span[contains(text(), '피킹')]", click=False, error_msg="공정별 투입인원 현황 검색 결과 중 소분류 미노출")
             try:
                 self.interact(by_type="XPATH", name="(//*[contains(@class, 'text-center v-data-table__divider') and contains(text(), '2 명')])[2]", click=False, error_msg="")
             except:
@@ -240,21 +242,23 @@ class TaskManagement(testModule):
             # 현장관리 탭
             self.interact(by_type="XPATH", name="//*[contains(@class, 'v-btn__content') and contains(text(), '현장관리')]", error_msg="작업자 체크인 중 현장관리 탭 없음")
 
-            # CC = 송파CC
-            # 센터 = 송파 냉장1 센터
-            # 업무파트 = HUB
-            # 대분류 작업공정 = MOVE
-            # 소분류 작업공정 = PLT 이동
+            # CC = 김포CC
+            # 센터 = 김포 상온 센터
+            # 업무파트 = IB
+            # 대분류 작업공정 = picking
+            # 소분류 작업공정 = 피킹
             self.interact(by_type="XPATH", name="(//*[contains(@class, 'v-select__selections')])[1]", error_msg="작업자 체크인 중 CC 선택란 미노출")
-            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-list-item__title') and contains(text(), '송파 CC')]", error_msg="작업자 체크인 중 송파 CC 미노출")
+            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-list-item__title') and contains(text(), '김포 CC')]", error_msg="작업자 체크인 중 김포 CC 미노출")
             self.interact(by_type="XPATH", name="(//*[contains(@class, 'v-select__selections')])[2]", error_msg="작업자 체크인 중 센터 선택란 미노출")
-            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-list-item__title') and contains(text(), '송파 냉장1')]", error_msg="작업자 체크인 중 송파 냉장1 미노출")
+            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-list-item__title') and contains(text(), '김포 냉장')]", error_msg="작업자 체크인 중 김포 냉장 미노출")
+            self.interact(by_type="XPATH", name="(//*[contains(@class, 'v-select__selections')])[2]", error_msg="작업자 체크인 중 센터 선택란 미노출")
+            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-list-item__title') and contains(text(), '김포 상온')]", error_msg="작업자 체크인 중 김포 상온 미노출")
             self.interact(by_type="XPATH", name="(//*[contains(@class, 'v-select__selections')])[3]", error_msg="작업자 체크인 중 업무파트 선택란 미노출")
-            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-list-item__title') and contains(text(), 'HUB')]", error_msg="작업자 체크인 중 HUB 미노출")
+            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-list-item__title') and contains(text(), 'IB')]", error_msg="작업자 체크인 중 IB 미노출")
             self.interact(by_type="XPATH", name="(//*[contains(@class, 'v-select__selections')])[4]", error_msg="작업자 체크인 중 대분류 작업공정 선택란 미노출")
-            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-list-item__title') and contains(text(), 'MOVE')]", error_msg="작업자 체크인 중 MOVE 미노출")
+            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-list-item__title') and contains(text(), 'picking')]", error_msg="작업자 체크인 중 picking 미노출")
             self.interact(by_type="XPATH", name="(//*[contains(@class, 'v-select__selections')])[5]", error_msg="작업자 체크인 중 소분류 작업공정 선택란 미노출")
-            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-list-item__title') and contains(text(), 'PLT 이동')]", error_msg="작업자 체크인 중 PLT 이동 미노출")
+            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-list-item__title') and contains(text(), '피킹')]", error_msg="작업자 체크인 중 피킹 미노출")
 
             # QR코드 junhyunkyung 입력
             self.interact(by_type="XPATH", name="(//*[contains(@class, 'v-input__slot white')])[6]//input", click=False, send_keys_msg='junhyunkyung', error_msg="작업자 체크인 중 QR코드 입력란 미노출")
@@ -297,24 +301,24 @@ class TaskManagement(testModule):
             # 공정별 체크인 작업자 확인 클릭
             self.interact(by_type="XPATH", name="//*[contains(text(), '공정별 체크인 작업자 확인')]", error_msg="공정별 체크인 작업자 확인 탭 미노출")
 
-            # CC = 송파CC
-            # 센터 = 송파 냉장1
+            # CC = 김포CC
+            # 센터 = 김포 상온
             # 계약구분 = 상용직
-            # 업무파트 = HUB
-            # 대분류 공정 = MOVE
-            # 소분류 공정 = PLT 이동
+            # 업무파트 = IB
+            # 대분류 공정 = picking
+            # 소분류 공정 = 피킹
             self.interact(by_type="XPATH", name="(//*[contains(@class, 'v-select__selections')])[1]", error_msg="공정별 체크인 작업자 확인 조회 중 CC 선택란 미노출")
-            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-list-item__title') and contains(text(), '송파 CC')]", error_msg="공정별 체크인 작업자 확인 조회 중 송파 CC 미노출")
+            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-list-item__title') and contains(text(), '김포 CC')]", error_msg="공정별 체크인 작업자 확인 조회 중 김포 CC 미노출")
             self.interact(by_type="XPATH", name="(//*[contains(@class, 'v-select__selections')])[2]", error_msg="공정별 체크인 작업자 확인 조회 중 센터 선택란 미노출")
-            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-list-item__title') and contains(text(), '송파 냉장1')]", error_msg="공정별 체크인 작업자 확인 조회 중 송파 냉장1 미노출")
+            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-list-item__title') and contains(text(), '김포 상온')]", error_msg="공정별 체크인 작업자 확인 조회 중 김포 상온 미노출")
             self.interact(by_type="XPATH", name="(//*[contains(@class, 'v-select__selections')])[3]", error_msg="공정별 체크인 작업자 확인 조회 중 계약구분 선택란 미노출")
             self.interact(by_type="XPATH", name="//*[contains(@class, 'v-list-item__title') and contains(text(), '상용직')]", error_msg="공정별 체크인 작업자 확인 조회 중 상용직 미노출")
             self.interact(by_type="XPATH", name="(//*[contains(@class, 'v-select__selections')])[4]", error_msg="공정별 체크인 작업자 확인 조회 중 업무파트 선택란 미노출")
-            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-list-item__title') and contains(text(), 'HUB')]", error_msg="공정별 체크인 작업자 확인 조회 중 HUB 미노출")
+            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-list-item__title') and contains(text(), 'IB')]", error_msg="공정별 체크인 작업자 확인 조회 중 IB 미노출")
             self.interact(by_type="XPATH", name="(//*[contains(@class, 'v-select__selections')])[5]", error_msg="공정별 체크인 작업자 확인 조회 중 대분류 공정 선택란 미노출")
-            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-list-item__title') and contains(text(), 'MOVE')]", error_msg="공정별 체크인 작업자 확인 조회 중 MOVE 미노출")
+            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-list-item__title') and contains(text(), 'picking')]", error_msg="공정별 체크인 작업자 확인 조회 중 picking 미노출")
             self.interact(by_type="XPATH", name="(//*[contains(@class, 'v-select__selections')])[6]", error_msg="공정별 체크인 작업자 확인 조회 중 소분류 공정 선택란 미노출")
-            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-list-item__title') and contains(text(), 'PLT 이동')]", error_msg="공정별 체크인 작업자 확인 조회 중 PLT 이동 미노출")
+            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-list-item__title') and contains(text(), '피킹')]", error_msg="공정별 체크인 작업자 확인 조회 중 피킹 미노출")
 
             # 검색 버튼 클릭
             self.interact(by_type="XPATH", name="//*[contains(@class, 'primary v-btn v-btn--contained theme--light v-size--default')]", error_msg="공정별 체크인 작업자 확인 조회 중 검색 버튼 미노출")
@@ -344,24 +348,24 @@ class TaskManagement(testModule):
 
             # 6. <공정공정별 체크인 작업자 확인 작업상세내역 다운로드>
 
-            # CC = 송파CC
-            # 센터 = 송파 냉장1
+            # CC = 김포CC
+            # 센터 = 김포 상온
             # 계약구분 = 상용직
-            # 업무파트 = HUB
-            # 대분류 공정 = MOVE
-            # 소분류 공정 = PLT 이동
+            # 업무파트 = IB
+            # 대분류 공정 = picking
+            # 소분류 공정 = 피킹
             self.interact(by_type="XPATH", name="(//*[contains(@class, 'v-select__selections')])[1]", error_msg="공정별 체크인 작업자 확인 조회 중 CC 선택란 미노출")
-            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-list-item__title') and contains(text(), '송파 CC')]", error_msg="공정별 체크인 작업자 확인 조회 중 송파 CC 미노출")
+            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-list-item__title') and contains(text(), '김포 CC')]", error_msg="공정별 체크인 작업자 확인 조회 중 김포 CC 미노출")
             self.interact(by_type="XPATH", name="(//*[contains(@class, 'v-select__selections')])[2]", error_msg="공정별 체크인 작업자 확인 조회 중 센터 선택란 미노출")
-            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-list-item__title') and contains(text(), '송파 냉장1')]", error_msg="공정별 체크인 작업자 확인 조회 중 송파 냉장1 미노출")
+            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-list-item__title') and contains(text(), '김포 상온')]", error_msg="공정별 체크인 작업자 확인 조회 중 김포 상온 미노출")
             self.interact(by_type="XPATH", name="(//*[contains(@class, 'v-select__selections')])[3]", error_msg="공정별 체크인 작업자 확인 조회 중 계약구분 선택란 미노출")
             self.interact(by_type="XPATH", name="//*[contains(@class, 'v-list-item__title') and contains(text(), '상용직')]", error_msg="공정별 체크인 작업자 확인 조회 중 상용직 미노출")
             self.interact(by_type="XPATH", name="(//*[contains(@class, 'v-select__selections')])[4]", error_msg="공정별 체크인 작업자 확인 조회 중 업무파트 선택란 미노출")
-            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-list-item__title') and contains(text(), 'HUB')]", error_msg="공정별 체크인 작업자 확인 조회 중 HUB 미노출")
+            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-list-item__title') and contains(text(), 'IB')]", error_msg="공정별 체크인 작업자 확인 조회 중 IB 미노출")
             self.interact(by_type="XPATH", name="(//*[contains(@class, 'v-select__selections')])[5]", error_msg="공정별 체크인 작업자 확인 조회 중 대분류 공정 선택란 미노출")
-            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-list-item__title') and contains(text(), 'MOVE')]", error_msg="공정별 체크인 작업자 확인 조회 중 MOVE 미노출")
+            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-list-item__title') and contains(text(), 'picking')]", error_msg="공정별 체크인 작업자 확인 조회 중 picking 미노출")
             self.interact(by_type="XPATH", name="(//*[contains(@class, 'v-select__selections')])[6]", error_msg="공정별 체크인 작업자 확인 조회 중 소분류 공정 선택란 미노출")
-            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-list-item__title') and contains(text(), 'PLT 이동')]", error_msg="공정별 체크인 작업자 확인 조회 중 PLT 이동 미노출")
+            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-list-item__title') and contains(text(), '피킹')]", error_msg="공정별 체크인 작업자 확인 조회 중 피킹 미노출")
 
             # 검색 버튼 클릭
             self.interact(by_type="XPATH", name="//*[contains(@class, 'primary v-btn v-btn--contained theme--light v-size--default')]", error_msg="공정별 체크인 작업자 확인 조회 중 검색 버튼 미노출")
@@ -391,22 +395,22 @@ class TaskManagement(testModule):
             # 공정별 체크인 작업자 확인 클릭
             self.interact(by_type="XPATH", name="//*[contains(text(), '공정별 이탈 작업자 확인')]", error_msg="공정별 이탈 작업자 확인 탭 미노출")
 
-            # CC 항목 값 변경 : 송파CC
-            # 센터 항목 값 변경 : 송파냉장1
+            # CC 항목 값 변경 : 김포CC
+            # 센터 항목 값 변경 : 김포 상온
             # 계약구분 값 변경 : 상용직
-            # 업무파트 변경 : HUB
-            # 대분류 공정 변경 : MOVE
-            # 소분류 공정값 변경 : PLT 이동
+            # 업무파트 변경 : IB
+            # 대분류 공정 변경 : picking
+            # 소분류 공정값 변경 : 피킹
             self.interact(by_type="XPATH", name="(//*[contains(@class, 'v-select__selections')])[1]", error_msg="공정별 이탈 작업자 확인 조회 중 CC 선택란 미노출")
-            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-list-item__title') and contains(text(), '송파 CC')]", error_msg="공정별 이탈 작업자 확인 조회 중 송파 CC 미노출")
+            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-list-item__title') and contains(text(), '김포 CC')]", error_msg="공정별 이탈 작업자 확인 조회 중 김포 CC 미노출")
             self.interact(by_type="XPATH", name="(//*[contains(@class, 'v-select__selections')])[2]", error_msg="공정별 이탈 작업자 확인 조회 중 센터 선택란 미노출")
-            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-list-item__title') and contains(text(), '송파 냉장1')]", error_msg="공정별 이탈 작업자 확인 조회 중 송파 냉장1 미노출")
+            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-list-item__title') and contains(text(), '김포 상온')]", error_msg="공정별 이탈 작업자 확인 조회 중 김포 상온 미노출")
             self.interact(by_type="XPATH", name="(//*[contains(@class, 'v-select__selections')])[3]", error_msg="공정별 이탈 작업자 확인 조회 중 업무파트 선택란 미노출")
-            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-list-item__title') and contains(text(), 'HUB')]", error_msg="공정별 이탈 작업자 확인 조회 중 HUB 미노출")
+            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-list-item__title') and contains(text(), 'IB')]", error_msg="공정별 이탈 작업자 확인 조회 중 IB 미노출")
             self.interact(by_type="XPATH", name="(//*[contains(@class, 'v-select__selections')])[4]", error_msg="공정별 이탈 작업자 확인 조회 중 대분류 공정 선택란 미노출")
-            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-list-item__title') and contains(text(), 'MOVE')]", error_msg="공정별 이탈 작업자 확인 조회 중 MOVE 미노출")
+            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-list-item__title') and contains(text(), 'picking')]", error_msg="공정별 이탈 작업자 확인 조회 중 picking 미노출")
             self.interact(by_type="XPATH", name="(//*[contains(@class, 'v-select__selections')])[5]", error_msg="공정별 이탈 작업자 확인 조회 중 소분류 공정 선택란 미노출")
-            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-list-item__title') and contains(text(), 'PLT 이동')]", error_msg="공정별 이탈 작업자 확인 조회 중 PLT 이동 미노출")
+            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-list-item__title') and contains(text(), '피킹')]", error_msg="공정별 이탈 작업자 확인 조회 중 피킹 미노출")
 
             # 검색 버튼 클릭
             self.interact(by_type="XPATH", name="//*[contains(@class, 'primary v-btn v-btn--contained theme--light v-size--default')]", error_msg="공정별 이탈 작업자 확인 조회 중 검색 버튼 미노출")
@@ -415,9 +419,9 @@ class TaskManagement(testModule):
             # 조회테이블 영역 항목 옵션 값 초기화
             self.interact(by_type="XPATH", name="//*[contains(@class, 'text-center') and contains(text(), 'junhyunkyung')]", click=False, error_msg="공정별 이탈 작업자 확인 조회 시 조회 결과의 아이디 텍스트 미노출")
             self.interact(by_type="XPATH", name="//*[contains(@class, 'text-center') and contains(text(), '경준현')]", click=False, error_msg="공정별 이탈 작업자 확인 조회 시 조회 결과의 이름 텍스트 미노출")
-            self.interact(by_type="XPATH", name="//*[contains(@class, 'text-center') and contains(text(), 'HUB')]", click=False, error_msg="공정별 이탈 작업자 확인 조회 시 조회 결과의 업무파트 텍스트 미노출")
-            self.interact(by_type="XPATH", name="//*[contains(@class, 'text-center') and contains(text(), 'MOVE')]", click=False, error_msg="공정별 이탈 작업자 확인 조회 시 조회 결과의 대분류공정 텍스트 미노출")
-            self.interact(by_type="XPATH", name="//*[contains(@class, 'text-center') and contains(text(), 'PLT 이동')]", click=False, error_msg="공정별 이탈 작업자 확인 조회 시 조회 결과의 소분류공정 텍스트 미노출")
+            self.interact(by_type="XPATH", name="//*[contains(@class, 'text-center') and contains(text(), 'IB')]", click=False, error_msg="공정별 이탈 작업자 확인 조회 시 조회 결과의 업무파트 텍스트 미노출")
+            self.interact(by_type="XPATH", name="//*[contains(@class, 'text-center') and contains(text(), 'picking')]", click=False, error_msg="공정별 이탈 작업자 확인 조회 시 조회 결과의 대분류공정 텍스트 미노출")
+            self.interact(by_type="XPATH", name="//*[contains(@class, 'text-center') and contains(text(), '피킹')]", click=False, error_msg="공정별 이탈 작업자 확인 조회 시 조회 결과의 소분류공정 텍스트 미노출")
             self.interact(by_type="XPATH", name="//*[contains(@class, 'text-center') and contains(text(), ' 체크아웃 ')]", click=False, error_msg="공정별 이탈 작업자 확인 조회 시 조회 결과의 상태 텍스트 미노출")
             self.interact(by_type="XPATH", name="//*[contains(@class, 'v-btn v-btn--contained theme--light v-size--default')]//span[contains(text(), '상세')]", click=False, error_msg="공정별 이탈 작업자 확인 조회 시 조회 결과의 작업자정보상세 텍스트 미노출")
 
@@ -489,27 +493,27 @@ class TaskManagement(testModule):
             # 작업자별 작업이력 확인 클릭
             self.interact(by_type="XPATH", name="//*[contains(text(), '작업자별 작업이력 확인')]", error_msg="작업자별 작업이력 확인 탭 미노출")
 
-            # CC 항목 값 변경 : 송파CC
-            # 센터 항목 값 변경 : 송파냉장1
+            # CC 항목 값 변경 : 김포 CC
+            # 센터 항목 값 변경 : 김포 상온
             # 계약구분 값 변경 : 상용직
-            # 업무파트 변경 : HUB
-            # 대분류 공정 변경 : MOVE
-            # 소분류 공정값 변경 : PLT 이동
+            # 업무파트 변경 : IB
+            # 대분류 공정 변경 : picking
+            # 소분류 공정값 변경 : 피킹
             self.interact(by_type="XPATH", name="(//*[contains(@class, 'v-select__selections')])[1]", error_msg="작업자별 작업이력 확인 조회 중 CC 선택란 미노출")
-            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-list-item__title') and contains(text(), '송파 CC')]", error_msg="작업자별 작업이력 확인 조회 중 송파 CC 미노출")
+            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-list-item__title') and contains(text(), '김포 CC')]", error_msg="작업자별 작업이력 확인 조회 중 김포 CC 미노출")
             self.interact(by_type="XPATH", name="(//*[contains(@class, 'v-select__selections')])[2]", error_msg="작업자별 작업이력 확인 조회 중 센터 선택란 미노출")
-            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-list-item__title') and contains(text(), '송파 냉장1')]", error_msg="작업자별 작업이력 확인 조회 중 송파 냉장1 미노출")
+            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-list-item__title') and contains(text(), '김포 상온')]", error_msg="작업자별 작업이력 확인 조회 중 김포 상온 미노출")
             self.interact(by_type="XPATH", name="(//*[contains(@class, 'v-select__selections')])[3]", error_msg="작업자별 작업이력 확인 조회 중 작업자 정보 선택란 미노출")
             self.interact(by_type="XPATH", name="//*[contains(@class, 'v-list-item__title') and contains(text(), '아이디')]", error_msg="작업자별 작업이력 확인 조회 중 아이디 미노출")
             self.interact(by_type="XPATH", name="(//*[contains(@class, 'v-input__slot white')])[4]//input", click=False, send_keys_msg='junhyunkyung', error_msg="작업자별 작업이력 확인 조회 중 검색어 입력란 미노출")
             self.interact(by_type="XPATH", name="(//*[contains(@class, 'v-select__selections')])[4]", error_msg="작업자별 작업이력 확인 조회 중 계약구분 선택란 미노출")
             self.interact(by_type="XPATH", name="//*[contains(@class, 'v-list-item__title') and contains(text(), '상용직')]", error_msg="작업자별 작업이력 확인 조회 중 상용직 미노출")
             self.interact(by_type="XPATH", name="(//*[contains(@class, 'v-select__selections')])[5]", error_msg="작업자별 작업이력 확인 조회 중 업무파트 선택란 미노출")
-            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-list-item__title') and contains(text(), 'HUB')]", error_msg="작업자별 작업이력 확인 조회 중 HUB 미노출")
+            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-list-item__title') and contains(text(), 'IB')]", error_msg="작업자별 작업이력 확인 조회 중 IB 미노출")
             self.interact(by_type="XPATH", name="(//*[contains(@class, 'v-select__selections')])[6]", error_msg="작업자별 작업이력 확인 조회 중 기준 대분류 공정 선택란 미노출")
-            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-list-item__title') and contains(text(), 'MOVE')]", error_msg="작업자별 작업이력 확인 조회 중 MOVE 미노출")
+            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-list-item__title') and contains(text(), 'picking')]", error_msg="작업자별 작업이력 확인 조회 중 picking 미노출")
             self.interact(by_type="XPATH", name="(//*[contains(@class, 'v-select__selections')])[7]", error_msg="작업자별 작업이력 확인 조회 중 기준 소분류 공정 선택란 미노출")
-            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-list-item__title') and contains(text(), 'PLT 이동')]", error_msg="작업자별 작업이력 확인 조회 중 PLT 이동 미노출")
+            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-list-item__title') and contains(text(), '피킹')]", error_msg="작업자별 작업이력 확인 조회 중 피킹 미노출")
 
             # [검색]버튼 선택
             self.interact(by_type="XPATH", name="//*[contains(@class, 'primary v-btn v-btn--contained theme--light v-size--default')]", error_msg="공정별 이탈 작업자 확인 조회 중 검색 버튼 미노출")
@@ -517,9 +521,9 @@ class TaskManagement(testModule):
             # 작업자아이디 / 계약구분/ 최근출근일자 / 충 출근일수 / 최근 작업공정 / 공정별투입시간(분) 상세 / 작업내역 상세 / 작업자정보 상세 항목 노출
             self.interact(by_type="XPATH", name="//*[contains(@class, 'text-center') and contains(text(), 'junhyunkyung')]", click=False, error_msg="작업자별 작업이력 확인 조회 후 조회 결과의 아이디 미노출")
             self.interact(by_type="XPATH", name="//*[contains(@class, 'text-center') and contains(text(), '상용직')]", click=False, error_msg="작업자별 작업이력 확인 조회 후조회 결과의 계약구분 미노출")
-            self.interact(by_type="XPATH", name="//*[contains(@class, 'text-center') and contains(text(), 'HUB')]", click=False, error_msg="작업자별 작업이력 확인 조회 후 조회 결과의 최근 작업공정의 업무파트 미노출")
-            self.interact(by_type="XPATH", name="//*[contains(@class, 'text-center') and contains(text(), 'MOVE')]", click=False, error_msg="작업자별 작업이력 확인 조회 후 조회 결과의 최근 작업공정의 대분류 공정 미노출")
-            self.interact(by_type="XPATH", name="//*[contains(@class, 'text-center') and contains(text(), 'PLT 이동')]", click=False, error_msg="작업자별 작업이력 확인 조회 후 조회 결과의 최근 작업공정의 소분류 공정 미노출")
+            self.interact(by_type="XPATH", name="//*[contains(@class, 'text-center') and contains(text(), 'IB')]", click=False, error_msg="작업자별 작업이력 확인 조회 후 조회 결과의 최근 작업공정의 업무파트 미노출")
+            self.interact(by_type="XPATH", name="//*[contains(@class, 'text-center') and contains(text(), 'picking')]", click=False, error_msg="작업자별 작업이력 확인 조회 후 조회 결과의 최근 작업공정의 대분류 공정 미노출")
+            self.interact(by_type="XPATH", name="//*[contains(@class, 'text-center') and contains(text(), '피킹')]", click=False, error_msg="작업자별 작업이력 확인 조회 후 조회 결과의 최근 작업공정의 소분류 공정 미노출")
             self.interact(by_type="XPATH", name="(//*[contains(@class, 'v-btn v-btn--contained theme--light v-size--default')]//span[contains(text(), '상세')])[3]", click=False, error_msg="작업자별 작업이력 확인 조회 후 조회 결과의 작업자정보상세 텍스트 미노출")
 
             # Total:n으로 노출 및 작업자 공정별 근무내역 노출
@@ -574,27 +578,27 @@ class TaskManagement(testModule):
 
             # 11. <작업자별 작업이력 확인 작업자상세내역 다운로드>
 
-            # CC 항목 값 변경 : 송파CC
-            # 센터 항목 값 변경 : 송파냉장1
+            # CC 항목 값 변경 : 김포 CC
+            # 센터 항목 값 변경 : 김포 상온
             # 계약구분 값 변경 : 상용직
-            # 업무파트 변경 : HUB
-            # 대분류 공정 변경 : MOVE
-            # 소분류 공정값 변경 : PLT 이동
+            # 업무파트 변경 : IB
+            # 대분류 공정 변경 : picking
+            # 소분류 공정값 변경 : 피킹
             self.interact(by_type="XPATH", name="(//*[contains(@class, 'v-select__selections')])[1]", error_msg="작업자별 작업이력 확인 조회 중 CC 선택란 미노출")
-            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-list-item__title') and contains(text(), '송파 CC')]", error_msg="작업자별 작업이력 확인 조회 중 송파 CC 미노출")
+            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-list-item__title') and contains(text(), '김포 CC')]", error_msg="작업자별 작업이력 확인 조회 중 김포 CC 미노출")
             self.interact(by_type="XPATH", name="(//*[contains(@class, 'v-select__selections')])[2]", error_msg="작업자별 작업이력 확인 조회 중 센터 선택란 미노출")
-            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-list-item__title') and contains(text(), '송파 냉장1')]", error_msg="작업자별 작업이력 확인 조회 중 송파 냉장1 미노출")
+            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-list-item__title') and contains(text(), '김포 상온')]", error_msg="작업자별 작업이력 확인 조회 중 김포 상온 미노출")
             self.interact(by_type="XPATH", name="(//*[contains(@class, 'v-select__selections')])[3]", error_msg="작업자별 작업이력 확인 조회 중 작업자 정보 선택란 미노출")
             self.interact(by_type="XPATH", name="//*[contains(@class, 'v-list-item__title') and contains(text(), '아이디')]", error_msg="작업자별 작업이력 확인 조회 중 아이디 미노출")
             self.interact(by_type="XPATH", name="(//*[contains(@class, 'v-input__slot white')])[4]//input", click=False, send_keys_msg='junhyunkyung', error_msg="작업자별 작업이력 확인 조회 중 검색어 입력란 미노출")
             self.interact(by_type="XPATH", name="(//*[contains(@class, 'v-select__selections')])[4]", error_msg="작업자별 작업이력 확인 조회 중 계약구분 선택란 미노출")
             self.interact(by_type="XPATH", name="//*[contains(@class, 'v-list-item__title') and contains(text(), '상용직')]", error_msg="작업자별 작업이력 확인 조회 중 상용직 미노출")
             self.interact(by_type="XPATH", name="(//*[contains(@class, 'v-select__selections')])[5]", error_msg="작업자별 작업이력 확인 조회 중 업무파트 선택란 미노출")
-            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-list-item__title') and contains(text(), 'HUB')]", error_msg="작업자별 작업이력 확인 조회 중 HUB 미노출")
+            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-list-item__title') and contains(text(), 'IB')]", error_msg="작업자별 작업이력 확인 조회 중 IB 미노출")
             self.interact(by_type="XPATH", name="(//*[contains(@class, 'v-select__selections')])[6]", error_msg="작업자별 작업이력 확인 조회 중 기준 대분류 공정 선택란 미노출")
-            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-list-item__title') and contains(text(), 'MOVE')]", error_msg="작업자별 작업이력 확인 조회 중 MOVE 미노출")
+            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-list-item__title') and contains(text(), 'picking')]", error_msg="작업자별 작업이력 확인 조회 중 picking 미노출")
             self.interact(by_type="XPATH", name="(//*[contains(@class, 'v-select__selections')])[7]", error_msg="작업자별 작업이력 확인 조회 중 기준 소분류 공정 선택란 미노출")
-            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-list-item__title') and contains(text(), 'PLT 이동')]", error_msg="작업자별 작업이력 확인 조회 중 PLT 이동 미노출")
+            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-list-item__title') and contains(text(), '피킹')]", error_msg="작업자별 작업이력 확인 조회 중 피킹 미노출")
 
             # [검색]버튼 선택
             self.interact(by_type="XPATH", name="//*[contains(@class, 'primary v-btn v-btn--contained theme--light v-size--default')]", error_msg="공정별 이탈 작업자 확인 조회 중 검색 버튼 미노출")
@@ -622,17 +626,17 @@ class TaskManagement(testModule):
             # 팀명 값 변경
             # 근무 Shift
             self.interact(by_type="XPATH", name="(//*[contains(@class, 'v-select__selections')])[1]", error_msg="연장근무 희망 관리 조회 중 CC 선택란 미노출")
-            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-list-item__title') and contains(text(), '송파 CC')]", error_msg="연장근무 희망 관리 확인 조회 중 송파 CC 미노출")
+            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-list-item__title') and contains(text(), '김포 CC')]", error_msg="연장근무 희망 관리 확인 조회 중 김포 CC 미노출")
             self.interact(by_type="XPATH", name="(//*[contains(@class, 'v-select__selections')])[2]", error_msg="연장근무 희망 관리 확인 조회 중 센터 선택란 미노출")
-            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-list-item__title') and contains(text(), '송파 냉장1')]", error_msg="연장근무 희망 관리 조회 중 송파 냉장1 미노출")
+            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-list-item__title') and contains(text(), '김포 상온')]", error_msg="연장근무 희망 관리 조회 중 김포 상온 미노출")
             self.interact(by_type="XPATH", name="(//*[contains(@class, 'v-select__selections')])[3]", error_msg="연장근무 희망 관리 조회 중 계약구분 선택란 미노출")
             self.interact(by_type="XPATH", name="//*[contains(@class, 'v-list-item__title') and contains(text(), '상용직')]", error_msg="연장근무 희망 관리 조회 중 상용직 미노출")
             self.interact(by_type="XPATH", name="(//*[contains(@class, 'v-select__selections')])[4]", error_msg="연장근무 희망 관리 조회 중 출근업무파트 선택란 미노출")
-            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-list-item__title') and contains(text(), 'HUB')]", error_msg="연장근무 희망 관리 조회 중 HUB 미노출")
+            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-list-item__title') and contains(text(), 'IB')]", error_msg="연장근무 희망 관리 조회 중 IB 미노출")
             self.interact(by_type="XPATH", name="(//*[contains(@class, 'v-select__selections')])[5]", error_msg="연장근무 희망 관리 조회 중 팀명 선택란 미노출")
-            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-list-item__title') and contains(text(), '송냉 HUB')]", error_msg="연장근무 희망 관리 조회 중 송냉 HUB 미노출")
+            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-list-item__title') and contains(text(), '김포 IB')]", error_msg="연장근무 희망 관리 조회 중 김포 IB 미노출")
             self.interact(by_type="XPATH", name="(//*[contains(@class, 'v-select__selections')])[6]", error_msg="연장근무 희망 관리 조회 중 근무 Shift 선택란 미노출")
-            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-list-item__title') and contains(text(), '00:25 ~ 05:00')]", error_msg="연장근무 희망 관리 조회 중 00:25 ~ 05:00 미노출")
+            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-list-item__title') and contains(text(), '00:00 ~ 01:50')]", error_msg="연장근무 희망 관리 조회 중 00:00 ~ 01:50 미노출")
 
             # [검색]버튼 선택
             self.interact(by_type="XPATH", name="//*[contains(@class, 'primary v-btn v-btn--contained theme--light v-size--default')]", error_msg="연장근무 희망 관리 조회 중 검색 버튼 미노출")
@@ -764,26 +768,25 @@ class TaskManagement(testModule):
 
             # 14. <연장근무 희망 관리 작업자상세내역 다운로드>
 
-            # CC 항목 값 변경 : 송파CC
-            # 센터 항목 값 변경 : 송파냉장1
+            # CC 항목 값 변경 : 김포CC
+            # 센터 항목 값 변경 : 김포 상온
             # 계약구분 값 변경 : 상용직
-            # 업무파트 변경 : HUB
-            # 팀명 변경 : 송냉 HUB
-            # 근무 Shift 변경 : 00:25 ~ 05:00
-            # 대분류 공정 변경 : MOVE
-            # 소분류 공정값 변경 : PLT 이동
+            # 업무파트 변경 : IB
+            # 팀명 변경 : 김포 IB
+            # 근무 Shift 변경 : 00:00 ~ 01:50
+            # 대분류 공정 변경 : picking
             self.interact(by_type="XPATH", name="(//*[contains(@class, 'v-select__selections')])[1]", error_msg="연장근무 희망 관리 조회 중 CC 선택란 미노출")
-            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-list-item__title') and contains(text(), '송파 CC')]", error_msg="연장근무 희망 관리 조회 중 송파 CC 미노출")
+            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-list-item__title') and contains(text(), '김포 CC')]", error_msg="연장근무 희망 관리 조회 중 김포 CC 미노출")
             self.interact(by_type="XPATH", name="(//*[contains(@class, 'v-select__selections')])[2]", error_msg="연장근무 희망 관리 조회 중 센터 선택란 미노출")
-            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-list-item__title') and contains(text(), '송파 냉장1')]", error_msg="연장근무 희망 관리 조회 중 송파 냉장1 미노출")
+            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-list-item__title') and contains(text(), '김포 상온')]", error_msg="연장근무 희망 관리 조회 중 김포 상온 미노출")
             self.interact(by_type="XPATH", name="(//*[contains(@class, 'v-select__selections')])[3]", error_msg="연장근무 희망 관리 조회 중 계약구분 선택란 미노출")
             self.interact(by_type="XPATH", name="//*[contains(@class, 'v-list-item__title') and contains(text(), '상용직')]", error_msg="연장근무 희망 관리 조회 중 상용직 미노출")
             self.interact(by_type="XPATH", name="(//*[contains(@class, 'v-select__selections')])[4]", error_msg="연장근무 희망 관리 조회 중 업무파트 선택란 미노출")
-            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-list-item__title') and contains(text(), 'HUB')]", error_msg="연장근무 희망 관리 조회 중 HUB 미노출")
+            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-list-item__title') and contains(text(), 'IB')]", error_msg="연장근무 희망 관리 조회 중 IB 미노출")
             self.interact(by_type="XPATH", name="(//*[contains(@class, 'v-select__selections')])[5]", error_msg="연장근무 희망 관리 조회 중 팀명 선택란 미노출")
-            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-list-item__title') and contains(text(), '송냉 HUB')]", error_msg="연장근무 희망 관리 조회 중 송냉 HUB 미노출")
+            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-list-item__title') and contains(text(), '김포 IB')]", error_msg="연장근무 희망 관리 조회 중 김포 IB 미노출")
             self.interact(by_type="XPATH", name="(//*[contains(@class, 'v-select__selections')])[6]", error_msg="연장근무 희망 관리 조회 중 기준 근무Shift 선택란 미노출")
-            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-list-item__title') and contains(text(), '00:25 ~ 05:00')]", error_msg="연장근무 희망 관리 조회 중 00:25 ~ 05:00 미노출")
+            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-list-item__title') and contains(text(), '00:00 ~ 01:50')]", error_msg="연장근무 희망 관리 조회 중 00:00 ~ 01:50 미노출")
 
             # [검색]버튼 선택
             self.interact(by_type="XPATH", name="//*[contains(@class, 'primary v-btn v-btn--contained theme--light v-size--default')]", error_msg="연장근무 희망 관리 탭 검색 버튼 미노출")
@@ -813,18 +816,18 @@ class TaskManagement(testModule):
             # 센터별 출근 작업자 확인 클릭
             self.interact(by_type="XPATH", name="//*[contains(text(), '센터별 출근 작업자 확인')]", error_msg="센터별 출근 작업자 확인 탭 미노출")
 
-            # CC 항목 값 변경 : 송파CC
-            # 센터 항목 값 변경 : 송파 냉장1
+            # CC 항목 값 변경 : 김포CC
+            # 센터 항목 값 변경 : 김포 상온
             # 계약구분 값 변경 : 상용직
-            # 출근업무파트 변경 : HUB
+            # 출근업무파트 변경 : IB
             self.interact(by_type="XPATH", name="(//*[contains(@class, 'v-select__selections')])[1]", error_msg="센터별 출근 작업자 확인 탭 CC 선택란 미노출")
-            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-list-item__title') and contains(text(), '송파 CC')]", error_msg="센터별 출근 작업자 확인 탭 CC 항목 송파 CC 미노출")
+            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-list-item__title') and contains(text(), '김포 CC')]", error_msg="센터별 출근 작업자 확인 탭 CC 항목 김포 CC 미노출")
             self.interact(by_type="XPATH", name="(//*[contains(@class, 'v-select__selections')])[2]", error_msg="센터별 출근 작업자 확인 탭 센터 선택란 미노출")
-            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-list-item__title') and contains(text(), '송파 냉장1')]", error_msg="센터별 출근 작업자 확인 탭 센터 항목 송파 냉장1 미노출")
+            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-list-item__title') and contains(text(), '김포 상온')]", error_msg="센터별 출근 작업자 확인 탭 센터 항목 김포 상온 미노출")
             self.interact(by_type="XPATH", name="(//*[contains(@class, 'v-select__selections')])[3]", error_msg="센터별 출근 작업자 확인 탭 계약구분 선택란 미노출")
             self.interact(by_type="XPATH", name="//*[contains(@class, 'v-list-item__title') and contains(text(), '상용직')]", error_msg="센터별 출근 작업자 확인 탭 계약구분 항목 상용직 미노출")
             self.interact(by_type="XPATH", name="(//*[contains(@class, 'v-select__selections')])[4]", error_msg="센터별 출근 작업자 확인 탭 출근업무파트 선택란 미노출")
-            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-list-item__title') and contains(text(), 'HUB')]", error_msg="센터별 출근 작업자 확인 탭 출근업무파트 항목 HUB 미노출")
+            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-list-item__title') and contains(text(), 'IB')]", error_msg="센터별 출근 작업자 확인 탭 출근업무파트 항목 IB 미노출")
 
             # [검색]버튼 선택
             self.interact(by_type="XPATH", name="//*[contains(@class, 'primary v-btn v-btn--contained theme--light v-size--default')]", error_msg="센터별 출근 작업자 확인 탭 검색 버튼 미노출")
@@ -910,18 +913,18 @@ class TaskManagement(testModule):
             # 센터별 퇴근 작업자 확인 클릭
             self.interact(by_type="XPATH", name="//*[contains(text(), '센터별 퇴근 작업자 확인')]", error_msg="센터별 퇴근 작업자 확인 탭 미노출")
 
-            # CC 항목 값 변경 : 송파CC
-            # 센터 항목 값 변경 : 송파냉장1
+            # CC 항목 값 변경 : 김포 CC
+            # 센터 항목 값 변경 : 김포 상온
             # 계약구분 값 변경 : 상용직
-            # 출근업무파트 변경 : HUB
+            # 출근업무파트 변경 : IB
             self.interact(by_type="XPATH", name="(//*[contains(@class, 'v-select__selections')])[1]", error_msg="센터별 퇴근 작업자 확인 탭 CC 선택란 미노출")
-            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-list-item__title') and contains(text(), '송파 CC')]", error_msg="센터별 퇴근 작업자 확인 탭 CC 항목 송파 CC 미노출")
+            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-list-item__title') and contains(text(), '김포 CC')]", error_msg="센터별 퇴근 작업자 확인 탭 CC 항목 김포 CC 미노출")
             self.interact(by_type="XPATH", name="(//*[contains(@class, 'v-select__selections')])[2]", error_msg="센터별 퇴근 작업자 확인 탭 센터 선택란 미노출")
-            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-list-item__title') and contains(text(), '송파 냉장1')]", error_msg="센터별 퇴근 작업자 확인 탭 센터 항목 송파 냉장1 미노출")
+            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-list-item__title') and contains(text(), '김포 상온')]", error_msg="센터별 퇴근 작업자 확인 탭 센터 항목 김포 상온 미노출")
             self.interact(by_type="XPATH", name="(//*[contains(@class, 'v-select__selections')])[3]", error_msg="센터별 퇴근 작업자 확인 탭 계약구분 선택란 미노출")
             self.interact(by_type="XPATH", name="//*[contains(@class, 'v-list-item__title') and contains(text(), '상용직')]", error_msg="센터별 퇴근 작업자 확인 탭 계약구분 항목 상용직 미노출")
             self.interact(by_type="XPATH", name="(//*[contains(@class, 'v-select__selections')])[4]", error_msg="센터별 퇴근 작업자 확인 탭 출근업무파트 선택란 미노출")
-            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-list-item__title') and contains(text(), 'HUB')]", error_msg="센터별 퇴근 작업자 확인 탭 출근업무파트 항목 HUB 미노출")
+            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-list-item__title') and contains(text(), 'IB')]", error_msg="센터별 퇴근 작업자 확인 탭 출근업무파트 항목 IB 미노출")
 
             # [검색]버튼 선택
             self.interact(by_type="XPATH", name="//*[contains(@class, 'primary v-btn v-btn--contained theme--light v-size--default')]", error_msg="센터별 퇴근 작업자 확인 탭 검색 버튼 미노출")
@@ -1002,18 +1005,18 @@ class TaskManagement(testModule):
 
             # 20. <센터별 퇴근 작업자 작업상세내역 다운로드>
 
-            # CC 항목 값 변경 : 송파CC
-            # 센터 항목 값 변경 : 송파냉장1
+            # CC 항목 값 변경 : 김포 CC
+            # 센터 항목 값 변경 : 김포 상온
             # 계약구분 값 변경 : 상용직
-            # 업무파트 변경 : HUB
+            # 업무파트 변경 : IB
             self.interact(by_type="XPATH", name="(//*[contains(@class, 'v-select__selections')])[1]", error_msg="센터별 퇴근 작업자 확인 탭 CC 선택란 미노출")
-            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-list-item__title') and contains(text(), '송파 CC')]", error_msg="센터별 퇴근 작업자 확인 탭 CC 항목 송파 CC 미노출")
+            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-list-item__title') and contains(text(), '김포 CC')]", error_msg="센터별 퇴근 작업자 확인 탭 CC 항목 김포 CC 미노출")
             self.interact(by_type="XPATH", name="(//*[contains(@class, 'v-select__selections')])[2]", error_msg="센터별 퇴근 작업자 확인 탭 센터 선택란 미노출")
-            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-list-item__title') and contains(text(), '송파 냉장1')]", error_msg="센터별 퇴근 작업자 확인 탭 센터 항목 송파 냉장1 미노출")
+            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-list-item__title') and contains(text(), '김포 상온')]", error_msg="센터별 퇴근 작업자 확인 탭 센터 항목 김포 상온 미노출")
             self.interact(by_type="XPATH", name="(//*[contains(@class, 'v-select__selections')])[3]", error_msg="센터별 퇴근 작업자 확인 탭 계약구분 선택란 미노출")
             self.interact(by_type="XPATH", name="//*[contains(@class, 'v-list-item__title') and contains(text(), '상용직')]", error_msg="센터별 퇴근 작업자 확인 탭 계약구분 항목 상용직 미노출")
             self.interact(by_type="XPATH", name="(//*[contains(@class, 'v-select__selections')])[4]", error_msg="센터별 퇴근 작업자 확인 탭 출근업무파트 선택란 미노출")
-            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-list-item__title') and contains(text(), 'HUB')]", error_msg="센터별 퇴근 작업자 확인 탭 출근업무파트 항목 HUB 미노출")
+            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-list-item__title') and contains(text(), 'IB')]", error_msg="센터별 퇴근 작업자 확인 탭 출근업무파트 항목 IB 미노출")
 
             # [검색]버튼 선택
             self.interact(by_type="XPATH", name="//*[contains(@class, 'primary v-btn v-btn--contained theme--light v-size--default')]", error_msg="센터별 퇴근 작업자 확인 탭 검색 버튼 미노출")
@@ -1035,8 +1038,6 @@ class TaskManagement(testModule):
                 if file_name.endswith(".xlsx"):
                     file_path = os.path.join(folder_path, file_name)
                     os.remove(file_path)
-
-
 
             # LMS 어드민 탭 닫기
             self.driver.close()

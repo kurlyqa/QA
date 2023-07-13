@@ -108,7 +108,7 @@ class OrderManagement(testModule):
             self.interact(by_type="XPATH", name="//*[contains(text(), '발주그룹 & 발주서 등록')]", error_msg="발주관리 탭 발주등록 페이지에서 발주그룹 & 발주서 등록 버튼 미노출")
 
             # 확인팝업 - [확인] 버튼 선택
-            self.interact(by_type="XPATH", name="//*[contains(@class, 'btn btn-primary') and contains(text(), '확인')]", error_msg="발주관리 탭 발주등록 페이지에서 발주그룹 & 발주서 등록 버튼 클릭 후 확인팝업 미노출")
+            self.interact(by_type="XPATH", name="//*[contains(@class, 'btn btn-primary') and contains(text(), '확인')]", wait_sec=30, error_msg="발주관리 탭 발주등록 페이지에서 발주그룹 & 발주서 등록 버튼 클릭 후 확인팝업 미노출")
 
             # 안내팝업 - [확인] 버튼 선택
             self.interact(by_type="XPATH", name="//*[contains(@class, 'btn btn-primary') and contains(text(), '확인')]", error_msg="발주관리 탭 발주등록 페이지에서 발주그룹 & 발주서 등록 버튼 클릭 후 안내팝업 미노출")
@@ -395,7 +395,7 @@ class OrderManagement(testModule):
             self.interact(by_type="XPATH", name="//*[contains(@class, 'form-control')]", click=False, send_keys_msg=new_order_code, error_msg="발주코드 입력란 미노출")
 
             # [검색] 버튼 선택
-            self.interact(by_type="XPATH", name="//*[contains(@class, 'btn btn-primary') and contains(text(), '검색')]", error_msg="발주내역서 탭에서 검색 버튼 미노출")
+            self.interact(by_type="XPATH", name="//*[contains(@class, 'btn btn-primary') and contains(text(), '검색')]", wait_sec=30, error_msg="발주내역서 탭에서 검색 버튼 미노출")
 
             # 공급사가 발주확정한 건 발주코드 동일하게 노출
             self.interact(by_type="XPATH", name=f"//*[contains(text(), '{new_order_code}')]", click=False, error_msg="발주내역서 탭에서 검색 후 공급사가 발주확정한 발주코드 미노출")
