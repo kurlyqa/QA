@@ -23,9 +23,8 @@ class TaskManagement(testModule):
 
     def test_02_작업관리(self):
         try:
-            # 파일 삭제 시 주소 ( 각 PC마다 변경해야 함 )
-            folder_path = "/Users/122d6424/Git/Kurly/Web/LMS"
-            # folder_path = "/Users/122d6424/Downloads"
+            # 파일 삭제 시 주소(환경변수 설정 필요!)
+            folder_path = os.environ.get('FOLDER_PATH')
 
             # 1. <공정별 투입인원 현황 조회>
 
@@ -123,6 +122,7 @@ class TaskManagement(testModule):
 
             # 아이디(lmstest01) 입력
             self.interact(by_type="XPATH", name="//input[@id='input-16' and @type='text' and @required='required']", click=False, send_keys_msg='lmstest01', error_msg="관리자 로그인중 아이디 입력란 미노출")
+
             # 비밀번호(q1w2e3r4!) 입력
             self.interact(by_type="XPATH", name="//input[@id='input-19' and @type='password' and @required='required']", click=False, send_keys_msg='q1w2e3r4!', error_msg="관리자 로그인중 비밀번호 입력란 미노출")
 
