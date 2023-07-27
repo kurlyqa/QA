@@ -47,14 +47,14 @@ class MasterManagement(testModule):
             # 마스터관리 탭
             self.interact(by_type="XPATH", name="//*[contains(@class, 'v-btn__content') and contains(text(), '마스터관리')]", error_msg="관리자 로그인 후 마스터관리 탭 미노출")
 
-            # CC 항목 값 변경 : 송파CC
-            # 센터 항목 값 변경 : 송파냉장1
+            # CC 항목 값 변경 : 김포CC
+            # 센터 항목 값 변경 : 김포 상온
             # 계약구분 항목 값 변경 : 상용직
             # 업무파트 항목 값 변경 : IB
             self.interact(by_type="XPATH", name="(//*[contains(@class, 'v-select__selections')])[1]", error_msg="센터별 근무시간 관리 조회 탭 CC 선택란 미노출")
-            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-list-item__title') and contains(text(), '송파 CC')]", error_msg="센터별 근무시간 관리 조회 탭 송파 CC 미노출")
+            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-list-item__title') and contains(text(), '김포 CC')]", error_msg="센터별 근무시간 관리 조회 탭 김포 CC 미노출")
             self.interact(by_type="XPATH", name="(//*[contains(@class, 'v-select__selections')])[2]", error_msg="센터별 근무시간 관리 조회 탭 센터 선택란 미노출")
-            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-list-item__title') and contains(text(), '송파 냉장1')]", error_msg="센터별 근무시간 관리 조회 탭 송파 냉장1 미노출")
+            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-list-item__title') and contains(text(), '김포 상온')]", error_msg="센터별 근무시간 관리 조회 탭 김포 상온 미노출")
             self.interact(by_type="XPATH", name="(//*[contains(@class, 'v-select__selections')])[3]", error_msg="센터별 근무시간 관리 조회 탭 계약구분 선택란 미노출")
             self.interact(by_type="XPATH", name="//*[contains(@class, 'v-list-item__title') and contains(text(), '상용직')]", error_msg="센터별 근무시간 관리 조회 탭 상용직 미노출")
             self.interact(by_type="XPATH", name="(//*[contains(@class, 'v-select__selections')])[4]", error_msg="센터별 근무시간 관리 조회 탭 업무파트 선택란 미노출")
@@ -99,13 +99,13 @@ class MasterManagement(testModule):
             # 작업공정 관리 탭
             self.interact(by_type="XPATH", name="//*[contains(text(), '작업공정 관리')]", error_msg="작업공정 관리 탭 미노출")
 
-            # CC 항목 값 변경 : 송파CC
-            # 센터 항목 값 변경 : 송파냉장1
+            # CC 항목 값 변경 : 김포CC
+            # 센터 항목 값 변경 : 김포 상온
             # 업무파트 항목 값 변경 : IB
             self.interact(by_type="XPATH", name="(//*[contains(@class, 'v-select__selections')])[1]", error_msg="작업공정 관리 탭 CC 선택란 미노출")
-            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-list-item__title') and contains(text(), '송파 CC')]", error_msg="작업공정 관리 탭 송파 CC 미노출")
+            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-list-item__title') and contains(text(), '김포 CC')]", error_msg="작업공정 관리 탭 김포 CC 미노출")
             self.interact(by_type="XPATH", name="(//*[contains(@class, 'v-select__selections')])[2]", error_msg="작업공정 관리 탭 센터 선택란 미노출")
-            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-list-item__title') and contains(text(), '송파 냉장1')]", error_msg="작업공정 관리 탭 송파 냉장1 미노출")
+            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-list-item__title') and contains(text(), '김포 상온')]", error_msg="작업공정 관리 탭 김포 상온 미노출")
             self.interact(by_type="XPATH", name="(//*[contains(@class, 'v-select__selections')])[3]", error_msg="작업공정 관리 탭 계약구분 선택란 미노출")
             self.interact(by_type="XPATH", name="//*[contains(@class, 'v-list-item__title') and contains(text(), 'IB')]", error_msg="작업공정 관리 탭 IB 미노출")
 

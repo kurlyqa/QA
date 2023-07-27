@@ -33,10 +33,10 @@ class AccountManagement(testModule):
             self.driver.maximize_window()
 
             # 아이디(lmstest01) 입력
-            self.interact(by_type="XPATH", name="//input[@id='input-16' and @type='text' and @required='required']", click=False, send_keys_msg='lmstest01', error_msg="관리자 로그인중 아이디 입력란 미노출")
+            self.interact(by_type="XPATH", name="(//*[contains(@class,'v-text-field__slot')]//input)[1]", click=False, send_keys_msg='lmstest01', error_msg="관리자 로그인중 아이디 입력란 미노출")
 
             # 비밀번호(q1w2e3r4!) 입력
-            self.interact(by_type="XPATH", name="//input[@id='input-19' and @type='password' and @required='required']", click=False, send_keys_msg='q1w2e3r4!', error_msg="관리자 로그인중 비밀번호 입력란 미노출")
+            self.interact(by_type="XPATH", name="(//*[contains(@class,'v-text-field__slot')]//input)[2]", click=False, send_keys_msg='q1w2e3r4!', error_msg="관리자 로그인중 비밀번호 입력란 미노출")
 
             # 로그인
             self.interact(by_type="XPATH", name="//*[contains(@class, 'v-btn v-btn--block v-btn--contained theme--light v-size--large primary')]", error_msg="관리자 로그인중 로그인 버튼 미노출")
@@ -50,15 +50,15 @@ class AccountManagement(testModule):
             # 관리자 계정 관리 탭
             self.interact(by_type="XPATH", name="//*[contains(text(), '관리자 계정 관리')]", error_msg="관리자 계정 관리 탭 미노출")
 
-            # CC 항목 값 변경 : 송파 CC
-            # 센터 항목 값 변경 : 송파 냉장1
+            # CC 항목 값 변경 : 김포 CC
+            # 센터 항목 값 변경 : 김포 상온
             # 부서 항목 값 변경 : FCS
             # 권한 항목 값 변경 : 마스터
             # 계정상태 항목 값 변경 : 정상
             self.interact(by_type="XPATH", name="(//*[contains(@class, 'v-select__selections')])[1]", error_msg="관리자 계정 관리 탭 CC 선택란 미노출")
-            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-list-item__title') and contains(text(), '송파 CC')]", error_msg="관리자 계정 관리 탭 송파 CC 미노출")
+            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-list-item__title') and contains(text(), '김포 CC')]", error_msg="관리자 계정 관리 탭 김포 CC 미노출")
             self.interact(by_type="XPATH", name="(//*[contains(@class, 'v-select__selections')])[2]", error_msg="관리자 계정 관리 탭 센터 선택란 미노출")
-            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-list-item__title') and contains(text(), '송파 냉장1')]", error_msg="관리자 계정 관리 탭 송파 냉장1 미노출")
+            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-list-item__title') and contains(text(), '김포 상온')]", error_msg="관리자 계정 관리 탭 김포 상온 미노출")
             self.interact(by_type="XPATH", name="(//*[contains(@class, 'v-select__selections')])[3]", error_msg="관리자 계정 관리 탭 부서 선택란 미노출")
             self.interact(by_type="XPATH", name="//*[contains(@class, 'v-list-item__title') and contains(text(), 'FCS')]", error_msg="관리자 계정 관리 탭 FCS 미노출")
             self.interact(by_type="XPATH", name="(//*[contains(@class, 'v-select__selections')])[4]", error_msg="관리자 계정 관리 탭 권한 선택란 미노출")

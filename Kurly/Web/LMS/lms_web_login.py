@@ -27,10 +27,10 @@ class LMSWebLogin(testModule):
 
             # 로그인 페이지 진입
             # 아이디(lmstest01) 입력
-            self.interact(by_type="XPATH", name="(//*[contains(@class,'v-text-field__slot')])[1]//input", click=False, send_keys_msg='lmstest01', error_msg="아이디 입력란 미노출")
+            self.interact(by_type="XPATH", name="(//*[contains(@class,'v-text-field__slot')]//input)[1]", click=False, send_keys_msg='lmstest01', error_msg="아이디 입력란 미노출")
 
             # 비밀번호(q1w2e3r4!) 입력
-            self.interact(by_type="XPATH", name="(//*[contains(@class,'v-text-field__slot')])[2]//input", click=False, send_keys_msg='q1w2e3r4!', error_msg="비밀번호 입력란 미노출")
+            self.interact(by_type="XPATH", name="(//*[contains(@class,'v-text-field__slot')]//input)[2]", click=False, send_keys_msg='q1w2e3r4!', error_msg="비밀번호 입력란 미노출")
 
             # 로그인
             self.interact(by_type="XPATH", name="//*[contains(@class, 'v-btn v-btn--block v-btn--contained theme--light v-size--large primary')]//*[contains(text(), '로그인')]", error_msg="로그인 버튼 미노출")

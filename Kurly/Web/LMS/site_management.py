@@ -36,10 +36,10 @@ class SiteManagement(testModule):
 
             # LMS 모바일 로그인
             # 아이디 입력
-            self.interact(by_type="XPATH", name="(//*[contains(@class,'v-text-field__slot')])[1]//input", click=False, send_keys_msg='junhyunkyung', error_msg="아이디 입력란 미노출")
+            self.interact(by_type="XPATH", name="(//*[contains(@class,'v-text-field__slot')]//input)[1]", click=False, send_keys_msg='junhyunkyung', error_msg="아이디 입력란 미노출")
 
             # 비밀번호 입력
-            self.interact(by_type="XPATH", name="(//*[contains(@class,'v-text-field__slot')])[2]//input", click=False, send_keys_msg='kurly12!@', error_msg="비밀번호 입력란 미노출")
+            self.interact(by_type="XPATH", name="(//*[contains(@class,'v-text-field__slot')]//input)[2]", click=False, send_keys_msg='kurly12!@', error_msg="비밀번호 입력란 미노출")
 
             # 로그인
             self.interact(by_type="XPATH", name="//*[contains(@class, 'v-btn v-btn--block v-btn--contained theme--light v-size--large')]", error_msg="로그인 버튼 미노출")
@@ -68,25 +68,25 @@ class SiteManagement(testModule):
             except:
                 pass
 
-            # 송파CC
-            # 송파 냉장1
+            # 김포CC
+            # 김포 상온
             self.interact(by_type="XPATH", name="(//*[contains(@class, 'v-select__selections')])[1]", error_msg="CC 선택란 미노출")
-            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-list-item__title') and contains(text(), '송파')]", error_msg="송파 미노출")
+            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-list-item__title') and contains(text(), '김포')]", error_msg="김포 미노출")
             self.interact(by_type="XPATH", name="(//*[contains(@class, 'v-select__selections')])[2]", error_msg="센터 선택란 미노출")
-            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-list-item__title') and contains(text(), '송파 냉장1')]", error_msg="송파 냉장1 미노출")
+            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-list-item__title') and contains(text(), '김포 상온')]", error_msg="김포 상온 미노출")
 
             # 다음
             self.interact(by_type="XPATH", name="//*[contains(@class, 'v-btn v-btn--contained theme--light v-size--default primary')]", error_msg="출근 프로세스 진행중 다음 버튼 미노출")
 
-            # 업무파트=HUB
-            # 팀명=송냉 HUB
-            # 근무 Shift=00:25 ~ 05:00
+            # 업무파트=IB
+            # 팀명=김포상온 A
+            # 근무 Shift=00:00 ~ 01:50
             self.interact(by_type="XPATH", name="(//*[contains(@class, 'v-select__selections')])[1]", error_msg="업무파트 선택란 미노출")
-            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-list-item__title') and contains(text(), 'HUB')]", error_msg="HUB")
+            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-list-item__title') and contains(text(), 'IB')]", error_msg="IB")
             self.interact(by_type="XPATH", name="(//*[contains(@class, 'v-select__selections')])[2]", error_msg="팀명 선택란 미노출")
-            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-list-item__title') and contains(text(), '송냉 HUB')]", error_msg="송냉 HUB 미노출")
+            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-list-item__title') and contains(text(), '김포상온 A')]", error_msg="김포상온 A 미노출")
             self.interact(by_type="XPATH", name="(//*[contains(@class, 'v-select__selections')])[3]", error_msg="근무 Shift 선택란 미노출")
-            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-list-item__title') and contains(text(), '00:25 ~ 05:00')]", error_msg="00:25 ~ 05:00 미노출")
+            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-list-item__title') and contains(text(), '00:00 ~ 01:50')]", error_msg="00:00 ~ 01:50 미노출")
 
             # 다음
             self.interact(by_type="XPATH", name="//*[contains(@class, 'v-btn v-btn--contained theme--light v-size--default primary')]", error_msg="출근 프로세스 진행중 다음 버튼 미노출")
@@ -109,10 +109,10 @@ class SiteManagement(testModule):
             self.driver.get(url)
 
             # 아이디(lmstest01) 입력
-            self.interact(by_type="XPATH", name="(//*[contains(@class,'v-text-field__slot')])[1]//input", click=False, send_keys_msg='lmstest01', error_msg="관리자 로그인중 아이디 입력란 미노출")
+            self.interact(by_type="XPATH", name="(//*[contains(@class,'v-text-field__slot')]//input)[1]", click=False, send_keys_msg='lmstest01', error_msg="관리자 로그인중 아이디 입력란 미노출")
 
             # 비밀번호(q1w2e3r4!) 입력
-            self.interact(by_type="XPATH", name="(//*[contains(@class,'v-text-field__slot')])[2]//input", click=False, send_keys_msg='q1w2e3r4!', error_msg="관리자 로그인중 비밀번호 입력란 미노출")
+            self.interact(by_type="XPATH", name="(//*[contains(@class,'v-text-field__slot')]//input)[2]", click=False, send_keys_msg='q1w2e3r4!', error_msg="관리자 로그인중 비밀번호 입력란 미노출")
 
             # 로그인
             self.interact(by_type="XPATH", name="//*[contains(@class, 'v-btn v-btn--block v-btn--contained theme--light v-size--large')]", error_msg="관리자 로그인중 로그인 버튼 미노출")
@@ -123,21 +123,21 @@ class SiteManagement(testModule):
             # 현장관리 탭
             self.interact(by_type="XPATH", name="//*[contains(@class, 'v-btn__content') and contains(text(), '현장관리')]", error_msg="작업자 체크인 중 현장관리 탭 미노출")
 
-            # CC 항목 값 변경 : 송파CC
-            # 센터 항목 값 변경 : 송파냉장1
-            # 업무파트 변경 : HUB
-            # 대분류 공정 변경 : MOVE
-            # 소분류 작업공정 : PLT 이동
+            # CC 항목 값 변경 : 김포CC
+            # 센터 항목 값 변경 : 김포 상온
+            # 업무파트 변경 : IB
+            # 대분류 공정 변경 : picking
+            # 소분류 작업공정 : 피킹
             self.interact(by_type="XPATH", name="(//*[contains(@class, 'v-select__selections')])[1]", error_msg="공정별 체크인/체크아웃 중 CC 선택란 미노출")
-            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-list-item__title') and contains(text(), '송파 CC')]", error_msg="공정별 체크인/체크아웃 중 송파 CC 미노출")
+            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-list-item__title') and contains(text(), '김포 CC')]", error_msg="공정별 체크인/체크아웃 중 김포 CC 미노출")
             self.interact(by_type="XPATH", name="(//*[contains(@class, 'v-select__selections')])[2]", error_msg="공정별 체크인/체크아웃 중 센터 선택란 미노출")
-            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-list-item__title') and contains(text(), '송파 냉장1')]", error_msg="공정별 체크인/체크아웃 중 송파 냉장1 미노출")
+            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-list-item__title') and contains(text(), '김포 상온')]", error_msg="공정별 체크인/체크아웃 중 김포 상온 미노출")
             self.interact(by_type="XPATH", name="(//*[contains(@class, 'v-select__selections')])[3]", error_msg="공정별 체크인/체크아웃 중 업무파트 선택란 미노출")
-            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-list-item__title') and contains(text(), 'HUB')]", error_msg="공정별 체크인/체크아웃 중 HUB 미노출")
+            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-list-item__title') and contains(text(), 'IB')]", error_msg="공정별 체크인/체크아웃 중 IB 미노출")
             self.interact(by_type="XPATH", name="(//*[contains(@class, 'v-select__selections')])[4]", error_msg="공정별 체크인/체크아웃 중 대분류 작업공정 선택란 미노출")
-            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-list-item__title') and contains(text(), 'MOVE')]", error_msg="공정별 체크인/체크아웃 중 MOVE 미노출")
+            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-list-item__title') and contains(text(), 'picking')]", error_msg="공정별 체크인/체크아웃 중 picking 미노출")
             self.interact(by_type="XPATH", name="(//*[contains(@class, 'v-select__selections')])[5]", error_msg="공정별 체크인/체크아웃 중 소분류 작업공정 선택란 미노출")
-            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-list-item__title') and contains(text(), 'PLT 이동')]", error_msg="공정별 체크인/체크아웃 중 PLT 이동 미노출")
+            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-list-item__title') and contains(text(), '피킹')]", error_msg="공정별 체크인/체크아웃 중 피킹 미노출")
 
             # QR코드 입력 (ID) : junhyunkyung
             self.interact(by_type="XPATH", name="(//*[contains(@class, 'v-input__slot white')])[6]//input", click=False, send_keys_msg='junhyunkyung', error_msg="작업자 체크인 중 QR코드 입력란 미노출")
@@ -146,7 +146,7 @@ class SiteManagement(testModule):
             self.interact(by_type="XPATH", name="//*[contains(@class, 'v-btn__content') and contains(text(), '체크인/체크아웃')]", error_msg="작업자 체크인 중 체크인 버튼 미노출")
 
             # 최상단에 체크인한 아이디, 센터, 업무파트, 대분류 공정, 소분류 공정, 체크인 일시 노출, 체크아웃 일시 미노출
-            # 작업자 아이디 : junhyunkyung 센터 : 송파 냉장1 업무파트 : HUB 대분류공정 : MOVE, 소분류공정 : PLT 이동
+            # 작업자 아이디 : junhyunkyung 센터 : 김포 상온 업무파트 : IB 대분류공정 : picking, 소분류공정 : 피킹
             element = WebDriverWait(self.driver, 10).until(EC.presence_of_element_located((By.XPATH, "(//*[contains(@class,'text-center')])[8]")))
             if element.text == 'junhyunkyung':
                 pass
@@ -154,28 +154,28 @@ class SiteManagement(testModule):
                 raise Exception("체크인 후 작업자 아이디 junhyunkyung 미노출")
 
             element = WebDriverWait(self.driver, 10).until(EC.presence_of_element_located((By.XPATH, "(//*[contains(@class,'text-center')])[9]")))
-            if element.text == '송파 냉장1':
+            if element.text == '김포 상온':
                 pass
             else:
-                raise Exception("체크인 후 센터 송파 냉장1 미노출")
+                raise Exception("체크인 후 센터 김포 상온 미노출")
 
             element = WebDriverWait(self.driver, 10).until(EC.presence_of_element_located((By.XPATH, "(//*[contains(@class,'text-center')])[10]")))
-            if element.text == 'HUB':
+            if element.text == 'IB':
                 pass
             else:
-                raise Exception("체크인 후 센터 HUB 미노출")
+                raise Exception("체크인 후 센터 IB 미노출")
 
             element = WebDriverWait(self.driver, 10).until(EC.presence_of_element_located((By.XPATH, "(//*[contains(@class,'text-center')])[11]")))
-            if element.text == 'MOVE':
+            if element.text == 'picking':
                 pass
             else:
-                raise Exception("체크인 후 대분류공정 MOVE 미노출")
+                raise Exception("체크인 후 대분류공정 picking 미노출")
 
             element = WebDriverWait(self.driver, 10).until(EC.presence_of_element_located((By.XPATH, "(//*[contains(@class,'text-center')])[12]")))
-            if element.text == 'PLT 이동':
+            if element.text == '피킹':
                 pass
             else:
-                raise Exception("체크인 후 소분류공정 PLT 이동 미노출")
+                raise Exception("체크인 후 소분류공정 피킹 미노출")
 
             # 체크인 일시 : YYYY-MM-DD HH:mm:ss 상단 팝업 노출 자동닫힘 확인
             time_element = WebDriverWait(self.driver, 10).until(EC.presence_of_element_located((By.XPATH, "(//*[contains(@class,'text-center')])[13]")))
@@ -262,29 +262,29 @@ class SiteManagement(testModule):
             # 공정별 투입인원 일괄 체크아웃 클릭
             self.interact(by_type="XPATH", name="//*[contains(text(), '공정별 투입인원 일괄 체크아웃')]", error_msg="공정별 투입인원 일괄 체크아웃 탭 미노출")
 
-            # CC 항목 값 변경 : 송파CC
-            # 센터 항목 값 변경 : 송파냉장1
-            # 업무파트 변경 : HUB
-            # 대분류 공정 변경 : MOVE
-            # 소분류 작업공정 : PLT 이동
+            # CC 항목 값 변경 : 김포 CC
+            # 센터 항목 값 변경 : 김포 상온
+            # 업무파트 변경 : IB
+            # 대분류 공정 변경 : picking
+            # 소분류 작업공정 : 피킹
             self.interact(by_type="XPATH", name="(//*[contains(@class, 'v-select__selections')])[1]", error_msg="공정별 투입인원 일괄 체크아웃 탭 CC 선택란 미노출")
-            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-list-item__title') and contains(text(), '송파 CC')]", error_msg="공정별 투입인원 일괄 체크아웃 탭 송파 CC 미노출")
+            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-list-item__title') and contains(text(), '김포 CC')]", error_msg="공정별 투입인원 일괄 체크아웃 탭 김포 CC 미노출")
             self.interact(by_type="XPATH", name="(//*[contains(@class, 'v-select__selections')])[2]", error_msg="공정별 투입인원 일괄 체크아웃 탭 센터 선택란 미노출")
-            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-list-item__title') and contains(text(), '송파 냉장1')]", error_msg="공정별 투입인원 일괄 체크아웃 탭 송파 냉장1 미노출")
+            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-list-item__title') and contains(text(), '김포 상온')]", error_msg="공정별 투입인원 일괄 체크아웃 탭 김포 상온 미노출")
             self.interact(by_type="XPATH", name="(//*[contains(@class, 'v-select__selections')])[3]", error_msg="공정별 투입인원 일괄 체크아웃 탭 업무파트 선택란 미노출")
-            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-list-item__title') and contains(text(), 'HUB')]", error_msg="공정별 투입인원 일괄 체크아웃 탭 HUB 미노출")
+            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-list-item__title') and contains(text(), 'IB')]", error_msg="공정별 투입인원 일괄 체크아웃 탭 IB 미노출")
             self.interact(by_type="XPATH", name="(//*[contains(@class, 'v-select__selections')])[4]", error_msg="공정별 투입인원 일괄 체크아웃 탭 대분류 작업공정 선택란 미노출")
-            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-list-item__title') and contains(text(), 'MOVE')]", error_msg="공정별 투입인원 일괄 체크아웃 탭 MOVE 미노출")
+            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-list-item__title') and contains(text(), 'picking')]", error_msg="공정별 투입인원 일괄 체크아웃 탭 picking 미노출")
             self.interact(by_type="XPATH", name="(//*[contains(@class, 'v-select__selections')])[5]", error_msg="공정별 투입인원 일괄 체크아웃 탭 소분류 작업공정 선택란 미노출")
-            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-list-item__title') and contains(text(), 'PLT 이동')]", error_msg="공정별 투입인원 일괄 체크아웃 탭 PLT 이동 미노출")
+            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-list-item__title') and contains(text(), '피킹')]", error_msg="공정별 투입인원 일괄 체크아웃 탭 피킹 미노출")
 
             # [검색] 버튼 선택
             self.interact(by_type="XPATH", name="//*[contains(@class, 'primary v-btn v-btn--contained theme--light v-size--default')]", error_msg="공정별 투입인원 일괄 체크아웃 탭 검색 버튼 미노출")
 
             # 업무파트 / 대분류공정 / 소분류공정 / 아이디 / 이름 / 작업자 정보상세
-            self.interact(by_type="XPATH", name="//*[contains(@class, 'text-center') and contains(text(), 'HUB')]", click=False, error_msg="공정별 투입인원 일괄 체크아웃 시 검색 결과에서 업무파트 미노출")
-            self.interact(by_type="XPATH", name="//*[contains(@class, 'text-center') and contains(text(), 'MOVE')]", click=False, error_msg="공정별 투입인원 일괄 체크아웃 시 검색 결과에서 대분류공정 미노출")
-            self.interact(by_type="XPATH", name="//*[contains(@class, 'text-center') and contains(text(), 'PLT 이동')]", click=False, error_msg="공정별 투입인원 일괄 체크아웃 시 검색 결과에서 소분류공정 미노출")
+            self.interact(by_type="XPATH", name="//*[contains(@class, 'text-center') and contains(text(), 'IB')]", click=False, error_msg="공정별 투입인원 일괄 체크아웃 시 검색 결과에서 업무파트 미노출")
+            self.interact(by_type="XPATH", name="//*[contains(@class, 'text-center') and contains(text(), 'picking')]", click=False, error_msg="공정별 투입인원 일괄 체크아웃 시 검색 결과에서 대분류공정 미노출")
+            self.interact(by_type="XPATH", name="//*[contains(@class, 'text-center') and contains(text(), '피킹')]", click=False, error_msg="공정별 투입인원 일괄 체크아웃 시 검색 결과에서 소분류공정 미노출")
             self.interact(by_type="XPATH", name="//*[contains(@class, 'text-center') and contains(text(), 'junhyunkyung')]", click=False, error_msg="공정별 투입인원 일괄 체크아웃 시 검색 결과에서 아이디 미노출")
             self.interact(by_type="XPATH", name="//*[contains(@class, 'text-center') and contains(text(), '경준현')]", click=False, error_msg="공정별 투입인원 일괄 체크아웃 시 검색 결과에서 이름 미노출")
             self.interact(by_type="XPATH", name="//*[contains(@class, 'v-btn v-btn--contained theme--light v-size--default')]//*[contains(text(), '상세')]", click=False, error_msg="공정별 투입인원 일괄 체크아웃 시 검색 결과에서 작업자정보상세 미노출")
@@ -361,25 +361,25 @@ class SiteManagement(testModule):
             # 휴대폰 미소지자 QR출력 탭 진입
             self.interact(by_type="XPATH", name="//*[contains(@class,'v-list-item__title subtitle-1 sub-nav-item-content') and contains(text(), '휴대폰 미소지자 QR 출력')]", error_msg="휴대폰 미소지자 QR 출력 탭 미노출")
 
-            # CC 항목 값 변경 : 송파CC
-            # 센터 항목 값 변경 : 송파냉장1
+            # CC 항목 값 변경 : 김포 CC
+            # 센터 항목 값 변경 : 김포 상온
             # 계약구분 항목 값 변경 : 상용직
-            # 업무파트 변경 : HUB
-            # 팀명 항목 값 변경 : 송냉HUB
-            # 근무 Shift 항목 값 변경 : 00:25 ~ 05:00
+            # 업무파트 변경 : IB
+            # 팀명 항목 값 변경 : 김포상온 A
+            # 근무 Shift 항목 값 변경 : 00:00 ~ 01:50
             # 이름/아이디 : 아이디
             self.interact(by_type="XPATH", name="(//*[contains(@class, 'v-select__selections')])[1]", error_msg="휴대폰 미소지자 QR출력 탭 CC 선택란 미노출")
-            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-list-item__title') and contains(text(), '송파 CC')]", error_msg="휴대폰 미소지자 QR출력 탭 송파 CC 미노출")
+            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-list-item__title') and contains(text(), '김포 CC')]", error_msg="휴대폰 미소지자 QR출력 탭 김포 CC 미노출")
             self.interact(by_type="XPATH", name="(//*[contains(@class, 'v-select__selections')])[2]", error_msg="휴대폰 미소지자 QR출력 탭 센터 선택란 미노출")
-            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-list-item__title') and contains(text(), '송파 냉장1')]", error_msg="휴대폰 미소지자 QR출력 탭 송파 냉장1 미노출")
+            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-list-item__title') and contains(text(), '김포 상온')]", error_msg="휴대폰 미소지자 QR출력 탭 김포 상온 미노출")
             self.interact(by_type="XPATH", name="(//*[contains(@class, 'v-select__selections')])[3]", error_msg="휴대폰 미소지자 QR출력 탭 계약구분 선택란 미노출")
             self.interact(by_type="XPATH", name="//*[contains(@class, 'v-list-item__title') and contains(text(), '상용직')]", error_msg="휴대폰 미소지자 QR출력 탭 상용직 미노출")
             self.interact(by_type="XPATH", name="(//*[contains(@class, 'v-select__selections')])[4]", error_msg="휴대폰 미소지자 QR출력 탭 업무파트 선택란 미노출")
-            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-list-item__title') and contains(text(), 'HUB')]", error_msg="휴대폰 미소지자 QR출력 탭 HUB 미노출")
+            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-list-item__title') and contains(text(), 'IB')]", error_msg="휴대폰 미소지자 QR출력 탭 IB 미노출")
             self.interact(by_type="XPATH", name="(//*[contains(@class, 'v-select__selections')])[5]", error_msg="휴대폰 미소지자 QR출력 탭 팀명 선택란 미노출")
-            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-list-item__title') and contains(text(), '송냉 HUB')]", error_msg="휴대폰 미소지자 QR출력 탭 송냉 HUB 미노출")
+            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-list-item__title') and contains(text(), '김포상온 A')]", error_msg="휴대폰 미소지자 QR출력 탭 김포상온 A 미노출")
             self.interact(by_type="XPATH", name="(//*[contains(@class, 'v-select__selections')])[6]", error_msg="휴대폰 미소지자 QR출력 탭 근무 Shift 선택란 미노출")
-            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-list-item__title') and contains(text(), '00:25 ~ 05:00')]", error_msg="휴대폰 미소지자 QR출력 탭 00:25 ~ 05:00 미노출")
+            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-list-item__title') and contains(text(), '00:00 ~ 01:50')]", error_msg="휴대폰 미소지자 QR출력 탭 00:00 ~ 01:50 미노출")
             self.interact(by_type="XPATH", name="(//*[contains(@class, 'v-select__selections')])[7]", error_msg="휴대폰 미소지자 QR출력 탭 이름/아이디 선택란 미노출")
             self.interact(by_type="XPATH", name="//*[contains(@class, 'v-list-item__title') and contains(text(), '아이디')]", error_msg="휴대폰 미소지자 QR출력 탭 아이디 미노출")
 
@@ -416,7 +416,7 @@ class SiteManagement(testModule):
 
             # 아이디/CC 센터: '로그인 작업자 계정' 노출
             self.interact(by_type="XPATH", name="//*[contains(@class, 'content_information_box')]//*[contains(text(), 'junhyunkyung')]", click=False, error_msg="휴대폰 미소지자 QR출력 탭에서 로그인 시 junhyunkyung 미노출")
-            self.interact(by_type="XPATH", name="//*[contains(@class, 'content_information_box')]//*[contains(text(), '송파 CC 송파 냉장1 ')]", click=False, error_msg="휴대폰 미소지자 QR출력 탭에서 로그인 시 송파 CC 송파 냉장1 미노출")
+            self.interact(by_type="XPATH", name="//*[contains(@class, 'content_information_box')]//*[contains(text(), '김포 CC 김포 상온 ')]", click=False, error_msg="휴대폰 미소지자 QR출력 탭에서 로그인 시 김포 CC 김포 상온 미노출")
 
             # 출근처리 / 작업자 QR 코드 / 작업자 QR코드 출력 / 퇴근처리 항목 노출
             #  - 작업자 QR 코드 미노출
@@ -454,25 +454,25 @@ class SiteManagement(testModule):
 
             # 7. <휴대폰 미소지자 QR출력 출근>
 
-            # CC 항목 값 변경 : 송파CC
-            # 센터 항목 값 변경 : 송파냉장1
+            # CC 항목 값 변경 : 김포 CC
+            # 센터 항목 값 변경 : 김포 상온
             # 계약구분 항목 값 변경 : 상용직
-            # 업무파트 변경 : HUB
-            # 팀명 항목 값 변경 : 송냉HUB
-            # 근무 Shift 항목 값 변경 : 00:25 ~ 05:00
+            # 업무파트 변경 : IB
+            # 팀명 항목 값 변경 : 김포상온 A
+            # 근무 Shift 항목 값 변경 : 00:00 ~ 01:50
             # 이름/아이디 : 아이디
             self.interact(by_type="XPATH", name="(//*[contains(@class, 'v-select__selections')])[1]", error_msg="휴대폰 미소지자 QR출력 탭 CC 선택란 미노출")
-            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-list-item__title') and contains(text(), '송파 CC')]", error_msg="휴대폰 미소지자 QR출력 탭 송파 CC 미노출")
+            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-list-item__title') and contains(text(), '김포 CC')]", error_msg="휴대폰 미소지자 QR출력 탭 김포 CC 미노출")
             self.interact(by_type="XPATH", name="(//*[contains(@class, 'v-select__selections')])[2]", error_msg="휴대폰 미소지자 QR출력 탭 센터 선택란 미노출")
-            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-list-item__title') and contains(text(), '송파 냉장1')]", error_msg="휴대폰 미소지자 QR출력 탭 송파 냉장1 미노출")
+            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-list-item__title') and contains(text(), '김포 상온')]", error_msg="휴대폰 미소지자 QR출력 탭 김포 상온 미노출")
             self.interact(by_type="XPATH", name="(//*[contains(@class, 'v-select__selections')])[3]", error_msg="휴대폰 미소지자 QR출력 탭 계약구분 선택란 미노출")
             self.interact(by_type="XPATH", name="//*[contains(@class, 'v-list-item__title') and contains(text(), '상용직')]", error_msg="휴대폰 미소지자 QR출력 탭 상용직 미노출")
             self.interact(by_type="XPATH", name="(//*[contains(@class, 'v-select__selections')])[4]", error_msg="휴대폰 미소지자 QR출력 탭 업무파트 선택란 미노출")
-            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-list-item__title') and contains(text(), 'HUB')]", error_msg="휴대폰 미소지자 QR출력 탭 HUB 미노출")
+            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-list-item__title') and contains(text(), 'IB')]", error_msg="휴대폰 미소지자 QR출력 탭 IB 미노출")
             self.interact(by_type="XPATH", name="(//*[contains(@class, 'v-select__selections')])[5]", error_msg="휴대폰 미소지자 QR출력 탭 팀명 선택란 미노출")
-            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-list-item__title') and contains(text(), '송냉 HUB')]", error_msg="휴대폰 미소지자 QR출력 탭 송냉 HUB 미노출")
+            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-list-item__title') and contains(text(), '김포상온 A')]", error_msg="휴대폰 미소지자 QR출력 탭 김포상온 A 미노출")
             self.interact(by_type="XPATH", name="(//*[contains(@class, 'v-select__selections')])[6]", error_msg="휴대폰 미소지자 QR출력 탭 근무 Shift 선택란 미노출")
-            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-list-item__title') and contains(text(), '00:25 ~ 05:00')]", error_msg="휴대폰 미소지자 QR출력 탭 00:25 ~ 05:00 미노출")
+            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-list-item__title') and contains(text(), '00:00 ~ 01:50')]", error_msg="휴대폰 미소지자 QR출력 탭 00:00 ~ 01:50 미노출")
             self.interact(by_type="XPATH", name="(//*[contains(@class, 'v-select__selections')])[7]", error_msg="휴대폰 미소지자 QR출력 탭 이름/아이디 선택란 미노출")
             self.interact(by_type="XPATH", name="//*[contains(@class, 'v-list-item__title') and contains(text(), '아이디')]", error_msg="휴대폰 미소지자 QR출력 탭 아이디 미노출")
 
@@ -515,7 +515,7 @@ class SiteManagement(testModule):
 
             # 아이디/CC 센터: '로그인 작업자 계정' / CC센터 값 노출
             self.interact(by_type="XPATH", name="//*[contains(@class, 'content_information_box')]//*[contains(text(), 'junhyunkyung')]", click=False, error_msg="휴대폰 미소지자 QR출력 탭에서 로그인 시 junhyunkyung 미노출")
-            self.interact(by_type="XPATH", name="//*[contains(@class, 'content_information_box')]//*[contains(text(), '송파 CC 송파 냉장1 ')]", click=False, error_msg="휴대폰 미소지자 QR출력 탭에서 로그인 시 송파 CC 송파 냉장1 미노출")
+            self.interact(by_type="XPATH", name="//*[contains(@class, 'content_information_box')]//*[contains(text(), '김포 CC 김포 상온 ')]", click=False, error_msg="휴대폰 미소지자 QR출력 탭에서 로그인 시 김포 CC 김포 상온 미노출")
 
             # 출근처리 / 작업자 QR 코드 노출 / 작업자 QR코드 출력 / 퇴근처리 항목 노출
             self.interact(by_type="XPATH", name="//*[contains(@class, 'text-center') and contains(text(), '출근처리')]", click=False, error_msg="휴대폰 미소지자 QR출력 탭에서 로그인 후 출근 처리 시 출근처리 탭 미노출")
@@ -569,25 +569,25 @@ class SiteManagement(testModule):
 
             # 10. <휴대폰 미소지자 QR출력 초기화>
 
-            # CC 항목 값 변경 : 송파CC
-            # 센터 항목 값 변경 : 송파냉장1
+            # CC 항목 값 변경 : 김포 CC
+            # 센터 항목 값 변경 : 김포 상온
             # 계약구분 항목 값 변경 : 상용직
-            # 업무파트 변경 : HUB
-            # 팀명 항목 값 변경 : 송냉HUB
-            # 근무 Shift 항목 값 변경 : 00:25 ~ 05:00
+            # 업무파트 변경 : IB
+            # 팀명 항목 값 변경 : 김포상온 A
+            # 근무 Shift 항목 값 변경 : 00:00 ~ 01:50
             # 이름/아이디 : 아이디
             self.interact(by_type="XPATH", name="(//*[contains(@class, 'v-select__selections')])[1]", error_msg="휴대폰 미소지자 QR출력 탭 CC 선택란 미노출")
-            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-list-item__title') and contains(text(), '송파 CC')]", error_msg="휴대폰 미소지자 QR출력 탭 송파 CC 미노출")
+            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-list-item__title') and contains(text(), '김포 CC')]", error_msg="휴대폰 미소지자 QR출력 탭 김포 CC 미노출")
             self.interact(by_type="XPATH", name="(//*[contains(@class, 'v-select__selections')])[2]", error_msg="휴대폰 미소지자 QR출력 탭 센터 선택란 미노출")
-            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-list-item__title') and contains(text(), '송파 냉장1')]", error_msg="휴대폰 미소지자 QR출력 탭 송파 냉장1 미노출")
+            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-list-item__title') and contains(text(), '김포 상온')]", error_msg="휴대폰 미소지자 QR출력 탭 김포 상온 미노출")
             self.interact(by_type="XPATH", name="(//*[contains(@class, 'v-select__selections')])[3]", error_msg="휴대폰 미소지자 QR출력 탭 계약구분 선택란 미노출")
             self.interact(by_type="XPATH", name="//*[contains(@class, 'v-list-item__title') and contains(text(), '상용직')]", error_msg="휴대폰 미소지자 QR출력 탭 상용직 미노출")
             self.interact(by_type="XPATH", name="(//*[contains(@class, 'v-select__selections')])[4]", error_msg="휴대폰 미소지자 QR출력 탭 업무파트 선택란 미노출")
-            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-list-item__title') and contains(text(), 'HUB')]", error_msg="휴대폰 미소지자 QR출력 탭 HUB 미노출")
+            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-list-item__title') and contains(text(), 'IB')]", error_msg="휴대폰 미소지자 QR출력 탭 IB 미노출")
             self.interact(by_type="XPATH", name="(//*[contains(@class, 'v-select__selections')])[5]", error_msg="휴대폰 미소지자 QR출력 탭 팀명 선택란 미노출")
-            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-list-item__title') and contains(text(), '송냉 HUB')]", error_msg="휴대폰 미소지자 QR출력 탭 송냉 HUB 미노출")
+            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-list-item__title') and contains(text(), '김포상온 A')]", error_msg="휴대폰 미소지자 QR출력 탭 김포상온 A 미노출")
             self.interact(by_type="XPATH", name="(//*[contains(@class, 'v-select__selections')])[6]", error_msg="휴대폰 미소지자 QR출력 탭 근무 Shift 선택란 미노출")
-            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-list-item__title') and contains(text(), '00:25 ~ 05:00')]", error_msg="휴대폰 미소지자 QR출력 탭 00:25 ~ 05:00 미노출")
+            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-list-item__title') and contains(text(), '00:00 ~ 01:50')]", error_msg="휴대폰 미소지자 QR출력 탭 00:00 ~ 01:50 미노출")
             self.interact(by_type="XPATH", name="(//*[contains(@class, 'v-select__selections')])[7]", error_msg="휴대폰 미소지자 QR출력 탭 이름/아이디 선택란 미노출")
             self.interact(by_type="XPATH", name="//*[contains(@class, 'v-list-item__title') and contains(text(), '아이디')]", error_msg="휴대폰 미소지자 QR출력 탭 아이디 미노출")
 
@@ -610,12 +610,12 @@ class SiteManagement(testModule):
             # 업무파트 : 선택
             # 팀명 : 선택디
             # 이름/아이 : 선택
-            self.interact(by_type="XPATH", name="(//*[contains(@class, 'v-select__selections')])[1]//div[contains(text(), '송파 CC')]", click=False, error_msg="휴대폰 미소지자 QR출력 탭에서 로그인 후 초기화 시 CC 선택란 송파 CC 미노출")
-            self.interact(by_type="XPATH", name="(//*[contains(@class, 'v-select__selections')])[2]//div[contains(text(), '송파 냉장1')]", click=False, error_msg="휴대폰 미소지자 QR출력 탭에서 로그인 후 초기화 시 센터 선택란 송파 냉장1 미노출")
+            self.interact(by_type="XPATH", name="(//*[contains(@class, 'v-select__selections')])[1]//div[contains(text(), '김포 CC')]", click=False, error_msg="휴대폰 미소지자 QR출력 탭에서 로그인 후 초기화 시 CC 선택란 김포 CC 미노출")
+            self.interact(by_type="XPATH", name="(//*[contains(@class, 'v-select__selections')])[2]//div[contains(text(), '김포 상온')]", click=False, error_msg="휴대폰 미소지자 QR출력 탭에서 로그인 후 초기화 시 센터 선택란 김포 상온 미노출")
             self.interact(by_type="XPATH", name="(//*[contains(@class, 'v-select__selections')])[3]//div[contains(text(), '상용직')]", click=False, error_msg="휴대폰 미소지자 QR출력 탭에서 로그인 후 초기화 시 계약구분 선택란 상용직 미노출")
-            self.interact(by_type="XPATH", name="(//*[contains(@class, 'v-select__selections')])[4]//div[contains(text(), 'HUB')]", click=False, error_msg="휴대폰 미소지자 QR출력 탭에서 로그인 후 초기화 시 업무파트 선택란 HUB 미노출")
-            self.interact(by_type="XPATH", name="(//*[contains(@class, 'v-select__selections')])[5]//div[contains(text(), '송냉 HUB')]", click=False, error_msg="휴대폰 미소지자 QR출력 탭에서 로그인 후 초기화 시 팀명 선택란 송파 HUB 미노출")
-            self.interact(by_type="XPATH", name="(//*[contains(@class, 'v-select__selections')])[6]//div[contains(text(), '00:25 ~ 05:00')]", click=False, error_msg="휴대폰 미소지자 QR출력 탭에서 로그인 후 초기화 시 근무 Shift 선택란 00:25 ~ 05:00 미노출")
+            self.interact(by_type="XPATH", name="(//*[contains(@class, 'v-select__selections')])[4]//div[contains(text(), 'IB')]", click=False, error_msg="휴대폰 미소지자 QR출력 탭에서 로그인 후 초기화 시 업무파트 선택란 IB 미노출")
+            self.interact(by_type="XPATH", name="(//*[contains(@class, 'v-select__selections')])[5]//div[contains(text(), '김포상온 A')]", click=False, error_msg="휴대폰 미소지자 QR출력 탭에서 로그인 후 초기화 시 팀명 선택란 김포상온 A 미노출")
+            self.interact(by_type="XPATH", name="(//*[contains(@class, 'v-select__selections')])[6]//div[contains(text(), '00:00 ~ 01:50')]", click=False, error_msg="휴대폰 미소지자 QR출력 탭에서 로그인 후 초기화 시 근무 Shift 선택란 00:00 ~ 01:50 미노출")
             self.interact(by_type="XPATH", name="(//*[contains(@class, 'v-select__selections')])[7]//div[contains(text(), '선택')]", click=False, error_msg="휴대폰 미소지자 QR출력 탭에서 로그인 후 초기화 시 이름/아이디 선택란 선택 미노출")
 
             # 이름 또는 아이디를 입력하세요 문구 노출

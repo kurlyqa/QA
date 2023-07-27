@@ -66,25 +66,25 @@ class MobileWebLogin(testModule):
             except:
                 pass
 
-            # 송파CC
-            # 송파 냉장1
+            # 김포CC
+            # 김포 상온
             self.interact(by_type="XPATH", name="(//*[contains(@class, 'v-select__selections')])[1]", error_msg="CC 선택란 미노출")
-            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-list-item__title') and contains(text(), '송파')]", error_msg="송파 미노출")
+            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-list-item__title') and contains(text(), '김포')]", error_msg="김포 미노출")
             self.interact(by_type="XPATH", name="(//*[contains(@class, 'v-select__selections')])[2]", error_msg="센터 선택란 미노출")
-            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-list-item__title') and contains(text(), '송파 냉장1')]", error_msg="송파 냉장1 미노출")
+            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-list-item__title') and contains(text(), '김포 상온')]", error_msg="김포 상온 미노출")
 
             # 다음
             self.interact(by_type="XPATH", name="//*[contains(@class, 'v-btn v-btn--contained theme--light v-size--default primary')]", error_msg="출근 프로세스 진행중 다음 버튼 미노출")
 
-            # 업무파트=HUB
-            # 팀명=송냉 HUB
-            # 근무 Shift=00:25 ~ 05:00
+            # 업무파트=IB
+            # 팀명=김포상온 A
+            # 근무 Shift=00:00 ~ 01:50
             self.interact(by_type="XPATH", name="(//*[contains(@class, 'v-select__selections')])[1]", error_msg="업무파트 선택란 미노출")
-            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-list-item__title') and contains(text(), 'HUB')]", error_msg="HUB")
+            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-list-item__title') and contains(text(), 'IB')]", error_msg="IB")
             self.interact(by_type="XPATH", name="(//*[contains(@class, 'v-select__selections')])[2]", error_msg="팀명 선택란 미노출")
-            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-list-item__title') and contains(text(), '송냉 HUB')]", error_msg="송냉 HUB 미노출")
+            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-list-item__title') and contains(text(), '김포상온 A')]", error_msg="김포상온 A 미노출")
             self.interact(by_type="XPATH", name="(//*[contains(@class, 'v-select__selections')])[3]", error_msg="근무 Shift 선택란 미노출")
-            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-list-item__title') and contains(text(), '00:25 ~ 05:00')]", error_msg="00:25 ~ 05:00 미노출")
+            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-list-item__title') and contains(text(), '00:00 ~ 01:50')]", error_msg="00:00 ~ 01:50 미노출")
 
             # 다음
             self.interact(by_type="XPATH", name="//*[contains(@class, 'v-btn v-btn--contained theme--light v-size--default primary')]", error_msg="출근 프로세스 진행중 다음 버튼 미노출")
@@ -168,8 +168,8 @@ class MobileWebLogin(testModule):
             self.interact(by_type="XPATH", name="(//*[contains(@class,'v-text-field__slot')])[2]//input", click=False, send_keys_msg='sc', error_msg="비밀번호 입력란 미노출")
             self.interact(by_type="XPATH", name="//*[contains(@class, 'v-btn v-btn--block v-btn--contained theme--light v-size--large')]", error_msg="로그인 버튼 미노출")
 
-            # 로그인 정보가 6회 이상 실패하여 계정 사용이 불가합니다. 관리자를 통해 계정 초기화 해주세요. 안내문구 화면 확인
-            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-alert__content') and contains(text(), '로그인 정보가 5회 이상 실패하여 계정 사용이 불가')]", click=False, error_msg="로그인 정보가 5회 이상 실패하여 계정 사용이 불가합니다. 알럿 미노출")
+            # 로그인 5회 이상 실패로 계정이 잠김 처리 되었습니다. 관리자를 통해 초기화 또는 비밀번호 찾기를 통해 비밀번호를 재설정 해주세요.  안내문구 화면 확인
+            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-alert__content') and contains(text(), '로그인 5회 이상 실패로 계정이 잠김 처리 되었습니다.')]", click=False, error_msg="로그인 5회 이상 실패로 계정이 잠김 처리 되었습니다. 알럿 미노출")
 
 
 
@@ -187,10 +187,10 @@ class MobileWebLogin(testModule):
             self.driver.get(url)
 
             # 아이디(lmstest01) 입력
-            self.interact(by_type="XPATH", name="(//*[contains(@class,'v-text-field__slot')])[1]//input", click=False, send_keys_msg='lmstest01', error_msg="관리자 로그인중 아이디 입력란 미노출")
+            self.interact(by_type="XPATH", name="(//*[contains(@class,'v-text-field__slot')]//input)[1]", click=False, send_keys_msg='lmstest01', error_msg="관리자 로그인중 아이디 입력란 미노출")
 
             # 비밀번호(q1w2e3r4!) 입력
-            self.interact(by_type="XPATH", name="(//*[contains(@class,'v-text-field__slot')])[2]//input", click=False, send_keys_msg='q1w2e3r4!', error_msg="관리자 로그인중 비밀번호 입력란 미노출")
+            self.interact(by_type="XPATH", name="(//*[contains(@class,'v-text-field__slot')]//input)[2]", click=False, send_keys_msg='q1w2e3r4!', error_msg="관리자 로그인중 비밀번호 입력란 미노출")
 
             # 로그인
             self.interact(by_type="XPATH", name="//*[contains(@class, 'v-btn v-btn--block v-btn--contained theme--light v-size--large')]", error_msg="관리자 로그인중 로그인 버튼 미노출")
