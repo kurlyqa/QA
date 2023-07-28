@@ -6,7 +6,8 @@ from HtmlTestRunner import HTMLTestRunner
 from papo_login import PAPOLogin
 from order_management import OrderManagement
 from warehouse_management import WarehouseManagement
-from supplier_return_details import SupplierReturnDetails
+from settlement_management_reverse import SettlementManagementReverse
+from settlement_management_regular import SettlementManagementRegular
 from account_management import AccountManagement
 from mobile_web_login import MobileWebLogin
 import datetime
@@ -18,9 +19,8 @@ from slack_sdk.errors import SlackApiError
 s1 = TestLoader().loadTestsFromTestCase(PAPOLogin)
 s2 = TestLoader().loadTestsFromTestCase(OrderManagement)
 s3 = TestLoader().loadTestsFromTestCase(WarehouseManagement)
-s4 = TestLoader().loadTestsFromTestCase(SupplierReturnDetails)
-# s5 = TestLoader().loadTestsFromTestCase()
-# s6 = TestLoader().loadTestsFromTestCase()
+s4 = TestLoader().loadTestsFromTestCase(SettlementManagementReverse)
+s5 = TestLoader().loadTestsFromTestCase(SettlementManagementRegular)
 
 suite = TestSuite([s4])
 # suite = TestSuite([s1, s2])

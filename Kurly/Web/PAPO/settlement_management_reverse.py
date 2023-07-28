@@ -12,15 +12,14 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.support.ui import Select
 from webdriver_manager.chrome import ChromeDriverManager
-
 from time import sleep
 
-class SupplierReturnDetails(testModule):
+class SettlementManagementReverse(testModule):
 
     def setUp(self):
         super().setUp() # testModule 클래스의 setUp 함수 호출
 
-    def test_04_공급사반품내역(self):
+    def test_04_정산관리_역발행(self):
         try:
             # 1. <공급사 반품 등록>
 
@@ -561,6 +560,6 @@ class SupplierReturnDetails(testModule):
 # Python에서 모듈이 직접 실행될 때 (즉, 다른 모듈에서 import 되지 않고 직접 실행될 때) 해당 코드 블록을 실행하도록 하는 일종의 조건문
 if __name__ == '__main__':
     # 이 클래스에서 정의된 테스트 메소드들을 자동으로 찾아주는 메소드를 사용하여 테스트 스위트(TestSuite) 객체를 생성
-    suite = unittest.TestLoader().loadTestsFromTestCase(SupplierReturnDetails)
+    suite = unittest.TestLoader().loadTestsFromTestCase(SettlementManagementReverse)
     # TextTestRunner 클래스의 객체를 생성하여 생성된 테스트 스위트 객체를 실행. verbosity 인자는 테스트 결과를 출력할 상세도를 설정하는 인자. 2이면 테스트 케이스 수, 테스트 시간, 테스트 결과를 출력. .run(suite)는 생성된 TestSuite객체를 실행하는 메소드.
     unittest.TextTestRunner(verbosity=2).run(suite)
