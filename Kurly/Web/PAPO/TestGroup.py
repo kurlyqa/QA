@@ -8,8 +8,6 @@ from order_management import OrderManagement
 from warehouse_management import WarehouseManagement
 from settlement_management_reverse import SettlementManagementReverse
 from settlement_management_regular import SettlementManagementRegular
-from account_management import AccountManagement
-from mobile_web_login import MobileWebLogin
 import datetime
 import os
 import ssl
@@ -27,7 +25,6 @@ suite = TestSuite([s4])
 # suite = TestSuite([s1, s2, s3])
 # suite = TestSuite([s1, s2, s3, s4])
 # suite = TestSuite([s1, s2, s3, s4, s5])
-# suite = TestSuite([s1, s2, s3, s4, s5, s6])
 
 daytime = datetime.datetime.now()
 dt = daytime.strftime("%Y-%m-%d_%H-%M-%S")
@@ -87,60 +84,3 @@ result = runner.run(suite)
 #
 # except SlackApiError as e:
 #     print('Error: {}'.format(e.response['error']))
-
-####################### Markdown_text ########################
-# mrkdwn_text = '''
-# This is test message.
-# > Block quote
-#
-# *Bold text*
-#
-# ```
-# code block - line 1
-# code block - line 2\ncode block - line 3
-# ```
-#
-# `highlight`
-#
-# _italicize_
-#
-# ~Strikethrough~
-#
-# <https://www.google.com|This is link to google.com>
-# '''
-
-
-
-####################### Webhook ##############################
-# def send_message_to_slack(text):
-#     url = "WebHook Url"
-#
-#     payload = { "text" : text }
-#
-#     requests.post(url, json=payload)
-#
-# def send_message_to_slack(webhook_url, channel, message, file_path=None):
-#     payload = {
-#         'channel': channel,
-#         'text': message
-#     }
-#
-#     files = None
-#     if file_path:
-#         files = {'file': open(file_path, 'rb')}
-#
-#     response = requests.post(webhook_url, json=payload, files=files)
-#     if response.status_code == 200:
-#         print("메시지 전송 성공")
-#     else:
-#         print("메시지 전송 실패")
-#
-# # Webhook URL 설정
-# webhook_url = 'https://hooks.slack.com/services/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'
-#
-# # 채널과 메시지 내용 설정
-# channel = 'C05BQN1D9GT'
-# message = '안녕하세요, 테스트입니다.'
-#
-# # 메시지와 파일 전송
-# send_message_to_slack(webhook_url, channel, message, file_path)

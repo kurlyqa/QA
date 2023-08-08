@@ -181,6 +181,7 @@ class PAPOLogin(testModule):
             print("Passed")
 
     def tearDown(self):
+        # 브라우저 세션 닫기
         self.driver.quit()
 
 ## 이 클래스에서 정의된 테스트 메소드를 찾아서 실행하고, 그 결과를 출력하는 코드

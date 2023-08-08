@@ -10,18 +10,15 @@ from webdriver_manager.chrome import ChromeDriverManager
 class testModule(unittest.TestCase):
 
     def setUp(self):
-
         # 옵션 생성
         chrome_options = webdriver.ChromeOptions()
 
-        # 가속(GPU) 사용 안함
+        # headless 모드 설정
+        # 크롬 옵션 설정
+        chrome_options.add_argument('headless')
         chrome_options.add_argument('--disable-gpu')
 
-        # 언어 설정
-        chrome_options.add_argument('lang=ko_KR')
-
-        # headless 모드 설정
-        chrome_options.add_argument('--headless')
+        # headless 모드에서 네트워크 설정 변경
         chrome_options.add_argument('--no-sandbox')
         chrome_options.add_argument('--disable-dev-shm-usage')
 

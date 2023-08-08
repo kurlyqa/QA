@@ -11,6 +11,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.support.ui import Select
+from selenium.webdriver.common.alert import Alert
 from webdriver_manager.chrome import ChromeDriverManager
 from time import sleep
 
@@ -540,6 +541,29 @@ class SettlementManagementRegular(testModule):
             # 공급사 반품 상세 상단영역 상태 - 완료 상태 노출
             self.interact(by_type="XPATH", name="//*[contains(text(), '완료')]", click=False, error_msg="발주 관리 -> 공급사 반품내역 -> 공급사 반품 상세 -> 확인 완료 -> 완료 텍스트 미노출")
 
+
+
+            # 22. <정산현황_승인완료>
+
+            # 버튼을 클릭합니다.
+            self.interact(by_type="XPATH", name="", error_msg="")
+
+            # 확인(alert) 창을 다루기 위해 Alert 클래스를 사용합니다.
+            alert = Alert(self.driver)
+
+            # 확인(alert) 창의 텍스트를 가져옵니다.
+            alert_text = alert.text
+
+            # 확인(alert) 창의 메시지를 출력하거나 필요한 처리를 수행합니다.
+            print("Alert Message:", alert_text)
+
+            # 확인(alert) 창을 닫습니다. (확인(alert) 창의 확인 버튼을 누릅니다.)
+            alert.accept()
+
+
+
+
+
             # 담당자 탭 닫기
             self.driver.close()
 
@@ -554,6 +578,7 @@ class SettlementManagementRegular(testModule):
             print("Passed")
 
     def tearDown(self):
+        # 브라우저 세션 닫기
         self.driver.quit()
 
 ## 이 클래스에서 정의된 테스트 메소드를 찾아서 실행하고, 그 결과를 출력하는 코드

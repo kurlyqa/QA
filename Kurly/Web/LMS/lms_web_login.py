@@ -53,8 +53,8 @@ class LMSWebLogin(testModule):
             if match:
                 # 확인
                 self.interact(by_type="XPATH", name="//*[contains(@class, 'v-btn v-btn--block v-btn--flat v-btn--text theme--light v-size--default primary--text')]", error_msg="확인 버튼 미노출")
-                # 공정별 투입인원 현황 텍스트 노출 확인
-                self.interact(by_type="XPATH", name="//*[contains(text(), '공정별 투입인원 현황')]", click=False, error_msg="공정별 투입인원 현황 텍스트 미노출")
+                # 센터별 출근 작업자 확인 텍스트 노출 확인
+                self.interact(by_type="XPATH", name="//*[contains(text(), '센터별 출근 작업자 확인')]", click=False, error_msg="센터별 출근 작업자 확인 텍스트 미노출")
                 # 우측상단 로그아웃 UI선택
                 self.interact(by_type="XPATH", name="(//*[contains(@class, 'v-btn v-btn--flat v-btn--icon v-btn--round theme--dark v-size--default')])[2]", error_msg="로그아웃 버튼 미노출")
                 # 로그인 버튼 노출 확인
@@ -70,6 +70,7 @@ class LMSWebLogin(testModule):
             print("Passed")
 
     def tearDown(self):
+        # 브라우저 세션 닫기
         self.driver.quit()
 
 ## 이 클래스에서 정의된 테스트 메소드를 찾아서 실행하고, 그 결과를 출력하는 코드

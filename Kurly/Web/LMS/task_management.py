@@ -739,8 +739,8 @@ class TaskManagement(testModule):
             else:
                 raise Exception("연장근무 희망 관리 초기화 후 연장근무 가능시간 활성화 상태")
 
-            # 최종 체크인 대분류 공정:전체(비활)
-            self.interact(by_type="XPATH", name="(//*[contains(@class, 'v-select__selections')])[8]//*[contains(text(), '전체')]", click=False, error_msg="연장근무 희망 관리 초기화 후 최종 체크인 대분류 공정 선택란 전체 텍스트 미노출")
+            # 최종 체크인 대분류 공정:선택(비활)
+            self.interact(by_type="XPATH", name="(//*[contains(@class, 'v-select__selections')])[8]//*[contains(text(), '선택')]", click=False, error_msg="연장근무 희망 관리 초기화 후 최종 체크인 대분류 공정 선택란 선택 텍스트 미노출")
 
             select_element = WebDriverWait(self.driver, 10).until(EC.presence_of_element_located((By.XPATH, "(//*[contains(@class, 'v-select__selections')])[8]//input")))
             is_disabled = select_element.get_attribute("disabled")
@@ -750,8 +750,8 @@ class TaskManagement(testModule):
             else:
                 raise Exception("연장근무 희망 관리 초기화 후 최종 체크인 대분류 공정 활성화 상태")
 
-            # 최종 체크인 소분류 공정:전체(비활)
-            self.interact(by_type="XPATH", name="(//*[contains(@class, 'v-select__selections')])[9]//*[contains(text(), '전체')]", click=False, error_msg="연장근무 희망 관리 초기화 후 최종 체크인 소분류 공정 선택란 전체 텍스트 미노출")
+            # 최종 체크인 소분류 공정:선택(비활)
+            self.interact(by_type="XPATH", name="(//*[contains(@class, 'v-select__selections')])[9]//*[contains(text(), '선택')]", click=False, error_msg="연장근무 희망 관리 초기화 후 최종 체크인 소분류 공정 선택란 선택 텍스트 미노출")
 
             select_element = WebDriverWait(self.driver, 10).until(EC.presence_of_element_located((By.XPATH, "(//*[contains(@class, 'v-select__selections')])[9]//input")))
             is_disabled = select_element.get_attribute("disabled")
@@ -812,6 +812,9 @@ class TaskManagement(testModule):
 
 
             # 15. <센터별 출근 작업자 확인 조회>
+
+            # 근태관리 탭 클릭
+            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-btn__content') and contains(text(), '근태관리')]", error_msg="근태관리 탭 미노출")
 
             # 센터별 출근 작업자 확인 클릭
             self.interact(by_type="XPATH", name="//*[contains(text(), '센터별 출근 작업자 확인')]", error_msg="센터별 출근 작업자 확인 탭 미노출")
@@ -950,9 +953,9 @@ class TaskManagement(testModule):
             # [초기화]버튼 선택
             self.interact(by_type="XPATH", name="//*[contains(@class, 'gray v-btn v-btn--contained theme--light v-size--default')]", error_msg="센터별 퇴근 작업자 확인 탭 검색 후 초기화 버튼 미노출")
 
-            # CC : 전체 / 센터 : 선택
+            # CC : 전체 / 센터 : 전체
             self.interact(by_type="XPATH", name="(//*[contains(@class, 'v-select__selections')])[1]//*[contains(text(), '전체')]", click=False, error_msg="센터별 퇴근 작업자 확인 탭 초기화 후 CC 선택란 전체 텍스트 미노출")
-            self.interact(by_type="XPATH", name="(//*[contains(@class, 'v-select__selections')])[2]//*[contains(text(), '선택')]", click=False, error_msg="센터별 퇴근 작업자 확인 탭 초기화 후 센터 선택란 선택 텍스트 미노출")
+            self.interact(by_type="XPATH", name="(//*[contains(@class, 'v-select__selections')])[2]//*[contains(text(), '전체')]", click=False, error_msg="센터별 퇴근 작업자 확인 탭 초기화 후 센터 선택란 전체 텍스트 미노출")
 
             # 계약구분 : 전체
             self.interact(by_type="XPATH", name="(//*[contains(@class, 'v-select__selections')])[3]//*[contains(text(), '전체')]", click=False, error_msg="센터별 퇴근 작업자 확인 탭 초기화 후 계약구분 선택란 전체 텍스트 미노출")
@@ -1056,6 +1059,7 @@ class TaskManagement(testModule):
             print("Passed")
 
     def tearDown(self):
+        # 브라우저 세션 닫기
         self.driver.quit()
 
 ## 이 클래스에서 정의된 테스트 메소드를 찾아서 실행하고, 그 결과를 출력하는 코드

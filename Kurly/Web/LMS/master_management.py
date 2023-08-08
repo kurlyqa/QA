@@ -90,6 +90,7 @@ class MasterManagement(testModule):
             self.interact(by_type="XPATH", name="//*[contains(@class, 'v-text-field__slot')]//*[contains(@placeholder, '팀명을 입력해주세요')]", click=False, error_msg="센터별 근무시간 관리 조회 탭 초기화 후 팀명 입력란 '팀명을 입력해주세요' 텍스트 미노출")
 
             # 조회결과 영역 초기화 상태 확인
+    # 개발팀에서 변경해줘야 체크 가능한데 오래걸릴것으로 예상
     #### self.interact(by_type="XPATH", name="//*[contains(@class, 'v-data-table__empty-wrapper')]//*[contains(text(), '조회 결과가 없습니다')]", error_msg="센터별 근무시간 관리 조회 탭 초기화 후 조회 결과 영역 '조회 결과가 없습니다' 텍스트 미노출")
 
 
@@ -252,6 +253,7 @@ class MasterManagement(testModule):
             print("Passed")
 
     def tearDown(self):
+        # 브라우저 세션 닫기
         self.driver.quit()
 
 ## 이 클래스에서 정의된 테스트 메소드를 찾아서 실행하고, 그 결과를 출력하는 코드
