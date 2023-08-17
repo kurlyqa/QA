@@ -136,9 +136,6 @@ class SettlementManagementRegular(testModule):
             element1 = WebDriverWait(self.driver, 10).until(EC.presence_of_element_located((By.XPATH, "(//*[contains(@class, 'custom-select')])[2]")))
             element1.click()
 
-            # - 상품하자 선택
-            element2 = WebDriverWait(self.driver, 10).until(EC.presence_of_element_located((By.XPATH, "//*[contains(text(), '상품하자')]")))
-
             # Select 클래스를 사용하여 드롭다운 목록 다루기
             select = Select(element1)
             select.select_by_visible_text('상품하자')
@@ -543,26 +540,514 @@ class SettlementManagementRegular(testModule):
 
 
 
-            # 22. <정산현황_승인완료>
+            # 12. <공급사 계산서 발행방식 변경>
 
-            # 버튼을 클릭합니다.
-            self.interact(by_type="XPATH", name="", error_msg="")
+            # 공급사 계정 로그아웃
+            self.interact(by_type="XPATH", name="//*[contains(@class, 'nav-link') and contains(text(), 'Logout')]", error_msg="발주 관리 -> 공급사 반품내역 -> 검색 -> 상세 진입 -> 승인 -> 로그아웃 버튼 미노출")
 
-            # 확인(alert) 창을 다루기 위해 Alert 클래스를 사용합니다.
+            # 담당자(CO(QA)) 로그인
+            #  - ID 입력 : qa_coqa2@kurlycorp.com
+            #  - 비밀번호입력 : kurly12!
+
+            # 아이디(qa_coqa2@kurlycorp.com) 입력
+            self.interact(by_type="XPATH", name="//*[contains(@id, 'inputEmail')]", click=False, send_keys_msg='qa_coqa2@kurlycorp.com', error_msg="아이디 입력란 미노출")
+
+            # 비밀번호(kurly12!) 입력
+            self.interact(by_type="XPATH", name="//*[contains(@id, 'inputPassword')]", click=False, send_keys_msg='kurly12!', error_msg="비밀번호 입력란 미노출")
+
+            # 로그인
+            self.interact(by_type="XPATH", name="//*[contains(@class, 'btn btn-lg btn-block btn-primary')]", error_msg="로그인 버튼 미노출")
+
+            # 다른 브라우저에 로그인 되어 있는 계정입니다. 라고 노출 될 경우 확인 버튼 클릭
+            try:
+                # 로그아웃 텍스트 확인
+                self.interact(by_type="XPATH", name="//*[contains(text(), '로그아웃')]", click=False, error_msg="")
+
+                # 확인 버튼 클릭
+                self.interact(by_type="XPATH", name="//*[contains(@class, 'btn btn-primary') and contains(text(), '확인')]", error_msg="")
+            except:
+                pass
+
+            # '로그인 되었습니다.' 토스트 팝업 노출
+            self.interact(by_type="XPATH", name="//*[contains(@class, 'toast-container')]", click=False, error_msg="로그인 되었습니다. 텍스트 미노출")
+
+            # 공급사관리
+            self.interact(by_type="XPATH", name="//*[contains(text(), '공급사관리')]", error_msg="CO 계정 로그인 후 발주 공급사관리 미노출")
+
+            # 검색 > 공급사코드 > VD4360 > [검색]
+            self.interact(by_type="XPATH", name="//*[contains(@class, 'btn dropdown-toggle btn-primary dropdown-toggle-no-caret')]", error_msg="공급사관리 -> 검색어 선택란 미노출")
+            self.interact(by_type="XPATH", name="//*[contains(@class,'dropdown-item')]//*[contains(text(), '공급사코드')]", error_msg="공급사관리 -> 검색어 선택 옵션 중 공급사코드 미노출")
+            self.interact(by_type="XPATH", name="//*[contains(@class, 'form-control')]", click=False, send_keys_msg="VD4360", error_msg="공급사관리 -> 검색어 입력란 미노출")
+            self.interact(by_type="XPATH", name="//*[contains(@class, 'btn btn-primary') and contains(text(), '검색')]", error_msg="공급사관리 -> 검색 버튼 미노출")
+
+            # 리스트 > [상세]
+            self.interact(by_type="XPATH", name="//*[contains(@class, 'btn button-view-detail btn-primary') and contains(text(), '상세')]", error_msg="공급사관리 -> 검색 -> 상세 버튼 미노출")
+
+            # 계산서 발행 방식 > 정발행으로 변경
+            # 계산서 발행 방식 드롭박스 선택
+            element1 = WebDriverWait(self.driver, 10).until(EC.presence_of_element_located((By.XPATH, "(//*[contains(@class, 'custom-select')])[6]")))
+            element1.click()
+
+            # Select 클래스를 사용하여 드롭다운 목록 다루기
+            select = Select(element1)
+            select.select_by_visible_text('정발행')
+
+            # 저장 버튼 클릭
+            self.interact(by_type="XPATH", name="//*[contains(@class, 'btn btn-primary') and contains(text(), '저장')]", error_msg="공급사관리 -> 검색 -> 상세 -> 저장 버튼 미노출")
+
+            # 공급사관리 리스트 노출 - 빈리스트
+            self.interact(by_type="XPATH", name="//*[contains(text(), '데이터가 없습니다.')]", click=False, error_msg="공급사관리 -> '데이터가 없습니다.' 텍스트 미노출")
+
+
+
+            # 13. <매입조정 데이터 생성 배치>
+
+            # https://batch.infra.kurlycorp.kr/jobpass/loginPage.do 진입
+
+             # 새 탭 열기
+            self.driver.execute_script("window.open('');")
+
+            # 원래 탭으로 포커스 변경
+            self.driver.switch_to.window(self.driver.window_handles[0])
+
+            # 이동할 url주소
+            url = 'https://batch.infra.kurlycorp.kr/jobpass/loginPage.do'
+
+            # url 이동
+            self.driver.get(url)
+
+            # ID 및 PW 입력 > [로그온]
+            self.interact(by_type="XPATH", name="(//*[contains(@class, 'input')]//input)[1]", click=False, send_keys_msg="junhyun.kyung@kurlycorp.com", error_msg="Job-Pass 아이디 입력란 미노출")
+            self.interact(by_type="XPATH", name="(//*[contains(@class, 'input')]//input)[2]", click=False, send_keys_msg="!tlgjatlf1", error_msg="Job-Pass 비밀번호 입력란 미노출")
+            self.interact(by_type="XPATH", name="//*[contains(@class, 'btn btn-primary')]", error_msg="Job-Pass 로그인 버튼 미노출")
+
+            # 새로 열린 탭으로 포커스 변경
+            self.driver.switch_to.window(self.driver.window_handles[-1])
+
+            # GNB 영역 기능모듈 드롭박스 선택 > [디자이너]
+            self.interact(by_type="XPATH", name="(//*[contains(@class, 'arwimg')])[2]", error_msg="Job-Pass 로그인 -> 기능모듈 하위 탭 버튼 미노출")
+            self.interact(by_type="XPATH", name="//*[contains(@class, 'btn_sel_text') and contains(text(), '디자이너')]", error_msg="Job-Pass 로그인 -> 기능모듈 -> 디자이너 버튼 미노출")
+
+            # Kurly_PROD > Job lists > 파트너서비스개발 > STG > STG_eSCM-Batch > STAGE_escm-settlement-batch-returningItemToPurchasingItemJob 배치 선택
+            self.interact(by_type="XPATH", name="(//*[contains(@class, 'standartTreeImage')])[2]", error_msg="Job-Pass 로그인 -> 디자이너 -> Kurly_PROD  미노출")
+            self.interact(by_type="XPATH", name="(//*[contains(@class, 'standartTreeImage')])[4]", error_msg="Job-Pass 로그인 -> 디자이너 -> Kurly_PROD  미노출")
+            self.interact(by_type="XPATH", name="(//*[contains(@class, 'standartTreeImage')])[6]", error_msg="Job-Pass 로그인 -> 디자이너 -> Kurly_PROD  미노출")
+            self.interact(by_type="XPATH", name="(//*[contains(@class, 'standartTreeImage')])[12]", error_msg="Job-Pass 로그인 -> 디자이너 -> Kurly_PROD  미노출")
+            self.interact(by_type="XPATH", name="(//*[contains(@class, 'standartTreeImage')])[14]", error_msg="Job-Pass 로그인 -> 디자이너 -> Kurly_PROD  미노출")
+            self.interact(by_type="XPATH", name="(//*[contains(@class, 'standartTreeImage')])[16]", error_msg="Job-Pass 로그인 -> 디자이너 -> Kurly_PROD  미노출")
+
+            # STAGE_escm-settlement-batch-returningItemToPurchasingItemJob 배치 우클릭
+            element = WebDriverWait(self.driver, 10).until(EC.presence_of_element_located((By.XPATH, "//*[contains(@class, 'standartTreeRow') and contains(text(), 'STAGE_escm-settlement-batch-returningItemToPurchasingItemJob')]")))
+
+            # ActionChains 객체를 생성
+            actions = ActionChains(self.driver)
+
+            # 오른쪽 마우스 클릭 동작을 추가
+            actions.context_click(element).perform()
+
+            # 실행
+            self.interact(by_type="XPATH", name="(//*[contains(@class, 'sub_item_text')]//*[contains(text(),'실행')])[4]", error_msg="Job-Pass 로그인 -> 디자이너 -> STAGE_escm-settlement-batch-returningItemToPurchasingItemJob -> 실행 미노출")
+
+            # 실행(일반) 선택
+            self.interact(by_type="XPATH", name="//*[contains(text(),'실행(일반)')]", error_msg="Job-Pass 로그인 -> 디자이너 -> STAGE_escm-settlement-batch-returningItemToPurchasingItemJob -> 실행 -> 실행(일반) 미노출")
+
+            # 새로 열린 탭으로 포커스 변경
+            self.driver.switch_to.window(self.driver.window_handles[-1])
+
+            # 작업실행 화면 노출 > 좌측하단 [실행] 버튼
+            element = WebDriverWait(self.driver, 10).until(EC.presence_of_element_located((By.XPATH, "//*[contains(@class, 'dhxform_btn')]")))
+            element.click()
+
+            # Alert 객체를 생성합니다.
             alert = Alert(self.driver)
 
-            # 확인(alert) 창의 텍스트를 가져옵니다.
-            alert_text = alert.text
-
-            # 확인(alert) 창의 메시지를 출력하거나 필요한 처리를 수행합니다.
-            print("Alert Message:", alert_text)
-
-            # 확인(alert) 창을 닫습니다. (확인(alert) 창의 확인 버튼을 누릅니다.)
+            # 팝업 - [확인] 선택
             alert.accept()
+            sleep(2)
+
+            # 팝업 - [확인] 선택
+            # "확인" 버튼을 누릅니다.
+            alert.accept()
+            sleep(2)
+
+            # 이전 창으로 포커스를 변경합니다.
+            self.driver.switch_to.window(self.driver.window_handles[0])
+            sleep(1)
+
+            # 공급사 URL 접속
+            url = 'https://partner.stg.kurly.com/#/login'
+            self.driver.get(url)
+
+            # 배치돌아가는 시간(처리완료로 만들기)
+            sleep(120)
 
 
 
+            # 14. <매입조정 데이터 조회>
 
+            # 정산관리
+            self.interact(by_type="XPATH", name="//*[contains(text(),'정산관리')]", error_msg="CO 계정 로그인 후 발주 정산관리 미노출")
+
+            # 매입조정
+            # 검색 > 반품코드 드롭박스 선택
+            self.interact(by_type="XPATH", name="//*[contains(@class, 'btn dropdown-toggle btn-primary dropdown-toggle-no-caret')]", error_msg="정산관리 -> 검색 선택란 미노출")
+            self.interact(by_type="XPATH", name="//*[contains(@class, 'dropdown-item')]//*[contains(text(), '반품코드')]", error_msg="정산관리 -> 검색 선택란 클릭 -> 반품코드 옵션 미노출")
+
+            # 반품완료 건 반품코드 입력
+            self.interact(by_type="XPATH", name="//*[contains(@class, 'form-control')]", click=False, send_keys_msg=return_code, error_msg="정산관리 -> 검색어 입력란 미노출")
+
+            # [검색]
+            self.interact(by_type="XPATH", name="//*[contains(@class, 'btn btn-primary') and contains(text(), '검색')]", error_msg="정산관리 -> 검색 버튼 미노출")
+
+
+
+            # 15. <정산집계>
+
+            # 정산집계
+            self.interact(by_type="XPATH", name="//*[contains(text(),'정산집계')]", error_msg="정산관리 -> 정산집계 미노출")
+
+            # [+집계요청] 선택
+            self.interact(by_type="XPATH", name="//*[contains(@class,'btn mr-1 btn-primary') and contains(text(), '집계요청')]", error_msg="정산관리 -> 정산집계 -> +집계요청 버튼 미노출")
+
+            # 집계 기준일 > 수불일 > 캘린더 시작/종료일 모두 당일 선택
+            self.interact(by_type="XPATH", name="(//*[contains(@class,'datepicker-input-class form-control')])[1]", click=False, send_keys_msg=converted_current_date, error_msg="정산관리 -> 정산집계 -> 집계요청 -> 집계 기준일 입력란 미노출")
+            self.interact(by_type="XPATH", name="(//*[contains(@class,'datepicker-input-class form-control')])[2]", click=False, send_keys_msg=converted_current_date, error_msg="정산관리 -> 정산집계 -> 집계요청 -> 집계 기준일 입력란 미노출")
+
+            # 공급사코드 > [VD4360] SH 공급사 > 검색 > 선택
+            self.interact(by_type="XPATH", name="(//*[contains(@class,'btn dropdown-toggle btn-primary dropdown-toggle-no-caret')])[3]", error_msg="정산관리 -> 정산집계 -> 집계 요청 -> 공급사코드 선택란 미노출")
+            self.interact(by_type="XPATH", name="//*[contains(text(),'[VD4360]')]", error_msg="정산관리 -> 정산집계 -> 집계 요청 -> 공급사코드 선택옵션 중 '[VD4360] SH 공급사' 미노출")
+
+            # [집계마감]
+            self.interact(by_type="XPATH", name="//*[contains(@class, 'btn mr-1 btn-primary') and contains(text(), '집계마감')]", error_msg="정산관리 -> 정산집계 -> 집계 요청 -> 집계마감 버튼 미노출")
+
+            # 집계 조건 정보 팝업 - [집계하기] 버튼
+            self.interact(by_type="XPATH", name="//*[contains(@class, 'btn btn-primary') and contains(text(), '집계하기')]", error_msg="정산관리 -> 정산집계 -> 집계 요청 -> 집계마감 -> 팝업창의 집계하기 버튼 미노출")
+
+            # 토스트 팝업 노출
+            # - 성공적으로 저장되었습니다.
+            self.interact(by_type="XPATH", name="//*[contains(@class, 'toast-container')]", click=False, error_msg="정산관리 -> 정산집계 -> 집계 요청 -> 집계마감 -> 토스트 팝업 미노출")
+
+            # 정산 집계 화면 노출
+            # - 당일 날짜 상태 : 대기 건 노출
+            self.interact(by_type="XPATH", name="//*[contains(@class, 'btn btn-primary') and contains(text(), '취소')]", click=False, error_msg="정산관리 -> 정산집계 -> 집계 요청 -> 집계마감 -> 당일 날짜 상태 : 대기 건 미노출")
+
+
+
+            # 16. <정산집계 마감 배치>
+
+            # https://batch.infra.kurlycorp.kr/jobpass/loginPage.do 진입
+            # 새 탭 열기
+            self.driver.execute_script("window.open('');")
+
+            # 새로 열린 탭으로 포커스 변경
+            self.driver.switch_to.window(self.driver.window_handles[-1])
+
+            # 공급사 URL 접속
+            url = 'https://batch.infra.kurlycorp.kr/jobpass/loginPage.do'
+
+            # url 이동
+            self.driver.get(url)
+
+            # ID 및 PW 입력 > [로그온]
+            self.interact(by_type="XPATH", name="(//*[contains(@class, 'input')]//input)[1]", click=False, send_keys_msg="junhyun.kyung@kurlycorp.com", error_msg="Job-Pass 아이디 입력란 미노출")
+            self.interact(by_type="XPATH", name="(//*[contains(@class, 'input')]//input)[2]", click=False, send_keys_msg="!tlgjatlf1", error_msg="Job-Pass 비밀번호 입력란 미노출")
+            self.interact(by_type="XPATH", name="//*[contains(@class, 'btn btn-primary')]", error_msg="Job-Pass 로그인 버튼 미노출")
+
+            # Alert 객체를 생성합니다.
+            alert = Alert(self.driver)
+
+            # 팝업 - [확인] 선택
+            alert.accept()
+            sleep(2)
+
+            # 새로 열린 탭으로 포커스 변경
+            self.driver.switch_to.window(self.driver.window_handles[-1])
+
+            # GNB 영역 기능모듈 드롭박스 선택 > [디자이너]
+            self.interact(by_type="XPATH", name="(//*[contains(@class, 'arwimg')])[2]", error_msg="Job-Pass 로그인 -> 기능모듈 하위 탭 버튼 미노출")
+            self.interact(by_type="XPATH", name="//*[contains(@class, 'btn_sel_text') and contains(text(), '디자이너')]", error_msg="Job-Pass 로그인 -> 기능모듈 -> 디자이너 버튼 미노출")
+
+            # STAGE_escm-settlement-batch-aggregationPurchasingItemJob 배치 우클릭
+            element = WebDriverWait(self.driver, 10).until(EC.presence_of_element_located((By.XPATH, "//*[contains(@class, 'standartTreeRow') and contains(text(), 'STAGE_escm-settlement-batch-aggregationPurchasingItemJob')]")))
+
+            # ActionChains 객체를 생성
+            actions = ActionChains(self.driver)
+
+            # 오른쪽 마우스 클릭 동작을 추가
+            actions.context_click(element).perform()
+
+            # 실행
+            self.interact(by_type="XPATH", name="(//*[contains(@class, 'sub_item_text')]//*[contains(text(),'실행')])[4]", error_msg="Job-Pass 로그인 -> 디자이너 -> STAGE_escm-settlement-batch-aggregationPurchasingItemJob -> 실행 미노출")
+
+            # 실행(일반) 선택
+            self.interact(by_type="XPATH", name="//*[contains(text(),'실행(일반)')]", error_msg="Job-Pass 로그인 -> 디자이너 -> STAGE_escm-settlement-batch-aggregationPurchasingItemJob -> 실행 -> 실행(일반) 미노출")
+
+            # 새로 열린 탭으로 포커스 변경
+            self.driver.switch_to.window(self.driver.window_handles[-1])
+
+            # 작업실행 화면 노출 > 좌측하단 [실행] 버튼
+            element = WebDriverWait(self.driver, 10).until(EC.presence_of_element_located((By.XPATH, "//*[contains(@class, 'dhxform_btn')]")))
+            element.click()
+
+            # Alert 객체를 생성합니다.
+            alert = Alert(self.driver)
+
+            # 팝업 - [확인] 선택
+            alert.accept()
+            sleep(2)
+
+            # 팝업 - [확인] 선택
+            # "확인" 버튼을 누릅니다.
+            alert.accept()
+            sleep(2)
+
+            # 이전 창으로 포커스를 변경합니다.
+            self.driver.switch_to.window(self.driver.window_handles[0])
+            sleep(1)
+
+            # 새 탭 열기
+            self.driver.execute_script("window.open('');")
+
+            # 새로 열린 탭으로 포커스 변경
+            self.driver.switch_to.window(self.driver.window_handles[-1])
+
+            # 공급사 URL 접속
+            url = 'https://partner.stg.kurly.com/#/login'
+            self.driver.get(url)
+
+            # 배치돌아가는 시간(처리완료로 만들기)
+            sleep(120)
+
+
+
+            # 17. <정산집계 완료 조회>
+
+            # 담당자(CO(QA)) 로그인
+            # 정산관리
+            self.interact(by_type="XPATH", name="//*[contains(text(),'정산관리')]", error_msg="CO 계정 로그인 후 발주 정산관리 미노출")
+
+            # 정산집계
+            self.interact(by_type="XPATH", name="//*[contains(text(),'정산집계')]", error_msg="정산관리 -> 정산집계 미노출")
+
+            # 기간 검색 > 집계요청일 > 캘린더 시작/종료일 모두 당일 선택
+            self.interact(by_type="XPATH", name="(//*[contains(@class,'datepicker-input-class form-control')])[1]", click=False, send_keys_msg=converted_current_date, error_msg="정산관리 -> 정산집계 -> 집계요청 -> 집계 기준일 입력란 미노출")
+            self.interact(by_type="XPATH", name="(//*[contains(@class,'datepicker-input-class form-control')])[2]", click=False, send_keys_msg=converted_current_date, error_msg="정산관리 -> 정산집계 -> 집계요청 -> 집계 기준일 입력란 미노출")
+
+            # [검색]
+            self.interact(by_type="XPATH", name="//*[contains(@class, 'btn btn-primary') and contains(text(), '검색')]", error_msg="정산관리 -> 정산집계 -> 검색 버튼 미노출")
+
+            # 리스트에 집계요청 건 노출
+            # 상태 : 처리완료
+            self.interact(by_type="XPATH", name="(//*[contains(text(), '처리완료')])[2]", click=False, error_msg="정산관리 -> 정산집계 -> 역방향 배치 -> 검색 -> '처리완료' 텍스트 미노출")
+
+
+
+            # 18. <정산 현황 버튼 활성화 확인>
+
+            # 정산 현황
+            self.interact(by_type="XPATH", name="//*[contains(@class, 'nav flex-column')]//*[contains(text(), '정산현황')]", error_msg="정산관리 -> 정산현황 미노출")
+
+            # 상태 > 집계완료 선택
+            self.interact(by_type="XPATH", name="(//*[contains(@class, 'btn dropdown-toggle btn-primary dropdown-toggle-no-caret')])[3]", error_msg="정산관리 -> 정산현황 -> 상태 선택란 미노출")
+            self.interact(by_type="XPATH", name="//*[contains(@class, 'dropdown-item')]//*[contains(text(), '집계완료')]", error_msg="정산관리 -> 정산현황 -> 상태 선택란 -> 집계완료 옵션 미노출")
+
+            # [검색]
+            self.interact(by_type="XPATH", name="//*[contains(@class, 'btn btn-primary') and contains(text(), '검색')]", error_msg="정산관리 -> 정산현황 -> 검색 미노출")
+
+            # 정산코드 저장
+            element = WebDriverWait(self.driver, 10).until(EC.element_to_be_clickable((By.XPATH, "(//*[contains(@class, 'table table-bordered table-striped custom-table-hover')]//span)[2]")))
+            settlement_code = element.text
+
+
+
+            # 19. <정산현황_승인요청>
+
+            # 검색 > 정산코드 > 해당 정산 건 코드 입력
+            self.interact(by_type="XPATH", name="//*[contains(@class, 'form-control')]", send_keys_msg=settlement_code, error_msg="정산관리 -> 정산현황 -> 검색어 입력란 미노출")
+            self.interact(by_type="XPATH", name="//*[contains(@class, 'btn btn-primary') and contains(text(), '검색')]", error_msg="정산관리 -> 정산현황 -> 검색 미노출")
+
+            # 리스트 > 해당 정산 건 체크박스 선택
+            self.interact(by_type="XPATH", name="//*[contains(@class, 'list-checkbox list-checkbox-margin custom-control custom-checkbox')]", error_msg="정산관리 -> 정산현황 -> 검색 -> 체크박스 미노출")
+
+            # [승인요청]
+            self.interact(by_type="XPATH", name="//*[contains(@class, 'btn mr-1 btn-primary') and contains(text(), '승인요청')]", error_msg="정산관리 -> 정산현황 -> 검색 -> 체크박스 클릭 -> 승인 요청 버튼 미노출")
+
+            # 안내팝업 - [확인]
+            self.interact(by_type="XPATH", name="//*[contains(@class, 'btn btn-primary') and contains(text(), '확인')]", error_msg="정산관리 -> 정산현황 -> 검색 -> 체크박스 클릭 -> 승인 요청 클릭 -> 확인 버튼 미노출")
+
+            # 토스트 팝업 노출
+            # - 성공적으로 승인요청 되었습니다.
+            self.interact(by_type="XPATH", name="//*[contains(@class, 'toast-container')]", click=False, error_msg="성공적으로 승인요청 되었습니다. 텍스트 미노출")
+
+            # 검색 필터 > 해당 정산 건 코드 입력
+            self.interact(by_type="XPATH", name="//*[contains(@class, 'btn btn-primary') and contains(text(), '검색')]", error_msg="정산관리 -> 정산현황 -> 승인요청 -> 검색 버튼 미노출")
+
+            # 리스트 확인 해당 정산 건 상태 : 승인요청
+            self.interact(by_type="XPATH", name="//*[contains(text(), '데이터가 없습니다.')]", error_msg="정산관리 -> 정산현황 -> 승인 요청 -> 검색 -> 데이터가 없습니다. 미노출")
+
+
+
+            # 20. <공급사 정산현황_승인>
+
+            # CO 계정 로그아웃
+            self.interact(by_type="XPATH", name="//*[contains(@class, 'nav-link') and contains(text(), 'Logout')]", error_msg="정산 관리 -> 로그아웃 버튼 미노출")
+
+            # 새 탭 열기
+            self.driver.execute_script("window.open('');")
+
+            # 새로 열린 탭으로 포커스 변경
+            self.driver.switch_to.window(self.driver.window_handles[-1])
+
+            # 공급사 URL 접속
+            url = 'https://partner.stg.kurly.com/#/login'
+            self.driver.get(url)
+
+            # 공급사 계정 로그인
+            #  - ID 입력 : VD4360.01
+            #  - 비밀번호입력 : kurly12!@
+
+            # 아이디(VD4360.01) 입력
+            self.interact(by_type="XPATH", name="//*[contains(@id, 'inputEmail')]", click=False, send_keys_msg='VD4360.01', error_msg="아이디 입력란 미노출")
+
+            # 비밀번호(kurly12!@) 입력
+            self.interact(by_type="XPATH", name="//*[contains(@id, 'inputPassword')]", click=False, send_keys_msg='kurly12!@', error_msg="비밀번호 입력란 미노출")
+
+            # 로그인
+            self.interact(by_type="XPATH", name="//*[contains(@class, 'btn btn-lg btn-block btn-primary')]", error_msg="로그인 버튼 미노출")
+
+            # 다른 브라우저에 로그인 되어 있는 계정입니다. 라고 노출 될 경우 확인 버튼 클릭
+            try:
+                # 로그아웃 텍스트 확인
+                self.interact(by_type="XPATH", name="//*[contains(text(), '로그아웃')]", click=False, error_msg="")
+
+                # 확인 버튼 클릭
+                self.interact(by_type="XPATH", name="//*[contains(@class, 'btn btn-primary') and contains(text(), '확인')]", error_msg="")
+            except:
+                pass
+
+            # '로그인 되었습니다.' 토스트 팝업 노출
+            self.interact(by_type="XPATH", name="//*[contains(@class, 'toast-container')]", click=False, error_msg="로그인 되었습니다. 텍스트 미노출")
+
+            # 정산관리
+            self.interact(by_type="XPATH", name="//*[contains(text(), '정산관리')]", error_msg="MD 계정 로그인 후 정산관리 미노출")
+
+            # 정산현황
+            self.interact(by_type="XPATH", name="//*[contains(text(), '정산현황')]", error_msg="정산관리 -> 정산현황 미노출")
+
+            # 검색 > 정산코드 > 해당 정산 건 코드 입력
+            self.interact(by_type="XPATH", name="//*[contains(@class, 'form-control')]", send_keys_msg=settlement_code, error_msg="정산관리 -> 정산현황 -> 검색어 입력란 미노출")
+            self.interact(by_type="XPATH", name="//*[contains(@class, 'btn btn-primary') and contains(text(), '검색')]", error_msg="정산관리 -> 정산현황 -> 검색 미노출")
+
+            # 리스트 > 해당 정산 건 체크박스 선택
+            self.interact(by_type="XPATH", name="//*[contains(@class, 'list-checkbox list-checkbox-margin custom-control custom-checkbox')]", error_msg="정산관리 -> 정산현황 -> 검색 -> 체크박스 미노출")
+
+            # [승인]
+            self.interact(by_type="XPATH", name="//*[contains(@class, 'btn mr-1 btn-primary') and contains(text(), '승인')]", error_msg="정산관리 -> 정산현황 -> 검색 -> 체크박스 클릭 -> 승인 버튼 미노출")
+
+            # 안내팝업 - [확인]
+            self.interact(by_type="XPATH", name="//*[contains(@class, 'btn btn-primary') and contains(text(), '확인')]", error_msg="정산관리 -> 정산현황 -> 검색 -> 체크박스 클릭 -> 승인 클릭 -> 확인 버튼 미노출")
+
+            # 토스트 팝업 노출
+            # - 성공적으로 승인요청 되었습니다.
+            self.interact(by_type="XPATH", name="//*[contains(@class, 'toast-container')]", click=False, error_msg="성공적으로 승인요청 되었습니다. 텍스트 미노출")
+
+            # 검색 필터 > 해당 정산 건 코드 입력
+            self.interact(by_type="XPATH", name="//*[contains(@class, 'btn btn-primary') and contains(text(), '검색')]", error_msg="정산관리 -> 정산현황 -> 검색 -> 체크박스 클릭 -> 승인 클릭 -> 확인 버튼 -> 검색 버튼 미노출")
+
+            # 상태 : 승인완료 / 계산서발행 : 정발행대기
+            self.interact(by_type="XPATH", name="//*[contains(text(), '승인완료')]", click=False, error_msg="정산관리 -> 정산현황 -> 검색 -> 체크박스 클릭 -> 승인 클릭 -> 확인 버튼 -> '승인완료' 텍스트 미노출")
+            self.interact(by_type="XPATH", name="//*[contains(text(), '정발행대기')]", click=False, error_msg="정산관리 -> 정산현황 -> 검색 -> 체크박스 클릭 -> 승인 클릭 -> 확인 버튼 -> '정발행대기' 텍스트 미노출")
+
+
+
+            # 21. <정산 현황 버튼 활성화 확인>
+
+            # 공급사 계정 로그아웃
+            self.interact(by_type="XPATH", name="//*[contains(@class, 'nav-link') and contains(text(), 'Logout')]", error_msg="정산 관리 -> 로그아웃 버튼 미노출")
+
+            # 새 탭 열기
+            self.driver.execute_script("window.open('');")
+
+            # 새로 열린 탭으로 포커스 변경
+            self.driver.switch_to.window(self.driver.window_handles[-1])
+
+            # 담당자 URL 접속
+            url = 'https://partner.stg.kurly.com/#/stafflogin'
+
+            # url 이동
+            self.driver.get(url)
+
+            # 담당자(CO(QA)) 로그인
+            #  - ID 입력 : qa_coqa2@kurlycorp.com
+            #  - 비밀번호입력 : kurly12!
+
+            # 아이디(qa_coqa2@kurlycorp.com) 입력
+            self.interact(by_type="XPATH", name="//*[contains(@id, 'inputEmail')]", click=False, send_keys_msg='qa_coqa2@kurlycorp.com', error_msg="아이디 입력란 미노출")
+
+            # 비밀번호(kurly12!) 입력
+            self.interact(by_type="XPATH", name="//*[contains(@id, 'inputPassword')]", click=False, send_keys_msg='kurly12!', error_msg="비밀번호 입력란 미노출")
+
+            # 로그인
+            self.interact(by_type="XPATH", name="//*[contains(@class, 'btn btn-lg btn-block btn-primary')]", error_msg="로그인 버튼 미노출")
+
+            # 다른 브라우저에 로그인 되어 있는 계정입니다. 라고 노출 될 경우 확인 버튼 클릭
+            try:
+                # 로그아웃 텍스트 확인
+                self.interact(by_type="XPATH", name="//*[contains(text(), '로그아웃')]", click=False, error_msg="")
+
+                # 확인 버튼 클릭
+                self.interact(by_type="XPATH", name="//*[contains(@class, 'btn btn-primary') and contains(text(), '확인')]", error_msg="")
+            except:
+                pass
+
+            # '로그인 되었습니다.' 토스트 팝업 노출
+            self.interact(by_type="XPATH", name="//*[contains(@class, 'toast-container')]", click=False, error_msg="로그인 되었습니다. 텍스트 미노출")
+
+            # 정산관리
+            self.interact(by_type="XPATH", name="//*[contains(text(), '정산관리')]", error_msg="CO 계정 로그인 후 정산관리 미노출")
+
+            # 정산 현황
+            self.interact(by_type="XPATH", name="//*[contains(text(), '정산현황')]", error_msg="정산관리 -> 정산현황 미노출")
+
+            # 검색 > 해당 정산 건 검색
+            self.interact(by_type="XPATH", name="//*[contains(@class, 'form-control')]", send_keys_msg=settlement_code, error_msg="정산관리 -> 정산현황 -> 검색어 입력란 미노출")
+            self.interact(by_type="XPATH", name="//*[contains(@class, 'btn btn-primary') and contains(text(), '검색')]", error_msg="정산관리 -> 정산현황 -> 검색 미노출")
+
+            # 상태 : 승인완료 / 계산서발행 : 정발행대기
+            self.interact(by_type="XPATH", name="//*[contains(text(), '승인완료')]", click=False, error_msg="정산관리 -> 정산현황 -> 검색 -> '승인완료' 텍스트 미노출")
+            self.interact(by_type="XPATH", name="//*[contains(text(), '정발행대기')]", click=False, error_msg="정산관리 -> 정산현황 -> 검색 -> '정발행대기' 텍스트 미노출")
+
+
+
+            # 22. <정산현황_승인완료>
+
+            # 담당자(CO(QA)) 로그인
+            # 정산관리
+            self.interact(by_type="XPATH", name="//*[contains(text(),'정산관리')]", error_msg="CO 계정 로그인 후 발주 정산관리 미노출")
+
+            # 정산현황
+            self.interact(by_type="XPATH", name="//*[contains(text(),'정산현황')]", error_msg="정산관리 -> 정산현황 미노출")
+
+            # 리스트 > 해당 정산 건 체크박스 선택
+            self.interact(by_type="XPATH", name="//*[contains(@class, 'btn btn-primary') and contains(text(), '상세')]", error_msg="정산관리 -> 정산현황 -> 상세 버튼 미노출")
+
+            # [(정)계산서발행]
+            self.interact(by_type="XPATH", name="//*[contains(@class, 'btn mr-1 btn-primary') and contains(text(), '(정)계산서발행')]", error_msg="정산관리 -> 정산현황 -> 상세 -> (정)계산서발행 버튼 미노출")
+
+            # 파일선택
+            file_path = os.environ.get('FILE_UPLOAD_PAPO')
+            self.interact(by_type="XPATH", name="//*[contains(@class, 'custom-file-input')]", click=False, send_keys_msg=file_path, error_msg="정산관리 -> 정산현황 -> 상세 -> (정)계산서발행 -> 파일명 입력란 미노출")
+
+            # 파일업로드
+            self.interact(by_type="XPATH", name="//*[contains(@class, 'btn btn-primary')]", error_msg="정산관리 -> 정산현황 -> 상세 -> (정)계산서발행 -> 파일업로드 버튼 미노출")
+
+            # 토스트 팝업 노출
+            # - 성공적으로 저장되었습니다.
+            self.interact(by_type="XPATH", name="//*[contains(@class, 'toast-container')]", click=False, error_msg="정산관리 -> 정산현황 -> 상세 -> (정)계산서발행 -> 파일업로드 -> '성공적으로 저장되었습니다.' 토스트 팝업  미노출")
+
+            # 상태 : 승인완료 / 계산서발행 : 정발행완료
+            self.interact(by_type="XPATH", name="//*[contains(text(), '승인완료')]", click=False, error_msg="정산관리 -> 정산현황 -> 상세 -> (정)계산서발행 -> 파일업로드 -> '승인완료' 텍스트 미노출")
+            self.interact(by_type="XPATH", name="//*[contains(text(), '정발행완료')]", click=False, error_msg="정산관리 -> 정산현황 -> 상세 -> (정)계산서발행 -> 파일업로드 -> '정발행완료' 텍스트 미노출")
 
             # 담당자 탭 닫기
             self.driver.close()

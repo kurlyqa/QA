@@ -81,8 +81,8 @@ class SiteManagement(testModule):
             # 업무파트=IB
             # 팀명=김포상온 A
             # 근무 Shift=00:00 ~ 01:50
-            self.interact(by_type="XPATH", name="(//*[contains(@class, 'v-select__selections')])[1]", error_msg="업무파트 선택란 미노출")
-            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-list-item__title') and contains(text(), 'IB')]", error_msg="IB")
+            self.interact(by_type="XPATH", name="(//*[contains(@class, 'v-select__selections')])[1]", wait_sec=5, error_msg="업무파트 선택란 미노출")
+            self.interact(by_type="XPATH", name="//*[contains(text(), 'IB')]", wait_sec=5, error_msg="IB")
             self.interact(by_type="XPATH", name="(//*[contains(@class, 'v-select__selections')])[2]", error_msg="팀명 선택란 미노출")
             self.interact(by_type="XPATH", name="//*[contains(@class, 'v-list-item__title') and contains(text(), '김포상온 A')]", error_msg="김포상온 A 미노출")
             self.interact(by_type="XPATH", name="(//*[contains(@class, 'v-select__selections')])[3]", error_msg="근무 Shift 선택란 미노출")

@@ -14,13 +14,7 @@ class testModule(unittest.TestCase):
         chrome_options = webdriver.ChromeOptions()
 
         # headless 모드 설정
-        # 크롬 옵션 설정
         chrome_options.add_argument('headless')
-        chrome_options.add_argument('--disable-gpu')
-
-        # headless 모드에서 네트워크 설정 변경
-        chrome_options.add_argument('--no-sandbox')
-        chrome_options.add_argument('--disable-dev-shm-usage')
 
         # 크롬 위치 명시
         chrome_options.binary_location = "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"

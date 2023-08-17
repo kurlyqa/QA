@@ -84,8 +84,8 @@ class TaskManagement(testModule):
             # 업무파트=IB
             # 팀명=김포상온 A
             # 근무 Shift=00:00 ~ 01:50
-            self.interact(by_type="XPATH", name="(//*[contains(@class, 'v-select__selections')])[1]", error_msg="업무파트 선택란 미노출")
-            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-list-item__title') and contains(text(), 'IB')]", error_msg="IB")
+            self.interact(by_type="XPATH", name="(//*[contains(@class, 'v-select__selections')])[1]", wait_sec=5, error_msg="업무파트 선택란 미노출")
+            self.interact(by_type="XPATH", name="//*[contains(text(), 'IB')]", wait_sec=5, error_msg="IB")
             self.interact(by_type="XPATH", name="(//*[contains(@class, 'v-select__selections')])[2]", error_msg="팀명 선택란 미노출")
             self.interact(by_type="XPATH", name="//*[contains(@class, 'v-list-item__title') and contains(text(), '김포상온 A')]", error_msg="김포상온 A 미노출")
             self.interact(by_type="XPATH", name="(//*[contains(@class, 'v-select__selections')])[3]", error_msg="근무 Shift 선택란 미노출")
@@ -739,8 +739,8 @@ class TaskManagement(testModule):
             else:
                 raise Exception("연장근무 희망 관리 초기화 후 연장근무 가능시간 활성화 상태")
 
-            # 최종 체크인 대분류 공정:선택(비활)
-            self.interact(by_type="XPATH", name="(//*[contains(@class, 'v-select__selections')])[8]//*[contains(text(), '선택')]", click=False, error_msg="연장근무 희망 관리 초기화 후 최종 체크인 대분류 공정 선택란 선택 텍스트 미노출")
+            # 최종 체크인 대분류 공정:전체(비활)
+            self.interact(by_type="XPATH", name="(//*[contains(@class, 'v-select__selections')])[8]//*[contains(text(), '전체')]", click=False, error_msg="연장근무 희망 관리 초기화 후 최종 체크인 대분류 공정 선택란 전체 텍스트 미노출")
 
             select_element = WebDriverWait(self.driver, 10).until(EC.presence_of_element_located((By.XPATH, "(//*[contains(@class, 'v-select__selections')])[8]//input")))
             is_disabled = select_element.get_attribute("disabled")
@@ -750,8 +750,8 @@ class TaskManagement(testModule):
             else:
                 raise Exception("연장근무 희망 관리 초기화 후 최종 체크인 대분류 공정 활성화 상태")
 
-            # 최종 체크인 소분류 공정:선택(비활)
-            self.interact(by_type="XPATH", name="(//*[contains(@class, 'v-select__selections')])[9]//*[contains(text(), '선택')]", click=False, error_msg="연장근무 희망 관리 초기화 후 최종 체크인 소분류 공정 선택란 선택 텍스트 미노출")
+            # 최종 체크인 소분류 공정:전체(비활)
+            self.interact(by_type="XPATH", name="(//*[contains(@class, 'v-select__selections')])[9]//*[contains(text(), '전체')]", click=False, error_msg="연장근무 희망 관리 초기화 후 최종 체크인 소분류 공정 선택란 전체 텍스트 미노출")
 
             select_element = WebDriverWait(self.driver, 10).until(EC.presence_of_element_located((By.XPATH, "(//*[contains(@class, 'v-select__selections')])[9]//input")))
             is_disabled = select_element.get_attribute("disabled")
@@ -792,7 +792,7 @@ class TaskManagement(testModule):
             self.interact(by_type="XPATH", name="//*[contains(@class, 'primary v-btn v-btn--contained theme--light v-size--default')]", error_msg="연장근무 희망 관리 탭 검색 버튼 미노출")
 
             # [다운로드] 버튼 선택
-            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-btn v-btn--contained theme--light v-size--default primary')]", error_msg="연장근무 희망 관리 조회 후 다운로드 버튼 미노출")
+            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-btn v-btn--contained theme--light v-size--default primary')]//*[contains(text(), '다운로드')]", error_msg="연장근무 희망 관리 조회 후 다운로드 버튼 미노출")
 
             # 개인정보 다운로드 설정 사유 입력
             self.interact(by_type="XPATH", name="(//*[contains(@class, 'v-text-field__slot')]//input)[2]", click=False, send_keys_msg='테스트테스트테스트테스트', error_msg="연장근무 희망 관리 조회 후 다운로드 시 다운로드 사유 입력란 미노출")

@@ -27,7 +27,7 @@ suite = TestSuite([s1, s2, s3, s4, s5, s6])
 
 daytime = datetime.datetime.now()
 dt = daytime.strftime("%Y-%m-%d_%H-%M-%S")
-domain = "LMS"
+domain = "Kurlyro"
 filename = domain + f"AutomationTestReport"
 dir = os.getcwd()
 
