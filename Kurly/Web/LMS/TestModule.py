@@ -21,7 +21,8 @@ class testModule(unittest.TestCase):
         chrome_driver_binary = "/usr/local/bin/chromedriver"
 
         # 크롬 드라이버 설치
-        self.driver = webdriver.Chrome(chrome_driver_binary, service=Service(ChromeDriverManager().install()), options=chrome_options)
+        chrome_driver_service = Service(ChromeDriverManager().install())
+        self.driver = webdriver.Chrome(executable_path=chrome_driver_binary, options=chrome_options, service=chrome_driver_service)
 
         # 웹페이지 전체가 로드 될때까지 기다림
         self.driver.implicitly_wait(100) # 또는 self.driver.set_page_load_timeout(30)
