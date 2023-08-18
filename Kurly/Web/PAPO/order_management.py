@@ -390,8 +390,15 @@ class OrderManagement(testModule):
             # 발주관리
             self.interact(by_type="XPATH", name="//*[contains(text(), '발주관리')]", error_msg="MD 계정 로그인 후 발주 관리 미노출")
 
-            # 발주서 내역 클릭
-            self.interact(by_type="XPATH", name="//*[contains(text(), '발주서 내역')]", error_msg="MD 계정 로그인 후 발주 관리의 발주서 내역 버튼 미노출")
+            try:
+                # 발주서 내역 클릭
+                self.interact(by_type="XPATH", name="//*[contains(text(), '발주서 내역')]", error_msg="")
+            except:
+                # 발주관리
+                self.interact(by_type="XPATH", name="(//*[contains(text(), '발주관리')])[2]", error_msg="")
+
+                # 발주서 내역 클릭
+                self.interact(by_type="XPATH", name="//*[contains(text(), '발주서 내역')]", error_msg="")
 
             # 검색버튼 선택
             self.interact(by_type="XPATH", name="//*[contains(@class, 'btn dropdown-toggle btn-primary dropdown-toggle-no-caret')]", error_msg="발주내역서 탭에서 검색 종류 선택란 미노출")
