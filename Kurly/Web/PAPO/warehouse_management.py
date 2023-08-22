@@ -156,7 +156,7 @@ class WarehouseManagement(testModule):
 
             # 다운받은 엑셀 파일 삭제
             for file_name in os.listdir(folder_path):
-                if file_name.endswith(".xlsx"):
+                if file_name.endswith(".pdf"):
                     file_path = os.path.join(folder_path, file_name)
                     os.remove(file_path)
 
