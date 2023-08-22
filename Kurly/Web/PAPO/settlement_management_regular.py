@@ -686,11 +686,11 @@ class SettlementManagementRegular(testModule):
             # 14. <매입조정 데이터 조회>
 
             # 정산관리
-            self.interact(by_type="XPATH", name="//*[contains(text(),'정산관리')]", error_msg="CO 계정 로그인 후 발주 정산관리 미노출")
+            self.interact(by_type="XPATH", name="//*[contains(text(),'정산관리')]", wait_sec=10, error_msg="CO 계정 로그인 후 발주 정산관리 미노출")
 
             # 매입조정
             # 검색 > 반품코드 드롭박스 선택
-            self.interact(by_type="XPATH", name="//*[contains(@class, 'btn dropdown-toggle btn-primary dropdown-toggle-no-caret')]", error_msg="정산관리 -> 검색 선택란 미노출")
+            self.interact(by_type="XPATH", name="(//*[contains(@class, 'btn dropdown-toggle btn-primary dropdown-toggle-no-caret')])[1]", error_msg="정산관리 -> 검색 선택란 미노출")
             self.interact(by_type="XPATH", name="//*[contains(@class, 'dropdown-item')]//*[contains(text(), '반품코드')]", error_msg="정산관리 -> 검색 선택란 클릭 -> 반품코드 옵션 미노출")
 
             # 반품완료 건 반품코드 입력

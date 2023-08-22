@@ -56,7 +56,7 @@ class OrderManagement(testModule):
             # 상품 등록 상태(발주가능, 사용여부 Y)
 
             # 발주관리
-            self.interact(by_type="XPATH", name="//*[contains(text(), '발주관리')]", error_msg="MD 계정 로그인 후 발주 관리 미노출")
+            self.interact(by_type="XPATH", name="//*[contains(text(), '발주관리')]", wait_sec=10, error_msg="MD 계정 로그인 후 발주 관리 미노출")
 
             # 발주등록 버튼 노출 확인
             self.interact(by_type="XPATH", name="//*[contains(@id, 'viewPurchaseOrder')]", click=False, error_msg="발주관리 탭에서 발주등록 버튼 미노출")
@@ -270,7 +270,7 @@ class OrderManagement(testModule):
             self.interact(by_type="XPATH", name="//*[contains(@class, 'toast-container')]", error_msg="확인 버튼 미노출")
 
             # 발주관리
-            self.interact(by_type="XPATH", name="//*[contains(text(), '발주관리')]", error_msg="공급사 계정 로그인 후 발주 관리 미노출")
+            self.interact(by_type="XPATH", name="//*[contains(text(), '발주관리')]", wait_sec=10, error_msg="공급사 계정 로그인 후 발주 관리 미노출")
 
             # 발주생성 : N뱃지 선택
             self.interact(by_type="XPATH", name="//*[contains(@class, 'badge badge-danger badge-pill')]", error_msg="공급사 계정 발주 관리탭 N뱃지 미노출")
@@ -388,7 +388,7 @@ class OrderManagement(testModule):
             self.interact(by_type="XPATH", name="//*[contains(@class, 'toast-container')]", click=False, error_msg="로그인 되었습니다. 텍스트 미노출")
 
             # 발주관리
-            self.interact(by_type="XPATH", name="//*[contains(text(), '발주관리')]", error_msg="MD 계정 로그인 후 발주 관리 미노출")
+            self.interact(by_type="XPATH", name="//*[contains(text(), '발주관리')]", wait_sec=10, error_msg="MD 계정 로그인 후 발주 관리 미노출")
 
             # 발주서 내역 클릭
             self.interact(by_type="XPATH", name="//*[contains(text(), '발주서 내역')]", error_msg="발주 관리 -> 발주서 내역 미노출")
