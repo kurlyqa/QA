@@ -20,9 +20,8 @@ class WarehouseManagement(testModule):
 
     def test_03_입고관리(self):
         try:
-            # 파일 삭제 시 주소 ( 각 PC마다 변경해야 함 )
-            # folder_path = "/Users/122d6424/Git/Kurly/Web/PAPO"
-            folder_path = "/Users/122d6424/Downloads"
+            # 파일 삭제 시 주소(환경변수 설정 필요!)
+            folder_path = os.environ.get('FOLDER_PATH')
 
             # 1. <입고예정 내역 조회>
 
