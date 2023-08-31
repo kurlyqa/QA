@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 import unittest
+import os
+import datetime
 from time import sleep
 from selenium.webdriver.common.by import By
 from selenium import webdriver
@@ -35,6 +37,6 @@ class testModule(unittest.TestCase):
                 self.driver.execute_script("arguments[0].click();", ele)
 
             sleep(wait_sec)
-        except:
+        except Exception as e:
             print(error_msg)
-            raise Exception(error_msg)
+            raise Exception(error_msg) from e

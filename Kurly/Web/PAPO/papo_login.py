@@ -17,6 +17,8 @@ class PAPOLogin(testModule):
 
     def test_01_PAPO_로그인(self):
         try:
+            # 1. <담당자 로그인>
+
             # 이동할 url주소
             url = 'https://partner.stg.kurly.com/#/stafflogin'
 
@@ -25,8 +27,6 @@ class PAPOLogin(testModule):
 
             # 브라우저 최대화
             self.driver.maximize_window()
-
-            # 1. <담당자 로그인>
 
             # 로그인 페이지 진입
             # 아이디(qa_md2@kurlycorp.com) 입력

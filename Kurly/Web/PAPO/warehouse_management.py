@@ -20,10 +20,10 @@ class WarehouseManagement(testModule):
 
     def test_03_입고관리(self):
         try:
+            # 1. <입고예정 내역 조회>
+
             # 파일 삭제 시 주소(환경변수 설정 필요!)
             folder_path = os.environ.get('FOLDER_PATH')
-
-            # 1. <입고예정 내역 조회>
 
             # 담당자 로그인
             # 이동할 url주소
@@ -58,11 +58,19 @@ class WarehouseManagement(testModule):
             # '로그인 되었습니다.' 토스트 팝업 노출
             self.interact(by_type="XPATH", name="//*[contains(@class, 'toast-container')]", click=False, error_msg="로그인 되었습니다. 텍스트 미노출")
 
+            sleep(30)
+
             # 입고관리
             self.interact(by_type="XPATH", name="//*[contains(text(), '입고관리')]", error_msg="MD 계정 로그인 후 입고 관리 미노출")
 
-            # 입고예정
-            self.interact(by_type="XPATH", name="//*[contains(@class, 'nav-link')]//*[contains(text(), '입고예정')]", error_msg="입고 관리탭 입고 예정 미노출")
+            try:
+                # 입고예정
+                self.interact(by_type="XPATH", name="//*[contains(@class, 'nav-link')]//*[contains(text(), '입고예정')]", error_msg="입고 관리탭 입고 예정 미노출")
+            except:
+                # 입고관리
+                self.interact(by_type="XPATH", name="//*[contains(text(), '입고관리')]", error_msg="MD 계정 로그인 후 입고 관리 미노출")
+                # 입고예정
+                self.interact(by_type="XPATH", name="//*[contains(@class, 'nav-link')]//*[contains(text(), '입고예정')]", error_msg="입고 관리탭 입고 예정 미노출")
 
             # 검색 드롭박스 선택
             self.interact(by_type="XPATH", name="//*[contains(@class, 'btn dropdown-toggle btn-primary dropdown-toggle-no-caret')]", error_msg="입고 관리탭 입고 예정에서 검색 드롭박스 미노출")

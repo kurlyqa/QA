@@ -23,10 +23,10 @@ class TaskManagement(testModule):
 
     def test_02_작업관리(self):
         try:
+            # 1. <공정별 투입인원 현황 조회>
+
             # 파일 삭제 시 주소(환경변수 설정 필요!)
             folder_path = os.environ.get('FOLDER_PATH')
-
-            # 1. <공정별 투입인원 현황 조회>
 
             # 작업자 체크인상태
             # 이동할 url주소

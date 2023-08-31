@@ -16,6 +16,8 @@ class LMSWebLogin(testModule):
 
     def test_01_LMS_Web_로그인(self):
         try:
+            # 1. <로그인>
+
             # 이동할 url주소
             url = 'https://admin-lms.stg.kurly.com/?#/login'
 
@@ -37,6 +39,10 @@ class LMSWebLogin(testModule):
 
             # 로그인 되었습니다 팝업 노출
             self.interact(by_type="XPATH", name="//*[contains(text(), '로그인 되었습니다.')]", click=False, error_msg="로그인 되었습니다. 텍스트 미노출")
+
+
+
+            # 2. <로그아웃>
 
             # 최종접속일시 노출(YYYY-MM-DD HH:MM:SS) -> 시간에 대한 비교로 테스트하면 오차가 생기기 때문에 형태값에 대한 테스트 진행
             # 최종접속일시 노출(YYYY-MM-DD HH:MM:SS)의 UI 요소를 찾아서 안에 있는 텍스트를 가져옴

@@ -60,11 +60,20 @@ class SettlementManagementRegular(testModule):
             # '로그인 되었습니다.' 토스트 팝업 노출
             self.interact(by_type="XPATH", name="//*[contains(@class, 'toast-container')]", click=False, error_msg="로그인 되었습니다. 텍스트 미노출")
 
+            sleep(30)
+
             # 발주관리
             self.interact(by_type="XPATH", name="//*[contains(text(), '발주관리')]", error_msg="MD 계정 로그인 후 발주 관리 미노출")
 
-            # 공급사 반품내역
-            self.interact(by_type="XPATH", name="//*[contains(text(), '공급사 반품내역')]", error_msg="발주 관리에서 공급사 반품내역 미노출")
+            try:
+                # 공급사 반품내역
+                self.interact(by_type="XPATH", name="//*[contains(text(), '공급사 반품내역')]", error_msg="발주 관리에서 공급사 반품내역 미노출")
+            except:
+                # 발주관리
+                self.interact(by_type="XPATH", name="//*[contains(text(), '발주관리')]", error_msg="MD 계정 로그인 후 발주 관리 미노출")
+
+                # 공급사 반품내역
+                self.interact(by_type="XPATH", name="//*[contains(text(), '공급사 반품내역')]", error_msg="발주 관리에서 공급사 반품내역 미노출")
 
             # [+공급사 반품 등록] 버튼 선택
             self.interact(by_type="XPATH", name="//*[contains(text(), '공급사 반품 등록')]", error_msg="발주 관리에서 [+공급사 반품 등록] 버튼 미노출")
@@ -266,11 +275,20 @@ class SettlementManagementRegular(testModule):
             # '로그인 되었습니다.' 토스트 팝업 노출
             self.interact(by_type="XPATH", name="//*[contains(@class, 'toast-container')]", click=False, error_msg="로그인 되었습니다. 텍스트 미노출")
 
+            sleep(30)
+
             # 발주관리
             self.interact(by_type="XPATH", name="//*[contains(text(), '발주관리')]", error_msg="LC 계정 로그인 후 발주 관리 미노출")
 
-            # 공급사 반품내역
-            self.interact(by_type="XPATH", name="//*[contains(text(), '공급사 반품내역')]", error_msg="발주 관리 -> 공급사 반품내역 미노출")
+            try:
+                # 공급사 반품내역
+                self.interact(by_type="XPATH", name="//*[contains(text(), '공급사 반품내역')]", error_msg="발주 관리에서 공급사 반품내역 미노출")
+            except:
+                # 발주관리
+                self.interact(by_type="XPATH", name="//*[contains(text(), '발주관리')]", error_msg="MD 계정 로그인 후 발주 관리 미노출")
+
+                # 공급사 반품내역
+                self.interact(by_type="XPATH", name="//*[contains(text(), '공급사 반품내역')]", error_msg="발주 관리에서 공급사 반품내역 미노출")
 
             # 상품명검색 : [QA] SH자동화
             self.interact(by_type="XPATH", name="//*[contains(@class, 'form-control')]", click=False, send_keys_msg="[QA] SH자동화", error_msg="발주 관리 -> 공급사 반품내역 -> 상품명 입력란 미노출")
@@ -331,11 +349,20 @@ class SettlementManagementRegular(testModule):
             # '로그인 되었습니다.' 토스트 팝업 노출
             self.interact(by_type="XPATH", name="//*[contains(@class, 'toast-container')]", click=False, error_msg="로그인 되었습니다. 텍스트 미노출")
 
+            sleep(30)
+
             # 발주관리
             self.interact(by_type="XPATH", name="//*[contains(text(), '발주관리')]", error_msg="LC 계정 로그인 후 발주 관리 미노출")
 
-            # 공급사 반품내역
-            self.interact(by_type="XPATH", name="//*[contains(text(), '공급사 반품내역')]", error_msg="발주 관리 -> 공급사 반품내역 미노출")
+            try:
+                # 공급사 반품내역
+                self.interact(by_type="XPATH", name="//*[contains(text(), '공급사 반품내역')]", error_msg="발주 관리에서 공급사 반품내역 미노출")
+            except:
+                # 발주관리
+                self.interact(by_type="XPATH", name="//*[contains(text(), '발주관리')]", error_msg="MD 계정 로그인 후 발주 관리 미노출")
+
+                # 공급사 반품내역
+                self.interact(by_type="XPATH", name="//*[contains(text(), '공급사 반품내역')]", error_msg="발주 관리에서 공급사 반품내역 미노출")
 
             # 상품명검색 : [QA] SH자동화
             self.interact(by_type="XPATH", name="//*[contains(@class, 'form-control')]", click=False, send_keys_msg="[QA] SH자동화", error_msg="발주 관리 -> 공급사 반품내역 -> 상품명 입력란 미노출")
@@ -387,6 +414,9 @@ class SettlementManagementRegular(testModule):
             url = 'https://partner.stg.kurly.com/#/login'
             self.driver.get(url)
 
+            # 브라우저 최대화
+            self.driver.maximize_window()
+
             # 공급사 계정 로그인
             #  - ID 입력 : VD4360.01
             #  - 비밀번호입력 : kurly12!@
@@ -413,11 +443,20 @@ class SettlementManagementRegular(testModule):
             # '로그인 되었습니다.' 토스트 팝업 노출
             self.interact(by_type="XPATH", name="//*[contains(@class, 'toast-container')]", click=False, error_msg="로그인 되었습니다. 텍스트 미노출")
 
+            sleep(30)
+
             # 발주관리
             self.interact(by_type="XPATH", name="//*[contains(text(), '발주관리')]", error_msg="공급사 계정 로그인 후 발주 관리 미노출")
 
-            # 공급사 반품내역
-            self.interact(by_type="XPATH", name="//*[contains(text(), '공급사 반품내역')]", error_msg="발주 관리 -> 공급사 반품내역 미노출")
+            try:
+                # 공급사 반품내역
+                self.interact(by_type="XPATH", name="//*[contains(text(), '공급사 반품내역')]", error_msg="발주 관리에서 공급사 반품내역 미노출")
+            except:
+                # 발주관리
+                self.interact(by_type="XPATH", name="//*[contains(text(), '발주관리')]", error_msg="MD 계정 로그인 후 발주 관리 미노출")
+
+                # 공급사 반품내역
+                self.interact(by_type="XPATH", name="//*[contains(text(), '공급사 반품내역')]", error_msg="발주 관리에서 공급사 반품내역 미노출")
 
             # 상품명검색 : [QA] SH자동화
             self.interact(by_type="XPATH", name="//*[contains(@class, 'form-control')]", click=False, send_keys_msg="[QA] SH자동화", error_msg="발주 관리 -> 공급사 반품내역 -> 상품명 입력란 미노출")
@@ -502,11 +541,20 @@ class SettlementManagementRegular(testModule):
             # '로그인 되었습니다.' 토스트 팝업 노출
             self.interact(by_type="XPATH", name="//*[contains(@class, 'toast-container')]", click=False, error_msg="로그인 되었습니다. 텍스트 미노출")
 
+            sleep(30)
+
             # 발주관리
             self.interact(by_type="XPATH", name="//*[contains(text(), '발주관리')]", error_msg="LC 계정 로그인 후 발주 관리 미노출")
 
-            # 공급사 반품내역
-            self.interact(by_type="XPATH", name="//*[contains(text(), '공급사 반품내역')]", error_msg="발주 관리 -> 공급사 반품내역 미노출")
+            try:
+                # 공급사 반품내역
+                self.interact(by_type="XPATH", name="//*[contains(text(), '공급사 반품내역')]", error_msg="발주 관리에서 공급사 반품내역 미노출")
+            except:
+                # 발주관리
+                self.interact(by_type="XPATH", name="//*[contains(text(), '발주관리')]", error_msg="MD 계정 로그인 후 발주 관리 미노출")
+
+                # 공급사 반품내역
+                self.interact(by_type="XPATH", name="//*[contains(text(), '공급사 반품내역')]", error_msg="발주 관리에서 공급사 반품내역 미노출")
 
             # 상품명검색 : [QA] SH자동화
             self.interact(by_type="XPATH", name="//*[contains(@class, 'form-control')]", click=False, send_keys_msg="[QA] SH자동화", error_msg="발주 관리 -> 공급사 반품내역 -> 상품명 입력란 미노출")
@@ -571,11 +619,21 @@ class SettlementManagementRegular(testModule):
             # '로그인 되었습니다.' 토스트 팝업 노출
             self.interact(by_type="XPATH", name="//*[contains(@class, 'toast-container')]", click=False, error_msg="로그인 되었습니다. 텍스트 미노출")
 
+            sleep(30)
+
             # 공급사관리
             self.interact(by_type="XPATH", name="//*[contains(text(), '공급사관리')]", error_msg="CO 계정 로그인 후 발주 공급사관리 미노출")
 
-            # 검색 > 공급사코드 > VD4360 > [검색]
-            self.interact(by_type="XPATH", name="//*[contains(@class, 'btn dropdown-toggle btn-primary dropdown-toggle-no-caret')]", error_msg="공급사관리 -> 검색어 선택란 미노출")
+            try:
+                # 검색 > 공급사코드 > VD4360 > [검색]
+                self.interact(by_type="XPATH", name="//*[contains(@class, 'btn dropdown-toggle btn-primary dropdown-toggle-no-caret')]", error_msg="공급사관리 -> 검색어 선택란 미노출")
+            except:
+                # 공급사관리
+                self.interact(by_type="XPATH", name="//*[contains(text(), '공급사관리')]", error_msg="CO 계정 로그인 후 발주 공급사관리 미노출")
+
+                # 검색 > 공급사코드 > VD4360 > [검색]
+                self.interact(by_type="XPATH", name="//*[contains(@class, 'btn dropdown-toggle btn-primary dropdown-toggle-no-caret')]", error_msg="공급사관리 -> 검색어 선택란 미노출")
+
             self.interact(by_type="XPATH", name="//*[contains(@class,'dropdown-item')]//*[contains(text(), '공급사코드')]", error_msg="공급사관리 -> 검색어 선택 옵션 중 공급사코드 미노출")
             self.interact(by_type="XPATH", name="//*[contains(@class, 'form-control')]", click=False, send_keys_msg="VD4360", error_msg="공급사관리 -> 검색어 입력란 미노출")
             self.interact(by_type="XPATH", name="//*[contains(@class, 'btn btn-primary') and contains(text(), '검색')]", error_msg="공급사관리 -> 검색 버튼 미노출")
@@ -616,6 +674,9 @@ class SettlementManagementRegular(testModule):
             # url 이동
             self.driver.get(url)
 
+            # 브라우저 최대화
+            self.driver.maximize_window()
+
             # ID 및 PW 입력 > [로그온]
             self.interact(by_type="XPATH", name="(//*[contains(@class, 'input')]//input)[1]", click=False, send_keys_msg="junhyun.kyung@kurlycorp.com", error_msg="Job-Pass 아이디 입력란 미노출")
             self.interact(by_type="XPATH", name="(//*[contains(@class, 'input')]//input)[2]", click=False, send_keys_msg="!tlgjatlf1", error_msg="Job-Pass 비밀번호 입력란 미노출")
@@ -655,7 +716,7 @@ class SettlementManagementRegular(testModule):
             self.driver.switch_to.window(self.driver.window_handles[-1])
 
             # 작업실행 화면 노출 > 좌측하단 [실행] 버튼
-            element = WebDriverWait(self.driver, 10).until(EC.presence_of_element_located((By.XPATH, "//*[contains(@class, 'dhxform_btn')]")))
+            element = WebDriverWait(self.driver, 10).until(EC.presence_of_element_located((By.XPATH, "//*[contains(@class, 'dhxform_btn') and contains(text(), '실행')]")))
             element.click()
 
             # Alert 객체를 생성합니다.
@@ -677,6 +738,9 @@ class SettlementManagementRegular(testModule):
             # 공급사 URL 접속
             url = 'https://partner.stg.kurly.com/#/login'
             self.driver.get(url)
+
+            # 브라우저 최대화
+            self.driver.maximize_window()
 
             # 배치돌아가는 시간(처리완료로 만들기)
             sleep(120)
@@ -748,6 +812,9 @@ class SettlementManagementRegular(testModule):
             # url 이동
             self.driver.get(url)
 
+            # 브라우저 최대화
+            self.driver.maximize_window()
+
             # ID 및 PW 입력 > [로그온]
             self.interact(by_type="XPATH", name="(//*[contains(@class, 'input')]//input)[1]", click=False, send_keys_msg="junhyun.kyung@kurlycorp.com", error_msg="Job-Pass 아이디 입력란 미노출")
             self.interact(by_type="XPATH", name="(//*[contains(@class, 'input')]//input)[2]", click=False, send_keys_msg="!tlgjatlf1", error_msg="Job-Pass 비밀번호 입력란 미노출")
@@ -786,7 +853,7 @@ class SettlementManagementRegular(testModule):
             self.driver.switch_to.window(self.driver.window_handles[-1])
 
             # 작업실행 화면 노출 > 좌측하단 [실행] 버튼
-            element = WebDriverWait(self.driver, 10).until(EC.presence_of_element_located((By.XPATH, "//*[contains(@class, 'dhxform_btn')]")))
+            element = WebDriverWait(self.driver, 10).until(EC.presence_of_element_located((By.XPATH, "//*[contains(@class, 'dhxform_btn') and contains(text(), '실행')]")))
             element.click()
 
             # Alert 객체를 생성합니다.
@@ -814,6 +881,9 @@ class SettlementManagementRegular(testModule):
             # 공급사 URL 접속
             url = 'https://partner.stg.kurly.com/#/login'
             self.driver.get(url)
+
+            # 브라우저 최대화
+            self.driver.maximize_window()
 
             # 배치돌아가는 시간(처리완료로 만들기)
             sleep(120)
@@ -902,6 +972,9 @@ class SettlementManagementRegular(testModule):
             url = 'https://partner.stg.kurly.com/#/login'
             self.driver.get(url)
 
+            # 브라우저 최대화
+            self.driver.maximize_window()
+
             # 공급사 계정 로그인
             #  - ID 입력 : VD4360.01
             #  - 비밀번호입력 : kurly12!@
@@ -928,11 +1001,20 @@ class SettlementManagementRegular(testModule):
             # '로그인 되었습니다.' 토스트 팝업 노출
             self.interact(by_type="XPATH", name="//*[contains(@class, 'toast-container')]", click=False, error_msg="로그인 되었습니다. 텍스트 미노출")
 
+            sleep(30)
+
             # 정산관리
             self.interact(by_type="XPATH", name="//*[contains(text(), '정산관리')]", error_msg="MD 계정 로그인 후 정산관리 미노출")
 
-            # 정산현황
-            self.interact(by_type="XPATH", name="//*[contains(text(), '정산현황')]", error_msg="정산관리 -> 정산현황 미노출")
+            try:
+                # 정산현황
+                self.interact(by_type="XPATH", name="//*[contains(text(), '정산현황')]", error_msg="정산관리 -> 정산현황 미노출")
+            except:
+                # 정산관리
+                self.interact(by_type="XPATH", name="//*[contains(text(), '정산관리')]", error_msg="MD 계정 로그인 후 정산관리 미노출")
+
+                # 정산현황
+                self.interact(by_type="XPATH", name="//*[contains(text(), '정산현황')]", error_msg="정산관리 -> 정산현황 미노출")
 
             # 검색 > 정산코드 > 해당 정산 건 코드 입력
             self.interact(by_type="XPATH", name="//*[contains(@class, 'form-control')]", send_keys_msg=settlement_code, error_msg="정산관리 -> 정산현황 -> 검색어 입력란 미노출")
@@ -977,6 +1059,9 @@ class SettlementManagementRegular(testModule):
             # url 이동
             self.driver.get(url)
 
+            # 브라우저 최대화
+            self.driver.maximize_window()
+
             # 담당자(CO(QA)) 로그인
             #  - ID 입력 : qa_coqa2@kurlycorp.com
             #  - 비밀번호입력 : kurly12!
@@ -1003,11 +1088,20 @@ class SettlementManagementRegular(testModule):
             # '로그인 되었습니다.' 토스트 팝업 노출
             self.interact(by_type="XPATH", name="//*[contains(@class, 'toast-container')]", click=False, error_msg="로그인 되었습니다. 텍스트 미노출")
 
+            sleep(30)
+
             # 정산관리
             self.interact(by_type="XPATH", name="//*[contains(text(), '정산관리')]", error_msg="CO 계정 로그인 후 정산관리 미노출")
 
-            # 정산 현황
-            self.interact(by_type="XPATH", name="//*[contains(text(), '정산현황')]", error_msg="정산관리 -> 정산현황 미노출")
+            try:
+                # 정산 현황
+                self.interact(by_type="XPATH", name="//*[contains(text(), '정산현황')]", error_msg="정산관리 -> 정산현황 미노출")
+            except:
+                # 정산관리
+                self.interact(by_type="XPATH", name="//*[contains(text(), '정산관리')]", error_msg="CO 계정 로그인 후 정산관리 미노출")
+
+                # 정산 현황
+                self.interact(by_type="XPATH", name="//*[contains(text(), '정산현황')]", error_msg="정산관리 -> 정산현황 미노출")
 
             # 검색 > 해당 정산 건 검색
             self.interact(by_type="XPATH", name="//*[contains(@class, 'form-control')]", send_keys_msg=settlement_code, error_msg="정산관리 -> 정산현황 -> 검색어 입력란 미노출")
