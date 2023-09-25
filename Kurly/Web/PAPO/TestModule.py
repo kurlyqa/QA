@@ -16,7 +16,7 @@ class testModule(unittest.TestCase):
         chrome_options = webdriver.ChromeOptions()
 
         # headless 모드 설정
-        chrome_options.add_argument('headless')
+        # chrome_options.add_argument('headless')
 
         # 크롬 드라이버를 생성
         self.driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=chrome_options)
