@@ -19,7 +19,7 @@ s2 = TestLoader().loadTestsFromTestCase(OrderHistory)
 s3 = TestLoader().loadTestsFromTestCase(OrderTransferManagement)
 s4 = TestLoader().loadTestsFromTestCase(OrderPlanManagement)
 
-# suite = TestSuite([s1])
+# suite = TestSuite([s1, s2])
 suite = TestSuite([s1, s2, s3, s4])
 
 daytime = datetime.datetime.now()

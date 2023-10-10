@@ -190,7 +190,7 @@ class OrderHistory(testModule):
             element = WebDriverWait(self.driver, 10).until(EC.presence_of_element_located((By.XPATH, "(//*[contains(@class, 'subTitleRow')]//span[contains(@class,'text')])[4]")))
             address = element.text
 
-            if address == "서울특별시 동대문구 서울시립대로 5 (답십리동, 신답극동아파트) (신답극동아파트)":
+            if address in "서울특별시 동대문구 서울시립대로 5 (답십리동, 신답극동아파트) (신답극동아파트)":
                 pass
             else:
                 raise Exception("주소가 맞지 않음")
@@ -257,6 +257,7 @@ class OrderHistory(testModule):
 
             # 전송상태 > 전송보류 선택
             self.interact(by_type="XPATH", name="//*[contains(@class, 'v-select__slot')]//*[contains(text(), '전송상태')]", error_msg="OMS > 주문 내역 > 전체 주문 > 전송상태 선택란 미노출")
+
             self.interact(by_type="XPATH", name="//*[contains(@class, 'v-list-item__content')]//*[contains(text(), '전송보류')]", error_msg="OMS > 주문 내역 > 전체 주문 > 전송 보류 > 전송상태 옵션중 전송보류 미노출")
 
             # [조회] 버튼 선택

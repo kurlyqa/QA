@@ -135,6 +135,7 @@ class OrderTransferManagement(testModule):
             self.interact(by_type="XPATH", name="//*[contains(@class, 'v-btn v-btn--block v-btn--is-elevated v-btn--has-bg theme--dark v-size--x-large')]", error_msg="로그인 버튼 미노출")
 
             # 주문전송 관리 > 주문 전송 스케줄 메뉴 진입
+            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-icon notranslate fas fa-bars theme--light')]", error_msg="OMS > 주문내역 버튼 미노출")
             self.interact(by_type="XPATH", name="//*[contains(@class, 'v-list-item__title nav__tab-content-main') and contains(text(), '주문 전송 관리')]", error_msg="OMS > 주문 전송 관리 버튼 미노출")
             self.interact(by_type="XPATH", name="//*[contains(@class, 'v-list-item__title nav__tab-content-sub ml-4') and contains(text(), '주문 전송 스케줄')]", error_msg="OMS > 주문 전송 관리 > 주문 전송 스케줄 버튼 미노출")
 
@@ -163,21 +164,25 @@ class OrderTransferManagement(testModule):
             self.driver.execute_script("arguments[0].value = '';", element)
             element.send_keys(mins_after)
 
+            # 다른 곳 클릭
+            self.interact(by_type="XPATH", name="(//*[contains(@class, 'v-text-field__slot')])[3]", error_msg="")
+
             # [저장] 버튼 선택
             self.interact(by_type="XPATH", name="//*[contains(@class, 'v-btn__content') and contains(text(), '저장')]", error_msg="OMS > 주문전송 관리 > 주문 전송 스케줄 > [등록/수정] > 추가 > 저장 버튼 미노출")
+
+            # 확인 버튼 클릭
+            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-btn__content') and contains(text(), '확인')]", error_msg="OMS > 주문전송 관리 > 주문 전송 스케줄 > [등록/수정] > 추가 > 저장 > 확인 버튼 미노출")
 
 
 
             # 2. <주문 스케줄 전송 확인>
 
             # 전송 시작시간까지 대기
-            sleep(120)
-
-            # X 버튼 선택
-            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-icon notranslate mdi mdi-close theme--dark')]", error_msg="OMS > 주문전송 관리 > 주문 전송 스케줄 > [등록/수정] > 추가 > X 버튼 미노출")
+            sleep(140)
 
             # 등록한 결제 일시 스케줄 확인
             self.interact(by_type="XPATH", name="//*[contains(@class, 'v-btn__content') and contains(text(), '조회')]", error_msg="OMS > 주문전송 관리 > 주문 전송 스케줄 > 조회 버튼 미노출")
+            sleep(5)
 
             # 전송상태 '전송완료' 노출 확인
             element = WebDriverWait(self.driver, 10).until(EC.presence_of_element_located((By.XPATH, "(//*[contains(@class, 'v-chip__content')])[3]")))

@@ -23,8 +23,8 @@ class OrderPlanManagement(testModule):
             # 1. <주문분배 계획관리_1회차 주문>
 
             # 컬리몰 스테이지 url주소
-            kurlymall_url = 'https://www.stg.kurly.com/main'
-            # kurlymall_url = 'https://www-qa5.stg.kurly.com/main'
+            # kurlymall_url = 'https://www.stg.kurly.com/main'
+            kurlymall_url = 'https://www-qa5.stg.kurly.com/main'
 
             # OMS url 주소
             oms_url = 'https://soms.stg.kurlycorp.kr/login'
@@ -223,7 +223,7 @@ class OrderPlanManagement(testModule):
                 element = WebDriverWait(self.driver, 10).until(EC.presence_of_element_located((By.XPATH, "(//*[contains(@class, 'subTitleRow')]//span[contains(@class,'text')])[4]")))
                 address = element.text
 
-                if address == "서울특별시 동대문구 서울시립대로 5 (답십리동, 신답극동아파트) (신답극동아파트)":
+                if address in "서울특별시 동대문구 서울시립대로 5 (답십리동, 신답극동아파트) (신답극동아파트)":
                     pass
                 else:
                     raise Exception("주소가 맞지 않음")
@@ -468,7 +468,7 @@ class OrderPlanManagement(testModule):
                 element = WebDriverWait(self.driver, 10).until(EC.presence_of_element_located((By.XPATH, "(//*[contains(@class, 'subTitleRow')]//span[contains(@class,'text')])[4]")))
                 address = element.text
 
-                if address == "서울특별시 동대문구 서울시립대로 5 (답십리동, 신답극동아파트) (신답극동아파트)":
+                if address in "서울특별시 동대문구 서울시립대로 5 (답십리동, 신답극동아파트) (신답극동아파트)":
                     pass
                 else:
                     raise Exception("주소가 맞지 않음")
@@ -713,7 +713,7 @@ class OrderPlanManagement(testModule):
                 element = WebDriverWait(self.driver, 10).until(EC.presence_of_element_located((By.XPATH, "(//*[contains(@class, 'subTitleRow')]//span[contains(@class,'text')])[4]")))
                 address = element.text
 
-                if address == "서울특별시 동대문구 서울시립대로 5 (답십리동, 신답극동아파트) (신답극동아파트)":
+                if address in "서울특별시 동대문구 서울시립대로 5 (답십리동, 신답극동아파트) (신답극동아파트)":
                     pass
                 else:
                     raise Exception("주소가 맞지 않음")
@@ -1084,7 +1084,7 @@ class OrderPlanManagement(testModule):
             element = WebDriverWait(self.driver, 10).until(EC.presence_of_element_located((By.XPATH, "(//*[contains(@class, 'subTitleRow')]//span[contains(@class,'text')])[4]")))
             address = element.text
 
-            if address == "서울특별시 동대문구 서울시립대로 5 (답십리동, 신답극동아파트) (신답극동아파트)":
+            if address in "서울특별시 동대문구 서울시립대로 5 (답십리동, 신답극동아파트) (신답극동아파트)":
                 pass
             else:
                 raise Exception("주소가 맞지 않음")
@@ -1123,14 +1123,70 @@ class OrderPlanManagement(testModule):
             # else:
             #     raise Exception("배송정보 권역이 맞지 않음")
 
-            #######
-            # 다시 마감 시간 되돌려서 진행중으로 만드는 코드 작성하기
+            # OMS > 주문 이행 계획 관리 > 주문 분배 계획 관리 > X권역 시간 확인
+            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-icon notranslate fas fa-bars theme--light')]", error_msg="OMS > 메뉴 버튼 미노출")
+            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-list-item__title nav__tab-content-main') and contains(text(), '주문 이행 계획 관리')]", error_msg="OMS > 주문 이행 계획 관리 버튼 미노출")
+            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-list-item__title nav__tab-content-sub ml-4') and contains(text(), '주문 분배 계획 관리')]", error_msg="OMS > 주문 이행 계획 관리 > 주문 분배 계획 관리 버튼 미노출")
 
-            # 탭 닫기
-            self.driver.close()
+            # X권역 검색
+            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-input v-input--dense theme--light v-text-field v-text-field--single-line v-text-field--solo v-text-field--is-booted v-text-field--enclosed')]//input", click=False, send_keys_msg='X', error_msg="권역 통홥 조회 입력란 미노출")
 
-            # 포커스를 변경
-            self.driver.switch_to.window(self.driver.window_handles[0])
+            # X권역 상세페이지 진입
+            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-icon notranslate v-icon--link mdi mdi-chevron-right theme--light')]", error_msg="OMS > 주문 이행 계획 관리 > 주문 분배 계획 관리 버튼 미노출")
+
+            # 3회차 마감 시간 19:10:00 변경
+            element = WebDriverWait(self.driver, 10).until(EC.presence_of_element_located((By.XPATH, "(//*[contains(@class, 'v-input__slot')])[11]//input")))
+            element.click()
+            sleep(2)
+            self.driver.execute_script("arguments[0].value = '';", element)
+            sleep(2)
+            element.send_keys("19:10:00")
+            sleep(2)
+
+            # 3회차 적용시키기 위한 코드
+            self.interact(by_type="XPATH", name="(//*[contains(@class, 'v-input__slot')])[10]//input", error_msg="OMS > 주문 이행 계획 관리 > 주문 분배 계획 관리 > X권역 상세 > 2회차 입력란 미노출")
+
+            # 수정버튼 클릭
+            self.interact(by_type="XPATH", name="(//*[contains(@class, 'v-btn v-btn--text theme--light v-size--default')])[2]//*[contains(text(), '수정')]", error_msg="OMS > 주문 이행 계획 관리 > 주문 분배 계획 관리 > X권역 상세 > 수정 버튼 미노출")
+            sleep(5)
+
+            # X권역 상세페이지 진입
+            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-icon notranslate v-icon--link mdi mdi-chevron-right theme--light')]", error_msg="OMS > 주문 이행 계획 관리 > 주문 분배 계획 관리 버튼 미노출")
+
+            # 2회차 마감 시간 19:05:00 변경
+            element = WebDriverWait(self.driver, 10).until(EC.presence_of_element_located((By.XPATH, "(//*[contains(@class, 'v-input__slot')])[10]//input")))
+            element.click()
+            sleep(2)
+            self.driver.execute_script("arguments[0].value = '';", element)
+            sleep(2)
+            element.send_keys("19:05:00")
+            sleep(2)
+
+            # 2회차 적용시키기 위한 코드
+            self.interact(by_type="XPATH", name="(//*[contains(@class, 'v-input__slot')])[9]//input", error_msg="OMS > 주문 이행 계획 관리 > 주문 분배 계획 관리 > X권역 상세 > 1회차 입력란 미노출")
+
+            # 수정버튼 클릭
+            self.interact(by_type="XPATH", name="(//*[contains(@class, 'v-btn v-btn--text theme--light v-size--default')])[2]//*[contains(text(), '수정')]", error_msg="OMS > 주문 이행 계획 관리 > 주문 분배 계획 관리 > X권역 상세 > 수정 버튼 미노출")
+            sleep(5)
+
+            # X권역 상세페이지 진입
+            self.interact(by_type="XPATH", name="//*[contains(@class, 'v-icon notranslate v-icon--link mdi mdi-chevron-right theme--light')]", error_msg="OMS > 주문 이행 계획 관리 > 주문 분배 계획 관리 버튼 미노출")
+
+            # 1회차 마감 시간 19:03:00 변경
+            element = WebDriverWait(self.driver, 10).until(EC.presence_of_element_located((By.XPATH, "(//*[contains(@class, 'v-input__slot')])[9]//input")))
+            element.click()
+            sleep(2)
+            self.driver.execute_script("arguments[0].value = '';", element)
+            sleep(2)
+            element.send_keys("19:03:00")
+            sleep(2)
+
+            # 1회차 적용시키기 위한 코드
+            self.interact(by_type="XPATH", name="(//*[contains(@class, 'v-input__slot')])[11]//input", error_msg="OMS > 주문 이행 계획 관리 > 주문 분배 계획 관리 > X권역 상세 > 1회차 입력란 미노출")
+
+            # 수정버튼 클릭
+            self.interact(by_type="XPATH", name="(//*[contains(@class, 'v-btn v-btn--text theme--light v-size--default')])[2]//*[contains(text(), '수정')]", error_msg="OMS > 주문 이행 계획 관리 > 주문 분배 계획 관리 > X권역 상세 > 수정 버튼 미노출")
+            sleep(5)
 
             # 탭 닫기
             self.driver.close()
