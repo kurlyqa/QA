@@ -132,6 +132,6 @@ class Kurly_App_TestCase(unittest.TestCase):
         self.driver.quit()
 
 if __name__ == '__main__':
-    #unittest.main(testRunner=HtmlTestRunner.HTMLTestRunner(output='/Users/mk-jj-mac-050/PycharmProjects/SQE_unittest/appium_reports'))
+    unittest.main(testRunner=HtmlTestRunner.HTMLTestRunner(output='/Users/mk-jj-mac-050/PycharmProjects/SQE_unittest/appium_reports'))
 
-    # driver.back()
+    driver.back()
